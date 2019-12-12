@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>关于我</title>
+    <url>/2019/about/</url>
+    <content><![CDATA[<h3 id="我是菜鸟，欢迎赐教："><a href="#我是菜鸟，欢迎赐教：" class="headerlink" title="我是菜鸟，欢迎赐教："></a>我是菜鸟，欢迎赐教：</h3><p>Github: <a href="https://github.com/wavecao" target="_blank" rel="noopener">Wavecao</a></p>
+<p>QQ: 2353769789</p>
+<p>微信：C2353769789</p>
+<p><img src="C:%5CUsers%5C23537%5COneDrive%5C%E5%9B%BE%E7%89%87%5C%E7%9B%B8%E6%9C%BA%E5%AF%BC%E5%85%A5%5C2019-07-25%5CIMG_0303.JPG" alt=""></p>
+]]></content>
+      <tags>
+        <tag>2019</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>【算法】Python判断数字是否是回文数</title>
+    <url>/2019/huiwenshu/</url>
+    <content><![CDATA[<p><strong>回文数的定义：</strong>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+<a id="more"></a>
+
+<p><strong>示例1：</strong></p>
+<p>输入：121</p>
+<p>输出：True</p>
+<p><strong>示例2：</strong></p>
+<p>输入：-121</p>
+<p>输出：False</p>
+<p>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</p>
+<p><strong>示例3：</strong></p>
+<p>输入: 10</p>
+<p>输出: false</p>
+<p>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
+<p><strong>思路：</strong></p>
+<p>映入脑海的第一个想法是将数字转换为字符串，并检查字符串是否为回文。但是，这需要额外的非常量空间来创建问题描述中所不允许的字符串。</p>
+<p>第二个想法是将数字本身反转，但是这样做有一个风险，32位机器的int类型最大值为2147483647，反转后的数字可能超出范围造成溢出。</p>
+<p>按照第二个想法，为了避免数字反转可能导致的溢出问题，为什么不考虑只反转 int\text{int}int 数字的一半？毕竟，如果该数字是回文，其后半部分反转后应该与原始数字的前半部分相同。</p>
+<p>例如，输入 1221，我们可以将数字“1221”的后半部分从“21”反转为“12”，并将其与前半部分“12”进行比较，因为二者相同，我们得知数字 1221 是回文。</p>
+<p><strong>算法：</strong></p>
+<p>首先我们要处理一些特殊情况，负数不可能是回文数，首先要禁止负数进入。</p>
+<p>然后再考虑如何反转数字，例如1221，首先1221%10就可以得到最后一位数字1，然后将1221/10得到122，再次122%10得到倒数第二位数字2，最后用1*10+2=12就得到了我们反转后的数字12，用12和原数字的前两位对比即可判断该数字是不是回文数。</p>
+<p>还存在一个问题：我们怎么知道自己反转了一半呢？</p>
+<p>我们将原始数字除以 10，然后给反转后的数字乘上 10，所以，当原始数字小于反转后的数字时，就意味着我们已经处理了一半位数的数字。</p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">Python </span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span><span class="params">(object)</span>:</span>    </span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">isPalindrome</span><span class="params">(self, x)</span>:</span>        </span><br><span class="line">		<span class="string">"""        </span></span><br><span class="line"><span class="string">		:type x: int        </span></span><br><span class="line"><span class="string">		:rtype: bool        </span></span><br><span class="line"><span class="string">		"""</span>        </span><br><span class="line">		<span class="keyword">if</span> x&lt;<span class="number">0</span> <span class="keyword">or</span> (x % <span class="number">10</span> == <span class="number">0</span> <span class="keyword">and</span> x != <span class="number">0</span>):            			<span class="keyword">return</span> <span class="literal">False</span>        </span><br><span class="line">		y=<span class="number">0</span>        </span><br><span class="line">		<span class="keyword">while</span>(x&gt;y):            </span><br><span class="line">			y=x%<span class="number">10</span>+y*<span class="number">10</span>            </span><br><span class="line">			x /= <span class="number">10</span>;        </span><br><span class="line">		<span class="keyword">return</span> x==y <span class="keyword">or</span> x==y/<span class="number">10</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">Java </span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;        </span><br><span class="line">        <span class="keyword">if</span>(x &lt; <span class="number">0</span> || (x % <span class="number">10</span> == <span class="number">0</span> &amp;&amp; x != <span class="number">0</span>))            		<span class="keyword">return</span> <span class="keyword">false</span>;        </span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;        </span><br><span class="line">        <span class="keyword">while</span>(x &gt; res)&#123;            </span><br><span class="line">            res = res * <span class="number">10</span> + x % <span class="number">10</span>;            </span><br><span class="line">            x /= <span class="number">10</span>;        </span><br><span class="line">        &#125;        </span><br><span class="line">        <span class="keyword">return</span> x == res || x == res / <span class="number">10</span>;    </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+</search>
