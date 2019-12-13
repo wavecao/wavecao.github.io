@@ -5,9 +5,9 @@
   <subtitle>永远年轻，永远热泪盈眶</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://www.wavecao.cn/"/>
+  <link href="http://www.wavecao.xyz/"/>
   <updated>2019-12-12T06:37:31.546Z</updated>
-  <id>http://www.wavecao.cn/</id>
+  <id>http://www.wavecao.xyz/</id>
   
   <author>
     <name>曹威</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>关于我</title>
-    <link href="http://www.wavecao.cn/2019/about/"/>
-    <id>http://www.wavecao.cn/2019/about/</id>
+    <link href="http://www.wavecao.xyz/2019/about/"/>
+    <id>http://www.wavecao.xyz/2019/about/</id>
     <published>2019-12-12T06:21:35.125Z</published>
     <updated>2019-12-12T06:37:31.546Z</updated>
     
@@ -36,14 +36,14 @@
     
     
     
-      <category term="2019" scheme="http://www.wavecao.cn/tags/2019/"/>
+      <category term="2019" scheme="http://www.wavecao.xyz/tags/2019/"/>
     
   </entry>
   
   <entry>
     <title>【算法】Python判断数字是否是回文数</title>
-    <link href="http://www.wavecao.cn/2019/huiwenshu/"/>
-    <id>http://www.wavecao.cn/2019/huiwenshu/</id>
+    <link href="http://www.wavecao.xyz/2019/huiwenshu/"/>
+    <id>http://www.wavecao.xyz/2019/huiwenshu/</id>
     <published>2019-12-12T03:56:00.000Z</published>
     <updated>2019-12-12T06:53:45.679Z</updated>
     
@@ -57,7 +57,7 @@
     
     
     
-      <category term="算法" scheme="http://www.wavecao.cn/tags/%E7%AE%97%E6%B3%95/"/>
+      <category term="算法" scheme="http://www.wavecao.xyz/tags/%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
