@@ -190,7 +190,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分性别年龄分布图（柱状图） </span></span><br><span class="line"></span><br><span class="line">age_distribution_sex = sns.countplot(<span class="string">'age'</span>, hue=<span class="string">'sex'</span>, data=student) </span><br><span class="line"></span><br><span class="line">age_distribution_sex.axes.set_title(<span class="string">'不同年龄段的学生人数'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_distribution_sex.set_xlabel(<span class="string">'年龄'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_distribution_sex.set_ylabel(<span class="string">'人数'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
 
 <p>绘制的图像如图3-2-4所示：</p>
-<p><img src="file:///C:/Users/23537/AppData/Local/Temp/msohtmlclip1/01/clip_image012.png" alt="img"></p>
+<p><img src="http://image.wavecao.xyz/blog/20191221/af0Xk9BY2yE8.png?imageslim" alt="mark"></p>
 <center>图3-2-4 分性别年龄分布图</center>
 结果就是，其实大部分学生的年龄是在15-18岁之间，并且各个年龄段的男女比例基本正常。超过该年龄的学生不一定是离群值，而是有年级下降的学生。分析完年龄本身，接下就可以分析年龄对成绩的影响，首先作出各年龄段的成绩箱型图，代码如下：
 
