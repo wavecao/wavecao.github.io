@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.wavecao.xyz/"/>
-  <updated>2019-12-12T06:37:31.546Z</updated>
+  <updated>2019-12-21T09:16:41.073Z</updated>
   <id>https://www.wavecao.xyz/</id>
   
   <author>
@@ -17,26 +17,27 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>关于我</title>
-    <link href="https://www.wavecao.xyz/2019/about/"/>
-    <id>https://www.wavecao.xyz/2019/about/</id>
-    <published>2019-12-12T06:21:35.125Z</published>
-    <updated>2019-12-12T06:37:31.546Z</updated>
+    <title>测试图床</title>
+    <link href="https://www.wavecao.xyz/2019/%E6%B5%8B%E8%AF%95image/"/>
+    <id>https://www.wavecao.xyz/2019/%E6%B5%8B%E8%AF%95image/</id>
+    <published>2019-12-20T16:00:00.000Z</published>
+    <updated>2019-12-21T09:16:41.073Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="我是菜鸟，欢迎赐教："><a href="#我是菜鸟，欢迎赐教：" class="headerlink" title="我是菜鸟，欢迎赐教："></a>我是菜鸟，欢迎赐教：</h3><p>Github: <a href="https://github.com/wavecao" target="_blank" rel="noopener">Wavecao</a></p><p>QQ: 2353769789</p><p>微信：C2353769789</p><p><img src="C:%5CUsers%5C23537%5COneDrive%5C%E5%9B%BE%E7%89%87%5C%E7%9B%B8%E6%9C%BA%E5%AF%BC%E5%85%A5%5C2019-07-25%5CIMG_0303.JPG" alt=""></p>]]></content>
+    <content type="html"><![CDATA[<h1 id="测试图床"><a href="#测试图床" class="headerlink" title="测试图床"></a>测试图床</h1><p>下面有一个png图片</p><p><img src="http://image.wavecao.xyz/blog/20191221/W0StN1he7vF2.png?imageslim" alt="mark"></p><p>下面有一个jpg图片</p><p><img src="http://image.wavecao.xyz/blog/20191221/9N1jESyOjL3W.JPG" alt="mark"></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;我是菜鸟，欢迎赐教：&quot;&gt;&lt;a href=&quot;#我是菜鸟，欢迎赐教：&quot; class=&quot;headerlink&quot; title=&quot;我是菜鸟，欢迎赐教：&quot;&gt;&lt;/a&gt;我是菜鸟，欢迎赐教：&lt;/h3&gt;&lt;p&gt;Github: &lt;a href=&quot;https://github.com/wa
+        &lt;h1 id=&quot;测试图床&quot;&gt;&lt;a href=&quot;#测试图床&quot; class=&quot;headerlink&quot; title=&quot;测试图床&quot;&gt;&lt;/a&gt;测试图床&lt;/h1&gt;&lt;p&gt;下面有一个png图片&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://image.wavecao.xyz/blog/2019
       
     
     </summary>
     
     
     
-      <category term="2019" scheme="https://www.wavecao.xyz/tags/2019/"/>
+      <category term="测试" scheme="https://www.wavecao.xyz/tags/%E6%B5%8B%E8%AF%95/"/>
     
   </entry>
   
@@ -58,6 +59,30 @@
     
     
       <category term="算法" scheme="https://www.wavecao.xyz/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于我</title>
+    <link href="https://www.wavecao.xyz/1970/about/"/>
+    <id>https://www.wavecao.xyz/1970/about/</id>
+    <published>1970-01-01T00:00:02.019Z</published>
+    <updated>2019-12-21T09:16:56.097Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="我是菜鸟，欢迎赐教："><a href="#我是菜鸟，欢迎赐教：" class="headerlink" title="我是菜鸟，欢迎赐教："></a>我是菜鸟，欢迎赐教：</h3><p>Github: <a href="https://github.com/wavecao" target="_blank" rel="noopener">Wavecao</a></p><p>QQ: 2353769789</p><p>微信：C2353769789</p><p><img src="C:%5CUsers%5C23537%5COneDrive%5C%E5%9B%BE%E7%89%87%5C%E7%9B%B8%E6%9C%BA%E5%AF%BC%E5%85%A5%5C2019-07-25%5CIMG_0303.JPG" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;我是菜鸟，欢迎赐教：&quot;&gt;&lt;a href=&quot;#我是菜鸟，欢迎赐教：&quot; class=&quot;headerlink&quot; title=&quot;我是菜鸟，欢迎赐教：&quot;&gt;&lt;/a&gt;我是菜鸟，欢迎赐教：&lt;/h3&gt;&lt;p&gt;Github: &lt;a href=&quot;https://github.com/wa
+      
+    
+    </summary>
+    
+    
+    
+      <category term="2019" scheme="https://www.wavecao.xyz/tags/2019/"/>
     
   </entry>
   

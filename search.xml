@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>关于我</title>
-    <url>/2019/about/</url>
-    <content><![CDATA[<h3 id="我是菜鸟，欢迎赐教："><a href="#我是菜鸟，欢迎赐教：" class="headerlink" title="我是菜鸟，欢迎赐教："></a>我是菜鸟，欢迎赐教：</h3><p>Github: <a href="https://github.com/wavecao" target="_blank" rel="noopener">Wavecao</a></p>
-<p>QQ: 2353769789</p>
-<p>微信：C2353769789</p>
-<p><img src="C:%5CUsers%5C23537%5COneDrive%5C%E5%9B%BE%E7%89%87%5C%E7%9B%B8%E6%9C%BA%E5%AF%BC%E5%85%A5%5C2019-07-25%5CIMG_0303.JPG" alt=""></p>
+    <title>测试图床</title>
+    <url>/2019/%E6%B5%8B%E8%AF%95image/</url>
+    <content><![CDATA[<h1 id="测试图床"><a href="#测试图床" class="headerlink" title="测试图床"></a>测试图床</h1><p>下面有一个png图片</p>
+<p><img src="http://image.wavecao.xyz/blog/20191221/W0StN1he7vF2.png?imageslim" alt="mark"></p>
+<p>下面有一个jpg图片</p>
+<p><img src="http://image.wavecao.xyz/blog/20191221/9N1jESyOjL3W.JPG" alt="mark"></p>
 ]]></content>
       <tags>
-        <tag>2019</tag>
+        <tag>测试</tag>
       </tags>
   </entry>
   <entry>
@@ -47,6 +47,18 @@
 ]]></content>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>关于我</title>
+    <url>/1970/about/</url>
+    <content><![CDATA[<h3 id="我是菜鸟，欢迎赐教："><a href="#我是菜鸟，欢迎赐教：" class="headerlink" title="我是菜鸟，欢迎赐教："></a>我是菜鸟，欢迎赐教：</h3><p>Github: <a href="https://github.com/wavecao" target="_blank" rel="noopener">Wavecao</a></p>
+<p>QQ: 2353769789</p>
+<p>微信：C2353769789</p>
+<p><img src="C:%5CUsers%5C23537%5COneDrive%5C%E5%9B%BE%E7%89%87%5C%E7%9B%B8%E6%9C%BA%E5%AF%BC%E5%85%A5%5C2019-07-25%5CIMG_0303.JPG" alt=""></p>
+]]></content>
+      <tags>
+        <tag>2019</tag>
       </tags>
   </entry>
 </search>
