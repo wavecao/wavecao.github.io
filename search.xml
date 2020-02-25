@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>关于爱的一些思考</title>
+    <url>/2020/what%20is%20love/</url>
+    <content><![CDATA[<p>今天是情人节的前一天，知乎恰逢这时地邀请我回答一个问题：“喜欢的本质是什么？”。也许知乎对我有误解，我也时常为想不清楚什么是爱而苦恼，但今天不妨说说我对爱的理解。</p>
+<p>我要说些丧气的话，我觉得爱的本质是自私，小王子为何如此爱自己的玫瑰？其实书中给出了特别明确的答案：“lt’s the time you wasted on your rose that make your rose so important.” 小王子之所以喜欢玫瑰，它喜欢的不是玫瑰本身，而是自己在玫瑰身上付出的时间和心血。</p>
+<p>我想再分享一个听来的故事：</p>
+<p>“Young man. Why are you eating that fish?”The young mans says, “Because I love fish.” He says, “Oh. You love the fish. That’s why you took it out of the water and killed it and boiled it.” He says, “Don’t tell me you love the fish. You love yourself, and because the fish tastes good to you; therefore, you took it out of the water and killed it and boiled it.”</p>
+<p>世上有许多的“爱情”，只不过是年轻人口中的“Fish Love”。所以，如果一对情侣坠入爱河，意味着首先他们发现了对方能够满足自己生理和感情上的需求，同时认为对方可以带给自己“爱情”。但双方只是在彼此身上寻找各自的需求，而不是关于对方的爱。对方变成了一个工具，来满足自己的需求。世上有太多所谓的“爱情”只不过是“Fish Love”，这也是爱的自私所在。</p>
+<p>爱的外在表现不在于我要得到什么，而是在于我要付出什么。犹太有一位伦理学家Rabbi Dessler曾说过：“人们犯了一个严重的错误，错误地认为，你要为你所爱之人付出。然而真正的答案是，你爱你为之付出的那个人。” 他的意思是，如果我对你付出了，我把我自己投入了在你身上，自爱是一种必然，但现在我的一部分已经成了你，我所爱的是你身上的那部分自己。</p>
+<p>无论是对上段感情的不舍，还是对现在感情的患失，不都是害怕自己的心血付诸东流吗？我们在一次次伤害别人和被别人伤害的过程中学会了如何去爱，却越来越吝惜自己的情感。不敢爱虽是自爱，也不可避免地掺杂一些自私。</p>
+<p>不少人的婚姻可能仅仅是搭伙过日子，早就没有需求可言，更遑论爱情，互相尊重已是最后的底线。所以你看，真正让大家陪伴到老的并不是什么美好的东西，只是舍不得自己的心血而已。</p>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>生活</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>大数据线性回归预测学生成绩</title>
     <url>/2019/lr-student/</url>
     <content><![CDATA[<p>通过训练集训练和测试集测试来生成多个线性模型，从而预测学生成绩，本文所有代码请点击<a href="https://github.com/wavecao/BigDataPredicteGrades" target="_blank" rel="noopener">Github</a></p>
