@@ -113,11 +113,11 @@ QQ: 2353769789
                 </span>
                 
                 
-                <span id="/2019/about/" class="leancloud_visitors" data-flag-title="关于我">
-                    <b class="iconfont icon-read"></b> <i>Read count</i>
-                    <span class="leancloud-visitors-count">1000000</span>
-                </span>
                 
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
                 
             </p>
             
@@ -164,7 +164,18 @@ QQ: 2353769789
             
             
             
-            <div id="vcomments"></div>
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='2840a5aa21f491f132b7'
+        data-cs='3610f58fc22e82e8befddce4f0c5fae5fcb489a4'
+        data-r='blog-comments'
+        data-o='wavecao'
+        data-a='wavecao'
+        data-d=''
+    >Comments</div>
+
+
+            
             
         </div>
         <div class="sidebar">
@@ -282,6 +293,13 @@ QQ: 2353769789
   }
 </script>
 
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
 
 
 
@@ -443,40 +461,6 @@ QQ: 2353769789
     }
 </script>
 
-
-    
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-    <script>
-
-        var valine = new Valine();
-
-        function initValine(path) {
-            if (!path) path = window.location.pathname;
-            let language = 'zh-Hans';
-            if (!language) {
-                language = 'en';
-            } else {
-                language = language.toLowerCase();
-            }
-            valine.init({
-                el: '#vcomments',
-                appId: 'X86hfGNsskOm6j1uwI89hEa1-gzGzoHsz',
-                appKey: 'Fp1VpuQi62zkoWQt3iQYp48q',
-                notify: 'false',
-                verify: 'false',
-                avatar: 'mp',
-                placeholder: '欢迎评论~',
-                visitor: 'true',
-                path: path,
-                lang: language
-            });
-        }
-
-        $(document).ready(function () {
-            initValine();
-        });
-    </script>
 
 
 

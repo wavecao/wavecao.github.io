@@ -159,11 +159,6 @@
             </span>
             
             
-            <span id="/2019/lr-student/" class="leancloud_visitors" data-flag-title="">
-                <b class="iconfont icon-read"></b> <i>Read count</i>
-                <span class="leancloud-visitors-count">1000000</span>
-            </span>
-            
         </p>
         
         
@@ -226,11 +221,6 @@
                     </span>
                 
                 
-                    <span id="/2019/huiwenshu/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>Read count</i>
-                        <span class="leancloud-visitors-count">1000000</span>
-                    </span>
-                
             </p>
             
                 <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
@@ -288,11 +278,6 @@
                         1 mins.
                     </span>
                 
-                
-                    <span id="/2019/about/" class="leancloud_visitors" data-flag-title="">
-                        <b class="iconfont icon-read"></b> <i>Read count</i>
-                        <span class="leancloud-visitors-count">1000000</span>
-                    </span>
                 
             </p>
             
@@ -395,6 +380,13 @@
   }
 </script>
 
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
 
 
 
@@ -556,40 +548,6 @@
     }
 </script>
 
-
-    
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-
-    <script>
-
-        var valine = new Valine();
-
-        function initValine(path) {
-            if (!path) path = window.location.pathname;
-            let language = 'zh-Hans';
-            if (!language) {
-                language = 'en';
-            } else {
-                language = language.toLowerCase();
-            }
-            valine.init({
-                el: '#vcomments',
-                appId: 'X86hfGNsskOm6j1uwI89hEa1-gzGzoHsz',
-                appKey: 'Fp1VpuQi62zkoWQt3iQYp48q',
-                notify: 'false',
-                verify: 'false',
-                avatar: 'mp',
-                placeholder: '欢迎评论~',
-                visitor: 'true',
-                path: path,
-                lang: language
-            });
-        }
-
-        $(document).ready(function () {
-            initValine();
-        });
-    </script>
 
 
 
