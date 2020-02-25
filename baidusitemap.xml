@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://www.cheerway.fun/2019/about/</loc>
-    <lastmod>2019-12-21</lastmod>
-  </url>  <url>
     <loc>https://www.cheerway.fun/2019/lr-student/</loc>
-    <lastmod>2019-12-21</lastmod>
+    <lastmod>2020-02-25</lastmod>
+  </url>  <url>
+    <loc>https://www.cheerway.fun/2019/about/</loc>
+    <lastmod>2020-02-25</lastmod>
   </url>  <url>
     <loc>https://www.cheerway.fun/2019/huiwenshu/</loc>
-    <lastmod>2019-12-12</lastmod>
+    <lastmod>2020-02-25</lastmod>
   </url>
 </urlset>
