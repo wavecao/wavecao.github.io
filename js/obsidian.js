@@ -65,12 +65,12 @@ function utiliseBgColor() {
  * Buidling the caption html in an aritle
  */
 function buildImgCaption() {
-  var images = $('.content').find('img');
+  //var images = $('.content').find('img');
 
-  images.each(function () {
-    var caption = $(this).attr('alt');
-    $('.content').find("[alt='" + caption + "']").parent().append('<p class="image-caption">"' + caption + '"</p>');
-  });
+  //images.each(function () {
+    //var caption = $(this).attr('alt');
+    //$('.content').find("[alt='" + caption + "']").parent().append('<p class="image-caption">"' + caption + '"</p>');
+  //});
 }
 
 var Home = location.href,
