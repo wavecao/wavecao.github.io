@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
-    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="keywords" content="New World,"> 
     <meta name="description" content="代码改变世界,"> 
     <meta name="author" content="曹威"> 
     <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
@@ -297,7 +297,7 @@
         var typedTextEl = $('.typed-text');
         if (typedTextEl && typedTextEl.length > 0) {
             var typed = new Typed('.typed-text', {
-                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                strings: ["Code Change The World", "代码改变世界"],
                 typeSpeed: 90,
                 loop: true,
                 loopCount: Infinity,
@@ -313,6 +313,40 @@
     }
 </script>
 
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-Hans';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'X86hfGNsskOm6j1uwI89hEa1-gzGzoHsz',
+                appKey: 'Fp1VpuQi62zkoWQt3iQYp48q',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: '欢迎评论~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
 
 
 

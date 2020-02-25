@@ -9,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
-    <meta name="keywords" content="TriDiamond Obsidian,"> 
+    <meta name="keywords" content="New World,"> 
     <meta name="description" content="代码改变世界,通过训练集训练和测试集测试来生成多个线性模型，从而预测学生成绩，本文所有代码请点击Github
 1. 实验数据背景1.1  数据来源本项目的数据来源于kaggle.com，数据集的名称为Studen,"> 
     <meta name="author" content="曹威"> 
@@ -99,21 +99,21 @@
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    47k
+                    20k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    43 mins.
+                    18 mins.
                 </span>
                 
                 
-                
-                <span id="busuanzi_container_page_pv">
+                <span id="/2019/lr-student/" class="leancloud_visitors" data-flag-title="大数据线性回归预测学生成绩">
                     <b class="iconfont icon-read"></b> <i>Read count</i>
-                    <span id="busuanzi_value_page_pv">0</span>
+                    <span class="leancloud-visitors-count">1000000</span>
                 </span>
+                
                 
             </p>
             
@@ -188,8 +188,11 @@
 <p>数据规范化后方可进行数据分析，本项目将首先拿出一些特定属性，通过绘制图标的形式单独分析该属性反映出来的信息，试图分析该属性对结果的影响。</p>
 <p>最后将对全部数据建立线性模型，并把数据集分为训练集和测试集，以测试模型的准确性。</p>
 <h2 id="3-具体步骤"><a href="#3-具体步骤" class="headerlink" title="3. 具体步骤"></a>3. 具体步骤</h2><h3 id="3-1-数据总体分析"><a href="#3-1-数据总体分析" class="headerlink" title="3.1  数据总体分析"></a>3.1  数据总体分析</h3><p>利用padans库的read_csv函数，可以读取数据集：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 初始化数据</span></span><br><span class="line">plt.rcParams[<span class="string">'font.sans-serif'</span>] = [<span class="string">'SimHei'</span>]  <span class="comment"># 中文字体设置-黑体</span></span><br><span class="line">plt.rcParams[<span class="string">'axes.unicode_minus'</span>] = <span class="literal">False</span>  <span class="comment"># 解决保存图像是负号'-'显示为方块的问题</span></span><br><span class="line">sns.set(font=<span class="string">'SimHei'</span>)  <span class="comment"># 解决Seaborn中文显示问题</span></span><br><span class="line">student = pd.read_csv(<span class="string">'student-mat.csv'</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python"># 初始化数据
+plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;]  # 中文字体设置-黑体
+plt.rcParams[&#39;axes.unicode_minus&#39;] = False  # 解决保存图像是负号&#39;-&#39;显示为方块的问题
+sns.set(font=&#39;SimHei&#39;)  # 解决Seaborn中文显示问题
+student = pd.read_csv(&#39;student-mat.csv&#39;)</code></pre>
 <p>格式化后展示如图3-1-1</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/ild5anDbNOI3.png?imageslim" alt="mark"></p>
 <center>图3-1-1数据格式化</center>
@@ -200,16 +203,29 @@
 
 
 <h3 id="3-2-利用图表分析属性"><a href="#3-2-利用图表分析属性" class="headerlink" title="3.2  利用图表分析属性"></a>3.2  利用图表分析属性</h3><h4 id="3-2-1各分数段学生计数"><a href="#3-2-1各分数段学生计数" class="headerlink" title="3.2.1各分数段学生计数"></a>3.2.1各分数段学生计数</h4><p>对学生期末成绩直接分析，可以得出成绩的大致分布，那么后文在分析其他因素对成绩的影响时也会更有针对性</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 根据人数多少统计各分数段的学生人数 </span></span><br><span class="line"></span><br><span class="line">grade_counts = student[<span class="string">'G3'</span>].value_counts().sort_values().plot.barh(width=<span class="number">.9</span>,color=sns.color_palette(<span class="string">'inferno'</span>,<span class="number">40</span>)) </span><br><span class="line"></span><br><span class="line">grade_counts.axes.set_title(<span class="string">'各分数值的学生分布'</span>,fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">grade_counts.set_xlabel(<span class="string">'学生数量'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">grade_counts.set_ylabel(<span class="string">'最终成绩'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">  # 根据人数多少统计各分数段的学生人数 
 
+ grade_counts = student[&#39;G3&#39;].value_counts().sort_values().plot.barh(width=.9,color=sns.color_palette(&#39;inferno&#39;,40)) 
+
+ grade_counts.axes.set_title(&#39;各分数值的学生分布&#39;,fontsize=30) 
+
+ grade_counts.set_xlabel(&#39;学生数量&#39;, fontsize=30) 
+
+ grade_counts.set_ylabel(&#39;最终成绩&#39;, fontsize=30) 
+
+ plt.show()</code></pre>
 <p>绘制出的图像如图3-2-1所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/fmFn0DCWkNTo.png?imageslim" alt="mark"></p>
 <center>图3-2-1 各分数段学生统计图</center>
 
 
 <h4 id="3-2-2-学生成绩分布直方图"><a href="#3-2-2-学生成绩分布直方图" class="headerlink" title="3.2.2 学生成绩分布直方图"></a>3.2.2 学生成绩分布直方图</h4><p>3.2.1节中的图像并没有告诉我们有价值的信息，也许我们真正需要的是成绩分布直方图，即把成绩作为一个坐标轴，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从低到高展示成绩分布图 </span></span><br><span class="line">grade_distribution = sns.countplot(student[<span class="string">'G3'</span>]) </span><br><span class="line">grade_distribution.set_title(<span class="string">'成绩分布图'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line">grade_distribution.set_xlabel(<span class="string">'期末成绩'</span>, fontsize=<span class="number">20</span>) </span><br><span class="line">grade_distribution.set_ylabel(<span class="string">'人数统计'</span>, fontsize=<span class="number">20</span>) </span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python"># 从低到高展示成绩分布图 
+grade_distribution = sns.countplot(student[&#39;G3&#39;]) 
+grade_distribution.set_title(&#39;成绩分布图&#39;, fontsize=30) 
+grade_distribution.set_xlabel(&#39;期末成绩&#39;, fontsize=20) 
+grade_distribution.set_ylabel(&#39;人数统计&#39;, fontsize=20) 
+plt.show() </code></pre>
 <p>绘制出的图像如图3-2-2所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/JBzNlvOUolQM.png?imageslim" alt="mark"></p>
 <center>图3-2-2 期末成绩分布图</center>
@@ -217,35 +233,76 @@
 
 <h4 id="3-2-3-年龄因素分析"><a href="#3-2-3-年龄因素分析" class="headerlink" title="3.2.3 年龄因素分析"></a>3.2.3 年龄因素分析</h4><p>中学生正处在身体机能快速发育的时期，大脑亦是如此，不同智力水平的学生势必会得到不同的分数，因此有必要分析一下年龄对成绩的影响，并且考虑到性别因素。</p>
 <p>以下代码可以得出性别的相关数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分析性别比例 </span></span><br><span class="line"></span><br><span class="line">male_studs = len(student[student[<span class="string">'sex'</span>] == <span class="string">'M'</span>]) </span><br><span class="line"></span><br><span class="line">female_studs = len(student[student[<span class="string">'sex'</span>] == <span class="string">'F'</span>]) </span><br><span class="line"></span><br><span class="line">print(<span class="string">'男同学数量:'</span>,male_studs) </span><br><span class="line"></span><br><span class="line">print(<span class="string">'女同学数量:'</span>,female_studs)</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 分析性别比例 
 
+male_studs = len(student[student[&#39;sex&#39;] == &#39;M&#39;]) 
 
+female_studs = len(student[student[&#39;sex&#39;] == &#39;F&#39;]) 
 
+print(&#39;男同学数量:&#39;,male_studs) 
+
+print(&#39;女同学数量:&#39;,female_studs)</code></pre>
 <p>结果为：男同学数量: 187，女同学数量: 208。男女比例并不悬殊。</p>
 <p>分析完性别因素之后，我们先来看看年龄比例的曲线图，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分析年龄分布比例（曲线图） </span></span><br><span class="line"></span><br><span class="line">age_distribution = sns.kdeplot(student[<span class="string">'age'</span>], shade=<span class="literal">True</span>) </span><br><span class="line"></span><br><span class="line">age_distribution.axes.set_title(<span class="string">'学生年龄分布图'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_distribution.set_xlabel(<span class="string">'年龄'</span>, fontsize=<span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">age_distribution.set_ylabel(<span class="string">'比例'</span>, fontsize=<span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 分析年龄分布比例（曲线图） 
 
+age_distribution = sns.kdeplot(student[&#39;age&#39;], shade=True) 
+
+age_distribution.axes.set_title(&#39;学生年龄分布图&#39;, fontsize=30) 
+
+age_distribution.set_xlabel(&#39;年龄&#39;, fontsize=20) 
+
+age_distribution.set_ylabel(&#39;比例&#39;, fontsize=20) 
+
+plt.show() </code></pre>
 <p>生成的图像如图3-2-3所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/7F9uhyjs0CxO.png?imageslim" alt="mark"></p>
 <center>图3-2-3 年龄占比分布图</center>
 该图反映出一个重要的信息，那就是绝大部分学的年龄都在15-19岁之间，但是除此之外没有其他有价值的信息，甚至看不出各个年龄段的人数，最重要的是没有考虑年龄，因此我又绘制的分性别的年龄分布直方图，代码如下：
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 分性别年龄分布图（柱状图） </span></span><br><span class="line"></span><br><span class="line">age_distribution_sex = sns.countplot(<span class="string">'age'</span>, hue=<span class="string">'sex'</span>, data=student) </span><br><span class="line"></span><br><span class="line">age_distribution_sex.axes.set_title(<span class="string">'不同年龄段的学生人数'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_distribution_sex.set_xlabel(<span class="string">'年龄'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_distribution_sex.set_ylabel(<span class="string">'人数'</span>, fontsize=<span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 分性别年龄分布图（柱状图） 
 
+age_distribution_sex = sns.countplot(&#39;age&#39;, hue=&#39;sex&#39;, data=student) 
+
+age_distribution_sex.axes.set_title(&#39;不同年龄段的学生人数&#39;, fontsize=30) 
+
+age_distribution_sex.set_xlabel(&#39;年龄&#39;, fontsize=30) 
+
+age_distribution_sex.set_ylabel(&#39;人数&#39;, fontsize=30) 
+
+plt.show() </code></pre>
 <p>绘制的图像如图3-2-4所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/af0Xk9BY2yE8.png?imageslim" alt="mark"></p>
 <center>图3-2-4 分性别年龄分布图</center>
 结果就是，其实大部分学生的年龄是在15-18岁之间，并且各个年龄段的男女比例基本正常。超过该年龄的学生不一定是离群值，而是有年级下降的学生。分析完年龄本身，接下就可以分析年龄对成绩的影响，首先作出各年龄段的成绩箱型图，代码如下：
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各年龄段的成绩箱型图 </span></span><br><span class="line"></span><br><span class="line">age_grade_boxplot = sns.boxplot(x=<span class="string">'age'</span>, y=<span class="string">'G3'</span>, data=student) </span><br><span class="line"></span><br><span class="line">age_grade_boxplot.axes.set_title(<span class="string">'年龄与分数'</span>, fontsize = <span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_grade_boxplot.set_xlabel(<span class="string">'年龄'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">age_grade_boxplot.set_ylabel(<span class="string">'分数'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 各年龄段的成绩箱型图 
 
+age_grade_boxplot = sns.boxplot(x=&#39;age&#39;, y=&#39;G3&#39;, data=student) 
+
+age_grade_boxplot.axes.set_title(&#39;年龄与分数&#39;, fontsize = 30) 
+
+age_grade_boxplot.set_xlabel(&#39;年龄&#39;, fontsize = 20) 
+
+age_grade_boxplot.set_ylabel(&#39;分数&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>得到的图像如图3-2-5所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/BDeffNFdGkli.png?imageslim" alt="mark"></p>
 <center>图3-2-5 各年龄段的成绩箱型图</center>
 绘制分布而非统计图将有助于我们更好地理解数据，代码如下：
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 各年龄段的成绩分布图 </span></span><br><span class="line"></span><br><span class="line">age_grade_swarmplot = sns.swarmplot(x=<span class="string">'age'</span>, y=<span class="string">'G3'</span>, data=student) </span><br><span class="line"></span><br><span class="line">age_grade_swarmplot.axes.set_title(<span class="string">'年龄与分数'</span>, fontsize = <span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">age_grade_swarmplot.set_xlabel(<span class="string">'年龄'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">age_grade_swarmplot.set_ylabel(<span class="string">'分数'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 各年龄段的成绩分布图 
 
+age_grade_swarmplot = sns.swarmplot(x=&#39;age&#39;, y=&#39;G3&#39;, data=student) 
+
+age_grade_swarmplot.axes.set_title(&#39;年龄与分数&#39;, fontsize = 30) 
+
+age_grade_swarmplot.set_xlabel(&#39;年龄&#39;, fontsize = 20) 
+
+age_grade_swarmplot.set_ylabel(&#39;分数&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>得到的图像如图3-2-6所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/AY1BCX9ppuDq.png?imageslim" alt="mark"></p>
 <center>图3-2-6 各年龄段的成绩分布图</center>
@@ -253,15 +310,33 @@
 
 <h4 id="3-2-4-学生城乡因素分析"><a href="#3-2-4-学生城乡因素分析" class="headerlink" title="3.2.4 学生城乡因素分析"></a>3.2.4 学生城乡因素分析</h4><p>既然年龄对成绩的影响不如预期那么明显，我们不妨再来分析一下学生地区因素对成绩的影响，在大部分地区，城乡教育资源都有不小的差距，教育质量也是如此，部分来自于乡下小学的孩子在步入城市中学后会不会落后于从小就在城市接受教育的孩子呢？</p>
 <p>首先分析城乡学生的比例，代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 城乡学生计数 </span></span><br><span class="line"></span><br><span class="line">areas_countplot = sns.countplot(student[<span class="string">'address'</span>]) </span><br><span class="line"></span><br><span class="line">areas_countplot.axes.set_title(<span class="string">'城乡学生'</span>, fontsize = <span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">areas_countplot.set_xlabel(<span class="string">'家庭住址'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">areas_countplot.set_ylabel(<span class="string">'计数'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 城乡学生计数 
 
+areas_countplot = sns.countplot(student[&#39;address&#39;]) 
+
+areas_countplot.axes.set_title(&#39;城乡学生&#39;, fontsize = 30) 
+
+areas_countplot.set_xlabel(&#39;家庭住址&#39;, fontsize = 20) 
+
+areas_countplot.set_ylabel(&#39;计数&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>绘制的图像如图3-2-7所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/fTXqHT6GIlty.png?imageslim" alt="mark"></p>
 <center>图3-2-7 城乡学生分布图</center>
 ​    大部分学生来自城市，并且城乡比例约为3 ：1。但是城市学生一定获得了更好的成绩吗？还需要进一步分析，代码如下：
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sns.kdeplot(student.loc[student[<span class="string">'address'</span>] == <span class="string">'U'</span>, <span class="string">'G3'</span>], label=<span class="string">'Urban'</span>, shade = <span class="literal">True</span>) </span><br><span class="line"></span><br><span class="line">sns.kdeplot(student.loc[student[<span class="string">'address'</span>] == <span class="string">'R'</span>, <span class="string">'G3'</span>], label=<span class="string">'Rural'</span>, shade = <span class="literal">True</span>) </span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">'城市学生获得了更好的成绩吗？'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.xlabel(<span class="string">'分数'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.ylabel(<span class="string">'占比'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python">sns.kdeplot(student.loc[student[&#39;address&#39;] == &#39;U&#39;, &#39;G3&#39;], label=&#39;Urban&#39;, shade = True) 
 
+sns.kdeplot(student.loc[student[&#39;address&#39;] == &#39;R&#39;, &#39;G3&#39;], label=&#39;Rural&#39;, shade = True) 
+
+plt.title(&#39;城市学生获得了更好的成绩吗？&#39;, fontsize = 20) 
+
+plt.xlabel(&#39;分数&#39;, fontsize = 20) 
+
+plt.ylabel(&#39;占比&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>绘制出的图像如图3-2-8所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/J89RRLlMqbOW.png?imageslim" alt="mark"></p>
 <center>图3-2-8 城乡学生成绩分布图</center>
@@ -271,11 +346,39 @@
 <h4 id="3-3-1相关性初步计算"><a href="#3-3-1相关性初步计算" class="headerlink" title="3.3.1相关性初步计算"></a>3.3.1相关性初步计算</h4><p>首先计算出各个属性与最终成绩G3的相关性，只需一行代码：</p>
 <p>student.corr()[‘G3’].sort_values() </p>
 <p>结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">\1.  failures   -0.360415 </span><br><span class="line"></span><br><span class="line">\2.  age     -0.161579 </span><br><span class="line"></span><br><span class="line">\3.  goout    -0.132791 </span><br><span class="line"></span><br><span class="line">\4.  traveltime  -0.117142 </span><br><span class="line"></span><br><span class="line">\5.  health    -0.061335 </span><br><span class="line"></span><br><span class="line">\6.  Dalc     -0.054660 </span><br><span class="line"></span><br><span class="line">\7.  Walc     -0.051939 </span><br><span class="line"></span><br><span class="line">\8.  freetime   0.011307 </span><br><span class="line"></span><br><span class="line">\9.  absences   0.034247 </span><br><span class="line"></span><br><span class="line">\10. famrel    0.051363 </span><br><span class="line"></span><br><span class="line">\11. studytime   0.097820 </span><br><span class="line"></span><br><span class="line">\12. Fedu     0.152457 </span><br><span class="line"></span><br><span class="line">\13. Medu     0.217147 </span><br><span class="line"></span><br><span class="line">\14. G1      0.801468 </span><br><span class="line"></span><br><span class="line">\15. G2      0.904868 </span><br><span class="line"></span><br><span class="line">\16. G3      1.000000 </span><br><span class="line"></span><br><span class="line">\17. Name: G3, dtype: float64</span><br></pre></td></tr></table></figure>
+<pre><code>\1.  failures   -0.360415 
 
+\2.  age     -0.161579 
 
+\3.  goout    -0.132791 
 
-<p>绝大部分机器学习算法无法处理非数值数据，因此在进行机器学习之前，我们要对部分属性进行编码。</p>
+\4.  traveltime  -0.117142 
+
+\5.  health    -0.061335 
+
+\6.  Dalc     -0.054660 
+
+\7.  Walc     -0.051939 
+
+\8.  freetime   0.011307 
+
+\9.  absences   0.034247 
+
+\10. famrel    0.051363 
+
+\11. studytime   0.097820 
+
+\12. Fedu     0.152457 
+
+\13. Medu     0.217147 
+
+\14. G1      0.801468 
+
+\15. G2      0.904868 
+
+\16. G3      1.000000 
+
+\17. Name: G3, dtype: float64</code></pre><p>绝大部分机器学习算法无法处理非数值数据，因此在进行机器学习之前，我们要对部分属性进行编码。</p>
 <p>首先介绍一下编码方式，第一种是标签编码：</p>
 <p>此方法会为每个类别分配一个标签（label）</p>
 <table>
@@ -330,24 +433,71 @@
 </tr>
 </tbody></table>
 <h4 id="3-3-2-编码后的相关性计算"><a href="#3-3-2-编码后的相关性计算" class="headerlink" title="3.3.2 编码后的相关性计算"></a>3.3.2 编码后的相关性计算</h4><p>​    利用独热编码处理我们的数据集，然后再次寻找相关性，尽管G1和G2是学生的期末成绩，并且与期末成绩G3高度相关，但我们将其删除。没有G2和G1的情况下预测G3更加困难，但是这种预测更加有用，因为我们希望找到影响成绩的其他因素。代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 选取G3属性值 </span></span><br><span class="line"></span><br><span class="line">labels = student[<span class="string">'G3'</span>] </span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除school，G1和G2属性 </span></span><br><span class="line"></span><br><span class="line">student = student.drop([<span class="string">'school'</span>, <span class="string">'G1'</span>, <span class="string">'G2'</span>], axis=<span class="string">'columns'</span>) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 对离散变量进行独热编码 </span></span><br><span class="line"></span><br><span class="line">student = pd.get_dummies(student) </span><br><span class="line"></span><br><span class="line"><span class="comment"># 选取相关性最强的6个 </span></span><br><span class="line"></span><br><span class="line">most_correlated = student.corr().abs()[<span class="string">'G3'</span>].sort_values(ascending=<span class="literal">False</span>) </span><br><span class="line"></span><br><span class="line">most_correlated = most_correlated[:<span class="number">6</span>] </span><br><span class="line"></span><br><span class="line">print(most_correlated)</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 选取G3属性值 
 
+labels = student[&#39;G3&#39;] 
+
+# 删除school，G1和G2属性 
+
+student = student.drop([&#39;school&#39;, &#39;G1&#39;, &#39;G2&#39;], axis=&#39;columns&#39;) 
+
+# 对离散变量进行独热编码 
+
+student = pd.get_dummies(student) 
+
+# 选取相关性最强的6个 
+
+most_correlated = student.corr().abs()[&#39;G3&#39;].sort_values(ascending=False) 
+
+most_correlated = most_correlated[:6] 
+
+print(most_correlated) </code></pre>
 <p>输出的结果如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">\1.  G3       1.000000 </span><br><span class="line"></span><br><span class="line">\2.  failures    0.360415 </span><br><span class="line"></span><br><span class="line">\3.  Medu      0.217147 </span><br><span class="line"></span><br><span class="line">\4.  higher_yes   0.182465 </span><br><span class="line"></span><br><span class="line">\5.  higher_no   0.182465 </span><br><span class="line"></span><br><span class="line">\6.  age      0.161579 </span><br><span class="line"></span><br><span class="line">\7.  Fedu      0.152457  </span><br><span class="line"></span><br><span class="line">\8.  Name: G3, dtype: float64</span><br></pre></td></tr></table></figure>
+<pre><code>\1.  G3       1.000000 
 
+\2.  failures    0.360415 
 
+\3.  Medu      0.217147 
 
-<h3 id="3-4-高相关度属性对成绩的影响"><a href="#3-4-高相关度属性对成绩的影响" class="headerlink" title="3.4  高相关度属性对成绩的影响"></a>3.4  高相关度属性对成绩的影响</h3><h4 id="3-4-1-失败次数对成绩的影响"><a href="#3-4-1-失败次数对成绩的影响" class="headerlink" title="3.4.1 失败次数对成绩的影响"></a>3.4.1 失败次数对成绩的影响</h4><p>​    代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 失败次数成绩分布图 </span></span><br><span class="line"></span><br><span class="line">failures_swarmplot = sns.swarmplot(x=student[<span class="string">'failures'</span>],y=student[<span class="string">'G3'</span>]) </span><br><span class="line"></span><br><span class="line">failures_swarmplot.axes.set_title(<span class="string">'失败次数少的学生分数更高吗？'</span>, fontsize = <span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">failures_swarmplot.set_xlabel(<span class="string">'失败次数'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">failures_swarmplot.set_ylabel(<span class="string">'最终成绩'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+\4.  higher_yes   0.182465 
 
+\5.  higher_no   0.182465 
+
+\6.  age      0.161579 
+
+\7.  Fedu      0.152457  
+
+\8.  Name: G3, dtype: float64 </code></pre><h3 id="3-4-高相关度属性对成绩的影响"><a href="#3-4-高相关度属性对成绩的影响" class="headerlink" title="3.4  高相关度属性对成绩的影响"></a>3.4  高相关度属性对成绩的影响</h3><h4 id="3-4-1-失败次数对成绩的影响"><a href="#3-4-1-失败次数对成绩的影响" class="headerlink" title="3.4.1 失败次数对成绩的影响"></a>3.4.1 失败次数对成绩的影响</h4><p>​    代码如下：</p>
+<pre><code class="python"># 失败次数成绩分布图 
+
+failures_swarmplot = sns.swarmplot(x=student[&#39;failures&#39;],y=student[&#39;G3&#39;]) 
+
+failures_swarmplot.axes.set_title(&#39;失败次数少的学生分数更高吗？&#39;, fontsize = 30) 
+
+failures_swarmplot.set_xlabel(&#39;失败次数&#39;, fontsize = 20) 
+
+failures_swarmplot.set_ylabel(&#39;最终成绩&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>生成的图像如图3-4-1所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/FPhpSE69gNUL.png?imageslim" alt="mark"></p>
 <center>图3-4-1 失败次数对成绩的影响</center>
 ​    结果很明显，失败次数少的学生其成绩分布图更偏向于高分，可见失败次数少的学生更容易拿到高分，这或许是因为失败次数少的学生自信心更强。
 
 <h4 id="3-4-2-双亲受教育水平对成绩的影响"><a href="#3-4-2-双亲受教育水平对成绩的影响" class="headerlink" title="3.4.2 双亲受教育水平对成绩的影响"></a>3.4.2 双亲受教育水平对成绩的影响</h4><p>​    代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 双亲受教育水平的影响 </span></span><br><span class="line"></span><br><span class="line">family_ed = student[<span class="string">'Fedu'</span>] + student[<span class="string">'Medu'</span>]  </span><br><span class="line"></span><br><span class="line">family_ed_boxplot = sns.boxplot(x=family_ed,y=student[<span class="string">'G3'</span>]) </span><br><span class="line"></span><br><span class="line">family_ed_boxplot.axes.set_title(<span class="string">'双亲受教育水平的影响'</span>, fontsize = <span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">family_ed_boxplot.set_xlabel(<span class="string">'家庭教育水平(Mother + Father)'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">family_ed_boxplot.set_ylabel(<span class="string">'最终成绩'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 双亲受教育水平的影响 
 
+family_ed = student[&#39;Fedu&#39;] + student[&#39;Medu&#39;]  
+
+family_ed_boxplot = sns.boxplot(x=family_ed,y=student[&#39;G3&#39;]) 
+
+family_ed_boxplot.axes.set_title(&#39;双亲受教育水平的影响&#39;, fontsize = 30) 
+
+family_ed_boxplot.set_xlabel(&#39;家庭教育水平(Mother + Father)&#39;, fontsize = 20) 
+
+family_ed_boxplot.set_ylabel(&#39;最终成绩&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>生成的图像如图3-4-2所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/bL7WV6bLSlzd.png?imageslim" alt="mark"></p>
 <center>图3-4-2 双亲受教育水平对成绩的影响</center>
@@ -355,26 +505,116 @@
 
 <h4 id="3-4-3-学生升学意愿对成绩的影响"><a href="#3-4-3-学生升学意愿对成绩的影响" class="headerlink" title="3.4.3 学生升学意愿对成绩的影响"></a>3.4.3 学生升学意愿对成绩的影响</h4><p>高等教育是绝对变量，其值为是和否。 由于我们使用了独热编码，因此已将其转换为2个变量。 因此，我们可以消除其中之一（因为这些值是互补的）。 我们消除Higher_no，因为Higher_yes更直观。</p>
 <p>​    代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 学生自己的升学意志对成绩的影响 </span></span><br><span class="line"></span><br><span class="line">personal_wish = sns.boxplot(x = student[<span class="string">'higher_yes'</span>], y=student[<span class="string">'G3'</span>]) </span><br><span class="line"></span><br><span class="line">personal_wish.axes.set_title(<span class="string">'学生升学意愿对成绩的影响'</span>, fontsize = <span class="number">30</span>) </span><br><span class="line"></span><br><span class="line">personal_wish.set_xlabel(<span class="string">'更高级的教育 (1 = 是)'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">personal_wish.set_ylabel(<span class="string">'最终成绩'</span>, fontsize = <span class="number">20</span>) </span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 学生自己的升学意志对成绩的影响 
 
+personal_wish = sns.boxplot(x = student[&#39;higher_yes&#39;], y=student[&#39;G3&#39;]) 
+
+personal_wish.axes.set_title(&#39;学生升学意愿对成绩的影响&#39;, fontsize = 30) 
+
+personal_wish.set_xlabel(&#39;更高级的教育 (1 = 是)&#39;, fontsize = 20) 
+
+personal_wish.set_ylabel(&#39;最终成绩&#39;, fontsize = 20) 
+
+plt.show() </code></pre>
 <p>生成的图像如图3-4-3所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/H6V25vVk1T1V.png?imageslim" alt="mark"></p>
 <p>图3-4-3 学生自己的升学意志对成绩的影响</p>
 <p>显而易见，如果学生本人渴望受到更高的教育，其成绩也会更高一些，毕竟学习是自己的事情。</p>
 <h3 id="3-5-大数据模型"><a href="#3-5-大数据模型" class="headerlink" title="3.5  大数据模型"></a>3.5  大数据模型</h3><h4 id="3-5-1-数据分割"><a href="#3-5-1-数据分割" class="headerlink" title="3.5.1   数据分割"></a>3.5.1   数据分割</h4><p>在大数据通过机器学习建立模型的过程中，不仅要使用大量的数据来训练模型，还需要一定数量的测试集验证模型的准确性，从而判断模型是否可用。因此，我们将数据集分割成训练集和测试集，比例分别为75%和25%。只需一行代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train, X_test, y_train, y_test = train_test_split(student, labels, test_size = <span class="number">0.25</span>, random_state=<span class="number">42</span>)</span><br></pre></td></tr></table></figure>
-
+<pre><code class="python">X_train, X_test, y_train, y_test = train_test_split(student, labels, test_size = 0.25, random_state=42) </code></pre>
 <p>分割后我们便可以利用数据集进行线性回归模型的训练。</p>
 <h4 id="3-5-2-训练之前的准备工作"><a href="#3-5-2-训练之前的准备工作" class="headerlink" title="3.5.2   训练之前的准备工作"></a>3.5.2   训练之前的准备工作</h4><p>代码中的注释已经足够详细，不做解释，直接贴代码：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 计算平均绝对误差和均方根误差 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># MAE-平均绝对误差 </span></span><br><span class="line"></span><br><span class="line"><span class="comment"># RMSE-均方根误差 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate_predictions</span><span class="params">(predictions, true)</span>:</span> </span><br><span class="line"></span><br><span class="line">    mae = np.mean(abs(predictions - true)) </span><br><span class="line"></span><br><span class="line">    rmse = np.sqrt(np.mean((predictions - true) ** <span class="number">2</span>)) </span><br><span class="line"></span><br><span class="line">     </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> mae, rmse </span><br><span class="line"></span><br><span class="line">   </span><br><span class="line"></span><br><span class="line"> <span class="comment"># 求中位数 </span></span><br><span class="line"></span><br><span class="line"> median_pred = X_train[<span class="string">'G3'</span>].median() </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"> <span class="comment"># 所有中位数的列表 </span></span><br><span class="line"></span><br><span class="line"> median_preds = [median_pred **<span class="keyword">for</span>** _ **<span class="keyword">in</span>** range(len(X_test))] </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"> <span class="comment"># 存储真实的G3值以传递给函数 </span></span><br><span class="line"></span><br><span class="line"> true = X_test[<span class="string">'G3'</span>] </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示基准的原始指标 </span></span><br><span class="line"></span><br><span class="line"> mb_mae, mb_rmse = evaluate_predictions(median_preds, true) </span><br><span class="line"></span><br><span class="line">print(<span class="string">'Median Baseline MAE: &#123;:.4f&#125;'</span>.format(mb_mae)) </span><br><span class="line"></span><br><span class="line">print(<span class="string">'Median Baseline RMSE: &#123;:.4f&#125;'</span>.format(mb_rmse))</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 计算平均绝对误差和均方根误差 
 
+# MAE-平均绝对误差 
+
+# RMSE-均方根误差 
+
+def evaluate_predictions(predictions, true): 
+
+    mae = np.mean(abs(predictions - true)) 
+
+    rmse = np.sqrt(np.mean((predictions - true) ** 2)) 
+
+
+
+    return mae, rmse 
+
+
+
+ # 求中位数 
+
+ median_pred = X_train[&#39;G3&#39;].median() 
+
+
+
+ # 所有中位数的列表 
+
+ median_preds = [median_pred **for** _ **in** range(len(X_test))] 
+
+
+
+ # 存储真实的G3值以传递给函数 
+
+ true = X_test[&#39;G3&#39;] 
+
+
+
+# 展示基准的原始指标 
+
+ mb_mae, mb_rmse = evaluate_predictions(median_preds, true) 
+
+print(&#39;Median Baseline MAE: {:.4f}&#39;.format(mb_mae)) 
+
+print(&#39;Median Baseline RMSE: {:.4f}&#39;.format(mb_rmse)) </code></pre>
 <p>最后两句代码的运行结果为：</p>
 <p>Median Baseline MAE: 3.7879</p>
 <p>Median Baseline RMSE: 4.8252</p>
 <h4 id="3-5-3-预测模型训练"><a href="#3-5-3-预测模型训练" class="headerlink" title="3.5.3   预测模型训练"></a>3.5.3   预测模型训练</h4><p>本项目将试图训练出六种模型，分别为：线性回归，ElasticNet回归，随机森林，极端随机数，支持向量机（SVM），梯度提升树。</p>
 <p>代码如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过训练集训练和测试集测试来生成多个线性模型</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">evaluate</span><span class="params">(X_train, X_test, y_train, y_test)</span>:</span></span><br><span class="line">    <span class="comment"># 模型名称</span></span><br><span class="line">    model_name_list = [<span class="string">'Linear Regression'</span>, <span class="string">'ElasticNet Regression'</span>,</span><br><span class="line">                      <span class="string">'Random Forest'</span>, <span class="string">'Extra Trees'</span>, <span class="string">'SVM'</span>,</span><br><span class="line">                       <span class="string">'Gradient Boosted'</span>, <span class="string">'Baseline'</span>]</span><br><span class="line">    X_train = X_train.drop(<span class="string">'G3'</span>, axis=<span class="string">'columns'</span>)</span><br><span class="line">    X_test = X_test.drop(<span class="string">'G3'</span>, axis=<span class="string">'columns'</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 实例化模型</span></span><br><span class="line">    model1 = LinearRegression()</span><br><span class="line">    model2 = ElasticNet(alpha=<span class="number">1.0</span>, l1_ratio=<span class="number">0.5</span>)</span><br><span class="line">    model3 = RandomForestRegressor(n_estimators=<span class="number">100</span>)</span><br><span class="line">    model4 = ExtraTreesRegressor(n_estimators=<span class="number">100</span>)</span><br><span class="line">    model5 = SVR(kernel=<span class="string">'rbf'</span>, degree=<span class="number">3</span>, C=<span class="number">1.0</span>, gamma=<span class="string">'auto'</span>)</span><br><span class="line">    model6 = GradientBoostingRegressor(n_estimators=<span class="number">50</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 结果数据框</span></span><br><span class="line">    results = pd.DataFrame(columns=[<span class="string">'mae'</span>, <span class="string">'rmse'</span>], index = model_name_list)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 每种模型的训练和预测</span></span><br><span class="line">    <span class="keyword">for</span> i, model <span class="keyword">in</span> enumerate([model1, model2, model3, model4, model5, model6]):</span><br><span class="line">        model.fit(X_train, y_train)</span><br><span class="line">        predictions = model.predict(X_test)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 误差标准</span></span><br><span class="line">        mae = np.mean(abs(predictions - y_test))</span><br><span class="line">        rmse = np.sqrt(np.mean((predictions - y_test) ** <span class="number">2</span>))</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 将结果插入结果框</span></span><br><span class="line">        model_name = model_name_list[i]</span><br><span class="line">        results.loc[model_name, :] = [mae, rmse]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 中值基准度量</span></span><br><span class="line">    baseline = np.median(y_train)</span><br><span class="line">    baseline_mae = np.mean(abs(baseline - y_test))</span><br><span class="line">    baseline_rmse = np.sqrt(np.mean((baseline - y_test) ** <span class="number">2</span>))</span><br><span class="line">    </span><br><span class="line">    results.loc[<span class="string">'Baseline'</span>, :] = [baseline_mae, baseline_rmse]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> results</span><br><span class="line">results = evaluate(X_train, X_test, y_train, y_test)</span><br><span class="line">print(results)</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 通过训练集训练和测试集测试来生成多个线性模型
+def evaluate(X_train, X_test, y_train, y_test):
+    # 模型名称
+    model_name_list = [&#39;Linear Regression&#39;, &#39;ElasticNet Regression&#39;,
+                      &#39;Random Forest&#39;, &#39;Extra Trees&#39;, &#39;SVM&#39;,
+                       &#39;Gradient Boosted&#39;, &#39;Baseline&#39;]
+    X_train = X_train.drop(&#39;G3&#39;, axis=&#39;columns&#39;)
+    X_test = X_test.drop(&#39;G3&#39;, axis=&#39;columns&#39;)
 
+    # 实例化模型
+    model1 = LinearRegression()
+    model2 = ElasticNet(alpha=1.0, l1_ratio=0.5)
+    model3 = RandomForestRegressor(n_estimators=100)
+    model4 = ExtraTreesRegressor(n_estimators=100)
+    model5 = SVR(kernel=&#39;rbf&#39;, degree=3, C=1.0, gamma=&#39;auto&#39;)
+    model6 = GradientBoostingRegressor(n_estimators=50)
+
+    # 结果数据框
+    results = pd.DataFrame(columns=[&#39;mae&#39;, &#39;rmse&#39;], index = model_name_list)
+
+    # 每种模型的训练和预测
+    for i, model in enumerate([model1, model2, model3, model4, model5, model6]):
+        model.fit(X_train, y_train)
+        predictions = model.predict(X_test)
+
+        # 误差标准
+        mae = np.mean(abs(predictions - y_test))
+        rmse = np.sqrt(np.mean((predictions - y_test) ** 2))
+
+        # 将结果插入结果框
+        model_name = model_name_list[i]
+        results.loc[model_name, :] = [mae, rmse]
+
+    # 中值基准度量
+    baseline = np.median(y_train)
+    baseline_mae = np.mean(abs(baseline - y_test))
+    baseline_rmse = np.sqrt(np.mean((baseline - y_test) ** 2))
+
+    results.loc[&#39;Baseline&#39;, :] = [baseline_mae, baseline_rmse]
+
+    return results
+results = evaluate(X_train, X_test, y_train, y_test)
+print(results)</code></pre>
 <p>结果如下表所示：</p>
 <table>
 <thead>
@@ -422,16 +662,37 @@
 </tbody></table>
 <p>至此模型的训练已经完成，后续的分析将在第五节中呈现。</p>
 <h2 id="4-分析与总结"><a href="#4-分析与总结" class="headerlink" title="4. 分析与总结"></a>4. 分析与总结</h2><p>模型训练完成之后，并非全部工作完成了，我们在第四节的最后训练出了多个模型，但是模型也有准确率之别，我们下一步就是要找出最合适的模型，代码如下:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找出最合适的模型</span></span><br><span class="line">plt.figure(figsize=(<span class="number">12</span>, <span class="number">8</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 平均绝对误差</span></span><br><span class="line">ax =  plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">results.sort_values(<span class="string">'mae'</span>, ascending = <span class="literal">True</span>).plot.bar(y = <span class="string">'mae'</span>, color = <span class="string">'b'</span>, ax = ax, fontsize=<span class="number">20</span>)</span><br><span class="line">plt.title(<span class="string">'平均绝对误差'</span>, fontsize=<span class="number">20</span>) </span><br><span class="line">plt.ylabel(<span class="string">'MAE'</span>, fontsize=<span class="number">20</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 均方根误差</span></span><br><span class="line">ax = plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">results.sort_values(<span class="string">'rmse'</span>, ascending = <span class="literal">True</span>).plot.bar(y = <span class="string">'rmse'</span>, color = <span class="string">'r'</span>, ax = ax, fontsize=<span class="number">20</span>)</span><br><span class="line">plt.title(<span class="string">'均方根误差'</span>, fontsize=<span class="number">20</span>) </span><br><span class="line">plt.ylabel(<span class="string">'RMSE'</span>,fontsize=<span class="number">20</span>)</span><br><span class="line">plt.tight_layout()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 找出最合适的模型
+plt.figure(figsize=(12, 8))
 
+# 平均绝对误差
+ax =  plt.subplot(1, 2, 1)
+results.sort_values(&#39;mae&#39;, ascending = True).plot.bar(y = &#39;mae&#39;, color = &#39;b&#39;, ax = ax, fontsize=20)
+plt.title(&#39;平均绝对误差&#39;, fontsize=20) 
+plt.ylabel(&#39;MAE&#39;, fontsize=20)
+
+# 均方根误差
+ax = plt.subplot(1, 2, 2)
+results.sort_values(&#39;rmse&#39;, ascending = True).plot.bar(y = &#39;rmse&#39;, color = &#39;r&#39;, ax = ax, fontsize=20)
+plt.title(&#39;均方根误差&#39;, fontsize=20) 
+plt.ylabel(&#39;RMSE&#39;,fontsize=20)
+plt.tight_layout()
+plt.show()</code></pre>
 <p>生成的图像如图4-1所示：</p>
 <p><img src="http://image.wavecao.xyz/blog/20191221/dIc1MXKhIIuA.png?imageslim" alt="mark"></p>
 <center>图4-1 各模型误差柱状图</center>
 显然，无论是平均绝对误差还是均方根误差，线性回归模型都是最小的。因此我们对它进行保存，以便于以后调用，代码很简单：
 
 <p>*</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 保存线性回归模型*</span></span><br><span class="line"></span><br><span class="line">model = LinearRegression()</span><br><span class="line"></span><br><span class="line">model.fit(X_train, y_train)</span><br><span class="line"></span><br><span class="line">filename = <span class="string">'LR_Model'</span></span><br><span class="line"></span><br><span class="line">pickle.dump(model, open(filename, <span class="string">'wb'</span>))</span><br></pre></td></tr></table></figure>
+<pre><code class="python"># 保存线性回归模型*
 
+model = LinearRegression()
+
+model.fit(X_train, y_train)
+
+filename = &#39;LR_Model&#39;
+
+pickle.dump(model, open(filename, &#39;wb&#39;)) </code></pre>
 <p>至此，建立大数据模型的工作已经全部完毕，并且保存了我们训练好的模型，以后如果想预测某个学生的成绩，只要将相关属性输入模型即可得出预测结果。</p>
 <p>回过头来再想一下，大数据学习的初衷是数据分析，因此在建立模型之前，有必要对单个属性先进行一些分析，毕竟在某些数据集中可能会存在一些影响性大甚至是决定性的属性。但对属性分析不意味着随便拿属性分析，除了理性选择之外，我们最好提前把数据进行编码，然后分析各个属性的相关性，选取一些相关性较高的属性分析。比如本项目中，失败次数，学生个人升学意愿对学生的成绩影响非常明显。</p>
 <p>需要强调的是，基于大数据的预测并不是绝对准确的，很多时候由于各种原因可能会造成离谱的误差，因此它只是我们预测结果的参考值。</p>
@@ -445,7 +706,7 @@
             <ul id="audio-list" style="display:none">
                 
                 
-                <li title='0' data-url='/statics/chengdu.mp3'></li>
+                <li title='0' data-url='/statics/bgmusic.mp3'></li>
                 
                     
             </ul>
@@ -454,16 +715,18 @@
             
     <div id='gitalk-container' class="comment link"
         data-ae='true'
-        data-ci='ec894e2b66f752e8b7fb'
-        data-cs='3ccc2e92bb350688fe2c2dc2930189b62622bfb1'
+        data-ci='2840a5aa21f491f132b7'
+        data-cs='3610f58fc22e82e8befddce4f0c5fae5fcb489a4'
         data-r='blog-comments'
-        data-o='TriDiamond'
-        data-a='TriDiamond'
+        data-o='wavecao'
+        data-a='wavecao'
         data-d=''
     >Comments</div>
 
 
             
+            
+            <div id="vcomments"></div>
             
         </div>
         <div class="sidebar">
@@ -471,13 +734,13 @@
                 <div class="subbox">
                     <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
                     <p>曹威</p>
-                    <span>Think like an artist, develop like an artisan</span>
+                    <span>Code Change The World</span>
                     <dl>
-                        <dd><a href="https://github.com/TriDiamond" target="_blank"><span
+                        <dd><a href="https://github.com/wavecao" target="_blank"><span
                                     class=" iconfont icon-github"></span></a></dd>
-                        <dd><a href="https://twitter.com/TriDiamond6" target="_blank"><span
+                        <dd><a href="https://twitter.com/wavecao1" target="_blank"><span
                                     class=" iconfont icon-twitter"></span></a></dd>
-                        <dd><a href="https://stackoverflow.com/users/7602324/tridiamond?tab=profile" target="_blank"><span
+                        <dd><a href="" target="_blank"><span
                                     class=" iconfont icon-stack-overflow"></span></a></dd>
                     </dl>
                 </div>
@@ -733,7 +996,7 @@
         var typedTextEl = $('.typed-text');
         if (typedTextEl && typedTextEl.length > 0) {
             var typed = new Typed('.typed-text', {
-                strings: ["Think like an artist, develop like an artisan", "艺术家思维去思考问题，工匠创造精神去开发"],
+                strings: ["Code Change The World", "代码改变世界"],
                 typeSpeed: 90,
                 loop: true,
                 loopCount: Infinity,
@@ -749,6 +1012,40 @@
     }
 </script>
 
+
+    
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+    <script>
+
+        var valine = new Valine();
+
+        function initValine(path) {
+            if (!path) path = window.location.pathname;
+            let language = 'zh-Hans';
+            if (!language) {
+                language = 'en';
+            } else {
+                language = language.toLowerCase();
+            }
+            valine.init({
+                el: '#vcomments',
+                appId: 'X86hfGNsskOm6j1uwI89hEa1-gzGzoHsz',
+                appKey: 'Fp1VpuQi62zkoWQt3iQYp48q',
+                notify: 'false',
+                verify: 'false',
+                avatar: 'mp',
+                placeholder: '欢迎评论~',
+                visitor: 'true',
+                path: path,
+                lang: language
+            });
+        }
+
+        $(document).ready(function () {
+            initValine();
+        });
+    </script>
 
 
 
