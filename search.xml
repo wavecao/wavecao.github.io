@@ -235,7 +235,7 @@ logging.pattern.file=%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} =
 &lt;/dependency&gt;</code></pre>
 ]]></content>
       <categories>
-        <category>SpringBoot - 笔记</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
@@ -550,7 +550,7 @@ classpath: /</code></pre></blockquote>
 <p>所有支持的配置加载来源，请参考<a href="https://docs.spring.io/spring-boot/docs/2.2.1.RELEASE/reference/htmlsingle/#boot-features-external-config" target="_blank" rel="noopener">官方文档</a>。</p>
 ]]></content>
       <categories>
-        <category>SpringBoot - 笔记</category>
+        <category>SpringBoot</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>
@@ -774,7 +774,6 @@ public @interface AutoConfigurationPackage</code></pre>
 ]]></content>
       <categories>
         <category>SpringBoot</category>
-        <category>笔记</category>
       </categories>
       <tags>
         <tag>SpringBoot</tag>

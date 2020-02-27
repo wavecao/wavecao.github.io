@@ -155,16 +155,16 @@
             <a href="/categories/SpringBoot"><b>「
                 </b>SPRINGBOOT<b> 」</b></a>
             
-            February 26, 2020
+            February 27, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/ck71sexg50000cstn3hy6dnen/" title="SpringBoot-HelloWorld" class="posttitle">SpringBoot-HelloWorld</a></h3>
+            <a href="/2020/ck74nrh5r0000xktndqn5h6i6/" title="SpringBoot 日志全解" class="posttitle">SpringBoot 日志全解</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                8.6k
+                9k
             </span>
             
             
@@ -181,18 +181,24 @@
         
         <div class="md-content animated fadeIn">
             
-            <p>相信用过SSM框架的小伙伴都知道，在使用过程中我们必须配置大量的.xml文件来整合各个框架并对其参数进行配置，这项工作对于大型项目来说苦不堪言。</p>
-<p>于是Pivotal 团队提供了全新的框架Spring Boot，其设计目的是用来简化新 Spring 应用的初始搭建以及开发过程。该框架采用“习惯优于配置”的方式开发，可以快速构建Spring应用。</p>
-<p>SpringBoot 主要有以下优点：</p>
-<blockquote>
-<ul>
-<li>快速创建独立运行的Spring项目以及与主流框架集成</li>
-<li>使用嵌入式的Servlet容器，应用无需打成WAR包</li>
-<li>starters自动依赖与版本控制</li>
-<li>大量的自动配置，简化开发，也可修改默认值</li>
-<li>无需配置XML，无代码生...</li></ul></blockquote>
+            <h3 id="1、日志框架介绍"><a href="#1、日志框架介绍" class="headerlink" title="1、日志框架介绍"></a>1、日志框架介绍</h3><p><strong>主流的日志框架：</strong></p>
+<p>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….</p>
+<table>
+<thead>
+<tr>
+<th align="center">日志门面  （日志的抽象层）</th>
+<th align="center">日志实现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><del>JCL（Jakarta  Commons Logging）</del>    SLF4j（Simple  Logging Facade for Java）    <strong><del>jboss-logging</del></strong></td>
+<td align="center">Log4j  JUL（java.util.logging）  Log4j2  <strong>Logback</strong></td>
+</tr>
+</tbody></table>
+<p>一般来说在开发中在左边选择一个抽象层，右边选择一个实现。</p>
+<p>SpringBoot默认选用<code>SLF4j</code>和<code>logback</code>，SpringBoot的底层是Spring，而Spring...</p>
             
-            <span class="read-more"><a href="/2020/ck71sexg50000cstn3hy6dnen/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2020/ck74nrh5r0000xktndqn5h6i6/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -213,6 +219,100 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(http://image.wavecao.xyz/blog/20200225/Wrc0uF8i5r3r.png?imageslim);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/SpringBoot">
+                  <b>「 </b>SPRINGBOOT<b> 」</b>
+                </a>
+            
+            February 26, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/ck735cvux0000xktn68oo02qa/" title="SpringBoot 配置文件详解（告别XML）" class="posttitle">SpringBoot 配置文件详解（告别XML）</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        13k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        12 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p><a href="https://www.cheerway.fun/2020/ck71sexg50000cstn3hy6dnen/">上篇笔记</a>中提到SpringBoot简化Spring的开发是通过大量的默认配置，然而在开发中我们有时需要改变这些默认约定，所以要使用配置文件。</p>
+<p>SpringBoot中的配置文件明必须是application，如：<code>application.yml</code>，<code>application.properties</code>，<code>application...</code></p>
+            
+            <span class="read-more"><a href="/2020/ck735cvux0000xktn68oo02qa/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(http://image.wavecao.xyz/blog/20200225/Wrc0uF8i5r3r.png?imageslim);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/SpringBoot">
+                  <b>「 </b>SPRINGBOOT<b> 」</b>
+                </a>
+            
+            February 26, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/ck71sexg50000cstn3hy6dnen/" title="SpringBoot-HelloWorld" class="posttitle">SpringBoot-HelloWorld</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        8.6k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        8 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <p>相信用过SSM框架的小伙伴都知道，在使用过程中我们必须配置大量的.xml文件来整合各个框架并对其参数进行配置，这项工作对于大型项目来说苦不堪言。</p>
+<p>于是Pivotal 团队提供了全新的框架Spring Boot，其设计目的是用来简化新 Spring 应用的初始搭建以及开发过程。该框架采用“习惯优于配置...</p>
+            
+            <span class="read-more"><a href="/2020/ck71sexg50000cstn3hy6dnen/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
     </div>
     
 </div>
