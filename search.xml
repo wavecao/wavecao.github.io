@@ -1,6 +1,603 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Vue入门——基础语法</title>
+    <url>/2020/ck7d2hz3p0000agtn4vjsaopj/</url>
+    <content><![CDATA[<h2 id="Vue入门——基础语法"><a href="#Vue入门——基础语法" class="headerlink" title="Vue入门——基础语法"></a>Vue入门——基础语法</h2><h3 id="Vue是什么？"><a href="#Vue是什么？" class="headerlink" title="Vue是什么？"></a>Vue是什么？</h3><p>Vue (读音 /vjuː/，类似于 <strong>view</strong>) 是一套用于构建用户界面的<strong>渐进式框架</strong>。与其它大型框架不同的是，Vue 被设计为可以自底向上逐层应用。Vue 的核心库只关注视图层，不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与<a href="https://vuejs.bootcss.com/guide/single-file-components.html" target="_blank" rel="noopener">现代化的工具链</a>以及各种<a href="https://github.com/vuejs/awesome-vue#libraries--plugins" target="_blank" rel="noopener">支持类库</a>结合使用时，Vue 也完全能够为复杂的单页应用提供驱动。</p>
+<h3 id="Vue的优势"><a href="#Vue的优势" class="headerlink" title="Vue的优势"></a>Vue的优势</h3><p>对于前端开发人员来说，大家使用过很多的Javascript框架。比如原生的JavaScript,Jquery,angularjs和rectjs等。那么Vue与这些框架相比，它的优势体现在哪里？</p>
+<ol>
+<li>Vue 只关注视图层， 采用自底向上增量开发的设计。Vue关注的是视图层，操作的对象是HTML元素。它是渐进的，没有强主张，你可以在原有大系统的上面，把一两个组件改用它实现，当jQuery用；也可以整个用它全家桶开发，当Angular用；还可以用它的视图，搭配你自己设计的整个下层用。你可以在底层数据逻辑的地方用OO和设计模式的那套理念，也可以函数式，都可以，它只是个轻量视图而已，只做了自己该做的事，没有做不该做的事，仅此而已。</li>
+<li>Vue 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。Vue.js 是一个更加灵活开放的解决方案。它允许你以希望的方式组织应用程序，而不是在任何时候都必须遵循 AngularJS 制定的规则，这让 Vue 能适用于各种项目.在 Vue 中指令和组件分得更清晰。指令只封装 DOM 操作，而组件代表一个自给自足的独立单元——有自己的视图和数据逻辑。</li>
+<li>Vue 学习起来非常简单.在 API 与设计两方面上 Vue.js非常简单，因此你可以快速地掌握它的全部特性并投入开发。Vue 的整体思想是拥抱经典的 Web 技术，并在其上进行扩展。基于 HTML 的模板使得将已有的应用逐步迁移到 Vue 更为容易。</li>
+</ol>
+<h3 id="声明式渲染"><a href="#声明式渲染" class="headerlink" title="声明式渲染"></a>声明式渲染</h3><pre><code class="html">&lt;div id=&quot;app&quot;&gt;
+  {{ message }}
+&lt;/div&gt;</code></pre>
+<pre><code class="js">var app = new Vue({
+  el: &#39;#app&#39;,
+  data: {
+    message: &#39;Hello Vue!&#39;
+  }
+})</code></pre>
+<p>如上几行代码就是一个简单的vue程序，你会发现id为app的div里显示了message的值，看起来这跟渲染一个字符串模板非常类似，但是 Vue 在背后做了大量工作。现在数据和 DOM 已经被建立了关联，所有东西都是<strong>响应式的</strong>。我们要怎么确认呢？打开你的浏览器的 JavaScript 控制台 (就在这个页面打开)，并修改 <code>app.message</code> 的值，你将看到上例相应地更新。</p>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><p>Vue有很多<code>v-</code>开头的指令，其本质是自定义属性。比如<code>v-cloak</code>, <code>v-text</code>, <code>v-bind</code>, <code>v-model</code>, <code>v-on</code>等等，下面将逐个介绍。</p>
+<h3 id="v-cloak"><a href="#v-cloak" class="headerlink" title="v-cloak"></a>v-cloak</h3><p>在上面的程序中，如果你的网速太慢，会发现最一开始网页会显示而非它的值，这涉及到Vue的生命周期，我们以后再聊。不过这样一个过程可能给用户带来不好的体验，因此你可以使用<code>v-cloak</code>指令防止页面加载时的闪烁。</p>
+<pre><code class="html">&lt;style type=&quot;text/css&quot;&gt;
+  /* 
+    1、通过属性选择器 选择到 带有属性 v-cloak的标签  让他隐藏
+ */
+  [v-cloak]{
+    /* 元素隐藏    */
+    display: none;
+  }
+  &lt;/style&gt;
+&lt;body&gt;
+  &lt;div id=&quot;app&quot;&gt;
+    &lt;!-- 2、 让带有插值 语法的   添加 v-cloak 属性 
+         在 数据渲染完场之后，v-cloak 属性会被自动去除，
+         v-cloak一旦移除也就是没有这个属性了  属性选择器就选择不到该标签
+         也就是对应的标签会变为可见
+    --&gt;
+    &lt;div  v-cloak  &gt;{{msg}}&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script type=&quot;text/javascript&quot; src=&quot;js/vue.js&quot;&gt;&lt;/script&gt;
+  &lt;script type=&quot;text/javascript&quot;&gt;
+    var vm = new Vue({
+      //  el   指定元素 id 是 app 的元素  
+      el: &#39;#app&#39;,
+      //  data  里面存储的是数据
+      data: {
+        msg: &#39;Hello Vue&#39;
+      }
+    });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><ul>
+<li><code>v-text</code>指令用于将数据填充到标签中，作用于插值表达式类似，但是没有闪动问题</li>
+<li>如果数据中有HTML标签会将html标签一并输出</li>
+<li>注意：此处为单向绑定，数据对象上的值改变，插值会发生变化；但是当插值发生变化并不会影响数据对象的值</li>
+</ul>
+<pre><code class="html">&lt;div id=&quot;app&quot;&gt;
+    &lt;!--  
+        注意:在指令中不要写插值语法  直接写对应的变量名称 
+        在 v-text 中 赋值的时候不要在写 插值语法
+        一般属性中不加 {{}}  直接写 对应 的数据名 
+    --&gt;
+    &lt;p v-text=&quot;msg&quot;&gt;&lt;/p&gt;
+    &lt;p&gt;
+        &lt;!-- Vue  中只有在标签的 内容中 才用插值语法 --&gt;
+        {{msg}}
+    &lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            msg: &#39;Hello Vue.js&#39;
+        }
+    });
+
+&lt;/script&gt;</code></pre>
+<h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><ul>
+<li>用法和<code>v-text</code> 相似  但是他可以将HTML片段填充到标签中</li>
+<li>可能有安全问题, 一般只在可信任内容上使用 <code>v-html</code>，<strong>永不</strong>用在用户提交的内容上(因为谁也不知道某些傻叉用户会提交啥。。。)</li>
+<li>它与v-text区别在于v-text输出的是纯文本，浏览器不会对其再进行html解析，但v-html会将其当html标签解析后输出。</li>
+</ul>
+<pre><code class="html">&lt;div id=&quot;app&quot;&gt;
+　　&lt;p v-html=&quot;html&quot;&gt;&lt;/p&gt; &lt;!-- 输出：html标签在渲染的时候被解析 --&gt;
+
+    &lt;p&gt;{{message}}&lt;/p&gt; &lt;!-- 输出：&lt;span&gt;通过双括号绑定&lt;/span&gt; --&gt;
+
+　　&lt;p v-text=&quot;text&quot;&gt;&lt;/p&gt; &lt;!-- 输出：&lt;span&gt;html标签在渲染的时候被源码输出&lt;/span&gt; --&gt;
+&lt;/div&gt;
+&lt;script&gt;
+　　let app = new Vue({
+　　el: &quot;#app&quot;,
+　　data: {
+　　　　message: &quot;&lt;span&gt;通过双括号绑定&lt;/span&gt;&quot;,
+　　　　html: &quot;&lt;span&gt;html标签在渲染的时候被解析&lt;/span&gt;&quot;,
+　　　　text: &quot;&lt;span&gt;html标签在渲染的时候被源码输出&lt;/span&gt;&quot;,
+　　}
+ });
+&lt;/script&gt;</code></pre>
+<h3 id="v-pre"><a href="#v-pre" class="headerlink" title="v-pre"></a>v-pre</h3><ul>
+<li>跳过编译过程显示原始信息</li>
+</ul>
+<pre><code class="html">&lt;span v-pre&gt;{{ this will not be compiled }}&lt;/span&gt;    
+&lt;!--  显示的是{{ this will not be compiled }}  --&gt;
+&lt;span v-pre&gt;{{msg}}&lt;/span&gt;  
+&lt;!--   即使data里面定义了msg这里仍然是显示的{{msg}}  --&gt;
+&lt;script&gt;
+    new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            msg: &#39;Hello Vue.js&#39;
+        }
+    });
+
+&lt;/script&gt;</code></pre>
+<h3 id="v-once"><a href="#v-once" class="headerlink" title="v-once"></a>v-once</h3><ul>
+<li>只渲染一次，当数据改变时，插值的内容不会有响应式的改变</li>
+</ul>
+<pre><code class="html">  &lt;!-- 即使data里面定义了msg 后期我们修改了 仍然显示的是第一次data里面存储的数据即 Hello Vue.js  --&gt;
+     &lt;span v-once&gt;{{ msg}}&lt;/span&gt;    
+&lt;script&gt;
+    new Vue({
+        el: &#39;#app&#39;,
+        data: {
+            msg: &#39;Hello Vue.js&#39;
+        }
+    });
+&lt;/script&gt;</code></pre>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><ul>
+<li><code>v-on</code>是用来绑定事件的指令，如：v-on:click  </li>
+<li>该指令还有一个语法糖，上述指令可以缩写为：@click</li>
+</ul>
+<pre><code class="html">&lt;body&gt;
+    &lt;div id=&quot;app&quot;&gt;
+        &lt;div&gt;{{num}}&lt;/div&gt;
+    &lt;div&gt;
+        &lt;button v-on:click=&quot;num++&quot;&gt;点击1&lt;/button&gt;
+        &lt;button @click=&quot;num++&quot;&gt;点击2&lt;/button&gt;
+        &lt;button @click=&#39;handle&#39;&gt;点击3&lt;/button&gt;
+        &lt;button @click=&#39;handle()&#39;&gt;点击4&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var vm = new Vue({
+            el: &#39;#app&#39;,
+            data: {
+                num: 0
+            },
+            methods: {
+                handle: function(){
+                    this.num ++;
+                }
+            },
+        })
+    &lt;/script&gt;
+&lt;/body&gt;</code></pre>
+<p>上面代码中四个按钮都可以实现对num加一 的操作，但是按钮3和4值得注意一下，按钮3在调用方法时没有加括号而按钮4加了括号，两种方式都是可以的。原因在于如果我们的方法不需要参数，在调用时就无须括号。</p>
+<blockquote>
+<p>实际上，如果方法内只需要一个event事件对象参数，我们在调用时也无须写括号，因为vue会帮助我们自动传入event对象，前提是方法的声明处只有一个参数。如果方法需要多个参数而我们没有传入，则默认传入event作为第一个参数，其他的会是undefined。</p>
+</blockquote>
+<h4 id="事件修饰符"><a href="#事件修饰符" class="headerlink" title="事件修饰符"></a>事件修饰符</h4><ul>
+<li>在事件处理程序中调用 <code>event.preventDefault()</code> 或 <code>event.stopPropagation()</code> 是非常常见的需求。</li>
+<li>Vue 不推荐我们操作DOM    为了解决这个问题，Vue.js 为 <code>v-on</code> 提供了<strong>事件修饰符</strong></li>
+<li>修饰符是由点开头的指令后缀来表示的</li>
+</ul>
+<pre><code class="html">&lt;!-- 阻止单击事件继续传播 --&gt;
+&lt;a v-on:click.stop=&quot;doThis&quot;&gt;&lt;/a&gt;
+
+&lt;!-- 提交事件不再重载页面 --&gt;
+&lt;form v-on:submit.prevent=&quot;onSubmit&quot;&gt;&lt;/form&gt;
+
+&lt;!-- 修饰符可以串联   即阻止冒泡也阻止默认事件 --&gt;
+&lt;a v-on:click.stop.prevent=&quot;doThat&quot;&gt;&lt;/a&gt;
+
+&lt;!-- 只当在 event.target 是当前元素自身时触发处理函数 --&gt;
+&lt;!-- 即事件不是从内部元素触发的 --&gt;
+&lt;div v-on:click.self=&quot;doThat&quot;&gt;...&lt;/div&gt;
+
+使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。因此，用 v-on:click.prevent.self 会阻止所有的点击，而 v-on:click.self.prevent 只会阻止对元素自身的点击。</code></pre>
+<h4 id="按键修饰符"><a href="#按键修饰符" class="headerlink" title="按键修饰符"></a>按键修饰符</h4><ul>
+<li>在做项目中有时会用到键盘事件，在监听键盘事件时，我们经常需要检查详细的按键。Vue 允许为 <code>v-on</code> 在监听键盘事件时添加按键修饰符</li>
+</ul>
+<pre><code class="html">&lt;!-- 只有在 `keyCode` 是 13 时调用 `vm.submit()` --&gt;
+&lt;input v-on:keyup.13=&quot;submit&quot;&gt;
+
+&lt;!-- -当点击enter 时调用 `vm.submit()` --&gt;
+&lt;input v-on:keyup.enter=&quot;submit&quot;&gt;
+
+&lt;!--当点击enter或者space时  时调用 `vm.alertMe()`   --&gt;
+&lt;input type=&quot;text&quot; v-on:keyup.enter.space=&quot;alertMe&quot; &gt;
+
+常用的按键修饰符
+.enter =&gt;    enter键
+.tab =&gt; tab键
+.delete (捕获“删除”和“退格”按键) =&gt;  删除键
+.esc =&gt; 取消键
+.space =&gt;  空格键
+.up =&gt;  上
+.down =&gt;  下
+.left =&gt;  左
+.right =&gt;  右
+
+&lt;script&gt;
+    var vm = new Vue({
+        el:&quot;#app&quot;,
+        methods: {
+              submit:function(){},
+              alertMe:function(){},
+        }
+    })
+
+&lt;/script&gt;</code></pre>
+<h4 id="自定义按键修饰符"><a href="#自定义按键修饰符" class="headerlink" title="自定义按键修饰符"></a>自定义按键修饰符</h4><ul>
+<li>在Vue中可以通过<code>config.keyCodes</code>自定义按键修饰符别名</li>
+</ul>
+<pre><code class="html">&lt;div id=&quot;app&quot;&gt;
+    预先定义了keycode 116（即F5）的别名为f5，因此在文字输入框中按下F5，会触发prompt方法
+    &lt;input type=&quot;text&quot; v-on:keydown.f5=&quot;prompt()&quot;&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+
+    Vue.config.keyCodes.f5 = 116;
+
+    let app = new Vue({
+        el: &#39;#app&#39;,
+        methods: {
+            prompt: function() {
+                alert(&#39;我是 F5！&#39;);
+            }
+        }
+    });
+&lt;/script&gt;</code></pre>
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><ul>
+<li>v-bind 指令被用来响应地更新 HTML 属性</li>
+<li>v-bind:href    可以缩写为    :href;</li>
+</ul>
+<pre><code class="html">&lt;!-- 绑定一个属性 --&gt;
+&lt;img v-bind:src=&quot;imageSrc&quot;&gt;
+
+&lt;!-- 缩写 --&gt;
+&lt;img :src=&quot;imageSrc&quot;&gt;</code></pre>
+<h4 id="绑定对象"><a href="#绑定对象" class="headerlink" title="绑定对象"></a>绑定对象</h4><ul>
+<li>我们可以给v-bind:class 一个对象，以动态地切换class。</li>
+<li>注意：v-bind:class指令可以与普通的class特性共存</li>
+</ul>
+<pre><code class="html">1、 v-bind 中支持绑定一个对象 
+    如果绑定的是一个对象 则 键为 对应的类名  值 为对应data中的数据 
+&lt;!-- 
+    HTML最终渲染为 &lt;ul class=&quot;box textColor textSize&quot;&gt;&lt;/ul&gt;
+    注意：
+        textColor，textSize  对应的渲染到页面上的CSS类名    
+        isColor，isSize  对应vue data中的数据  如果为true 则对应的类名 渲染到页面上 
+
+
+        当 isColor 和 isSize 变化时，class列表将相应的更新，
+        例如，将isSize改成false，
+        class列表将变为 &lt;ul class=&quot;box textColor&quot;&gt;&lt;/ul&gt;
+--&gt;
+
+&lt;ul class=&quot;box&quot; v-bind:class=&quot;{textColor:isColor, textSize:isSize}&quot;&gt;
+    &lt;li&gt;学习Vue&lt;/li&gt;
+    &lt;li&gt;学习Node&lt;/li&gt;
+    &lt;li&gt;学习React&lt;/li&gt;
+&lt;/ul&gt;
+  &lt;div v-bind:style=&quot;{color:activeColor,fontSize:activeSize}&quot;&gt;对象语法&lt;/div&gt;
+
+&lt;sript&gt;
+var vm= new Vue({
+    el:&#39;.box&#39;,
+    data:{
+        isColor:true,
+        isSize:true，
+        activeColor:&quot;red&quot;,
+        activeSize:&quot;25px&quot;,
+    }
+})
+&lt;/sript&gt;
+&lt;style&gt;
+
+    .box{
+        border:1px dashed #f0f;
+    }
+    .textColor{
+        color:#f00;
+        background-color:#eef;
+    }
+    .textSize{
+        font-size:30px;
+        font-weight:bold;
+    }
+&lt;/style&gt;</code></pre>
+<h4 id="绑定class"><a href="#绑定class" class="headerlink" title="绑定class"></a>绑定class</h4><pre><code class="html">2、  v-bind 中支持绑定一个数组    数组中classA和 classB 对应为data中的数据
+
+这里的classA  对用data 中的  classA
+这里的classB  对用data 中的  classB
+&lt;ul class=&quot;box&quot; :class=&quot;[classA, classB]&quot;&gt;
+    &lt;li&gt;学习Vue&lt;/li&gt;
+    &lt;li&gt;学习Node&lt;/li&gt;
+    &lt;li&gt;学习React&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script&gt;
+var vm= new Vue({
+    el:&#39;.box&#39;,
+    data:{
+        classA:‘textColor‘,
+        classB:‘textSize‘
+    }
+})
+&lt;/script&gt;
+&lt;style&gt;
+    .box{
+        border:1px dashed #f0f;
+    }
+    .textColor{
+        color:#f00;
+        background-color:#eef;
+    }
+    .textSize{
+        font-size:30px;
+        font-weight:bold;
+    }
+&lt;/style&gt;</code></pre>
+<h4 id="绑定对象和数组的区别"><a href="#绑定对象和数组的区别" class="headerlink" title="绑定对象和数组的区别"></a>绑定对象和数组的区别</h4><ul>
+<li>绑定对象的时候 对象的属性 即要渲染的类名 对象的属性值对应的是 data 中的数据 </li>
+<li>绑定数组的时候数组里面存的是data 中的数据 </li>
+</ul>
+<h4 id="绑定style"><a href="#绑定style" class="headerlink" title="绑定style"></a>绑定style</h4><pre><code class="html">&lt;div v-bind:style=&quot;styleObject&quot;&gt;绑定样式对象&lt;/div&gt;&#39;
+
+&lt;!-- CSS 属性名可以用驼峰式 (camelCase) 或短横线分隔 (kebab-case，记得用单引号括起来)    --&gt;
+ &lt;div v-bind:style=&quot;{ color: activeColor, fontSize: fontSize,background:&#39;red&#39; }&quot;&gt;内联样式&lt;/div&gt;
+
+&lt;!--组语法可以将多个样式对象应用到同一个元素 --&gt;
+&lt;div v-bind:style=&quot;[styleObj1, styleObj2]&quot;&gt;&lt;/div&gt;
+
+
+&lt;script&gt;
+    new Vue({
+      el: &#39;#app&#39;,
+      data: {
+        styleObject: {
+          color: &#39;green&#39;,
+          fontSize: &#39;30px&#39;,
+          background:&#39;red&#39;
+        }，
+        activeColor: &#39;green&#39;,
+           fontSize: &quot;30px&quot;
+      },
+      styleObj1: {
+             color: &#39;red&#39;
+       },
+       styleObj2: {
+            fontSize: &#39;30px&#39;
+       }
+
+&lt;/script&gt;</code></pre>
+<h3 id="分支结构"><a href="#分支结构" class="headerlink" title="分支结构"></a>分支结构</h3><h4 id="v-if-使用场景"><a href="#v-if-使用场景" class="headerlink" title="v-if 使用场景"></a>v-if 使用场景</h4><ul>
+<li>多个元素 通过条件判断展示或者隐藏某个元素。或者多个元素</li>
+<li>进行两个视图之间的切换</li>
+</ul>
+<pre><code class="html">&lt;div id=&quot;app&quot;&gt;
+        &lt;!--  判断是否加载，如果为真，就加载，否则不加载--&gt;
+        &lt;span v-if=&quot;flag&quot;&gt;
+           如果flag为true则显示,false不显示!
+        &lt;/span&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+    var vm = new Vue({
+        el:&quot;#app&quot;,
+        data:{
+            flag:true
+        }
+    })
+&lt;/script&gt;
+
+----------------------------------------------------------
+
+    &lt;div v-if=&quot;type === &#39;A&#39;&quot;&gt;
+       A
+    &lt;/div&gt;
+  &lt;!-- v-else-if紧跟在v-if或v-else-if之后   表示v-if条件不成立时执行--&gt;
+    &lt;div v-else-if=&quot;type === &#39;B&#39;&quot;&gt;
+       B
+    &lt;/div&gt;
+    &lt;div v-else-if=&quot;type === &#39;C&#39;&quot;&gt;
+       C
+    &lt;/div&gt;
+  &lt;!-- v-else紧跟在v-if或v-else-if之后--&gt;
+    &lt;div v-else&gt;
+       Not A/B/C
+    &lt;/div&gt;
+
+&lt;script&gt;
+    new Vue({
+      el: &#39;#app&#39;,
+      data: {
+        type: &#39;C&#39;
+      }
+    })
+&lt;/script&gt;</code></pre>
+<h4 id="v-show-和-v-if的区别"><a href="#v-show-和-v-if的区别" class="headerlink" title="v-show 和 v-if的区别"></a>v-show 和 v-if的区别</h4><ul>
+<li>v-show本质就是标签display设置为none，控制隐藏<ul>
+<li>v-show只编译一次，后面其实就是控制css，而v-if不停的销毁和创建，故v-show性能更好一点。</li>
+</ul>
+</li>
+<li>v-if是动态的向DOM树内添加或者删除DOM元素<ul>
+<li>v-if切换有一个局部编译/卸载的过程，切换过程中合适地销毁和重建内部的事件监听和子组件</li>
+</ul>
+</li>
+</ul>
+<h3 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h3><h4 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h4><ul>
+<li>用于循环的数组里面的值可以是对象，也可以是普通元素</li>
+</ul>
+<pre><code class="html">&lt;ul id=&quot;example-1&quot;&gt;
+   &lt;!-- 循环结构-遍历数组  
+    item 是我们自己定义的一个名字  代表数组里面的每一项  
+    items对应的是 data中的数组--&gt;
+  &lt;li v-for=&quot;item in items&quot;&gt;
+    {{ item.message }}
+  &lt;/li&gt; 
+
+&lt;/ul&gt;
+&lt;script&gt;
+ new Vue({
+  el: &#39;#example-1&#39;,
+  data: {
+    items: [
+      { message: &#39;Foo&#39; },
+      { message: &#39;Bar&#39; }
+    ]，
+
+  }
+})
+&lt;/script&gt;</code></pre>
+<ul>
+<li><strong>不推荐</strong>同时使用 <code>v-if</code> 和 <code>v-for</code></li>
+<li>当 <code>v-if</code> 与 <code>v-for</code> 一起使用时，<code>v-for</code> 具有比 <code>v-if</code> 更高的优先级。</li>
+</ul>
+<pre><code class="html">   &lt;!--  循环结构-遍历对象
+        v 代表   对象的value
+        k  代表对象的 键 
+        i  代表索引    
+    ---&gt; 
+     &lt;div v-if=&#39;v==13&#39; v-for=&#39;(v,k,i) in obj&#39;&gt;{{v + '---' + k + '---' + i}}&lt;/div&gt;
+
+&lt;script&gt;
+ new Vue({
+  el: &#39;#example-1&#39;,
+  data: {
+    items: [
+      { message: &#39;Foo&#39; },
+      { message: &#39;Bar&#39; }
+    ]，
+    obj: {
+        uname: &#39;zhangsan&#39;,
+        age: 13,
+        gender: &#39;female&#39;
+    }
+  }
+})
+&lt;/script&gt;</code></pre>
+<p>key 的作用</p>
+<ul>
+<li><strong>key来给每个节点做一个唯一标识</strong></li>
+<li><strong>key的作用主要是为了高效的更新虚拟DOM</strong></li>
+</ul>
+<pre><code class="html">&lt;ul&gt;
+  &lt;li v-for=&quot;item in items&quot; :key=&quot;item.id&quot;&gt;...&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<h3 id="购物车案例"><a href="#购物车案例" class="headerlink" title="购物车案例"></a>购物车案例</h3><p><strong>需求说明：</strong></p>
+<ul>
+<li>表格显示购物车的商品内容</li>
+<li>可以增加或者减少物品的数量，并且可以删除</li>
+<li>显示购物车商品的总价</li>
+</ul>
+<p><strong>实现图：</strong></p>
+<p><img src="http://image.wavecao.xyz/blog/20200304/bXC4dppdTWJQ.png?imageslim" alt="mark"></p>
+<p><strong>代码:</strong></p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;Title&lt;/title&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css&quot; integrity=&quot;sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T&quot; crossorigin=&quot;anonymous&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;app&quot; class=&quot;container&quot;&gt;
+  &lt;table class=&quot;table table-hover table-bordered&quot;&gt;
+    &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th scope=&quot;col&quot;&gt;ID&lt;/th&gt;
+      &lt;th scope=&quot;col&quot;&gt;书籍名称&lt;/th&gt;
+      &lt;th scope=&quot;col&quot;&gt;出版日期&lt;/th&gt;
+      &lt;th scope=&quot;col&quot;&gt;价格&lt;/th&gt;
+      &lt;th scope=&quot;col&quot;&gt;购买数量&lt;/th&gt;
+      &lt;th scope=&quot;col&quot;&gt;操作&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+    &lt;tr v-for=&quot;(book,index) in books&quot;&gt;
+      &lt;td&gt;{{index+1}}&lt;/td&gt;
+      &lt;td&gt;{{book.name}}&lt;/td&gt;
+      &lt;td&gt;{{book.date}}&lt;/td&gt;
+      &lt;td&gt;{{book.price | showPrice}}&lt;/td&gt;
+      &lt;td&gt;
+        &lt;button class=&quot;btn btn-sm btn-secondary&quot; @click=&quot;decrement(index)&quot;&gt;-&lt;/button&gt;
+        {{book.count}}
+        &lt;button class=&quot;btn btn-sm btn-secondary&quot; @click=&quot;increment(index)&quot;&gt;+&lt;/button&gt;
+      &lt;/td&gt;
+      &lt;td&gt;
+        &lt;button class=&quot;btn btn-sm btn-danger&quot; @click=&quot;removeItem(index)&quot;&gt;删除&lt;/button&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+  &lt;span&gt;总价格:{{totalPrice | showPrice}}&lt;/span&gt;
+&lt;/div&gt;
+&lt;script src=&quot;https://code.jquery.com/jquery-3.3.1.slim.min.js&quot; integrity=&quot;sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js&quot; integrity=&quot;sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js&quot; integrity=&quot;sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  const app = new Vue({
+    el: &quot;#app&quot;,
+    data: {
+      books: [
+        {
+          name: &#39;《算法导论》&#39;,
+          date: &#39;2016-9&#39;,
+          price: 85,
+          count: &#39;1&#39;
+        },
+        {
+          name: &#39;《UNIX编程艺术》&#39;,
+          date: &#39;2016-2&#39;,
+          price: 99,
+          count: &#39;1&#39;
+        },
+        {
+          name: &#39;《编程珠玑》&#39;,
+          date: &#39;2008-10&#39;,
+          price: 108,
+          count: &#39;1&#39;
+        },
+        {
+          name: &#39;《代码大全》&#39;,
+          date: &#39;2006-3&#39;,
+          price: 79,
+          count: &#39;1&#39;
+        }
+      ],
+    },
+    filters: {
+      showPrice(value){
+        return &#39;￥&#39; + value.toFixed(2);
+      }
+    },
+    computed: {
+      totalPrice(){
+        let total = 0;
+        for (let item of this.books){
+          total += item.price * item.count;
+        }
+        return total;
+      }
+    },
+    methods: {
+      increment(index){
+        this.books[index].count++;
+      },
+      decrement(index){
+        if (this.books[index].count &gt; 0){
+          this.books[index].count--;
+        }
+      },
+      removeItem(index){
+        this.books.splice(index,1);
+      }
+    }
+  });
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>Vue</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringBoot 日志全解</title>
     <url>/2020/ck74nrh5r0000xktndqn5h6i6/</url>
     <content><![CDATA[<h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><h3 id="1、日志框架介绍"><a href="#1、日志框架介绍" class="headerlink" title="1、日志框架介绍"></a>1、日志框架介绍</h3><p><strong>主流的日志框架：</strong></p>
