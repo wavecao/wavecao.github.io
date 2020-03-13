@@ -337,7 +337,277 @@
     &lt;/body&gt;
 &lt;/html&gt;
 </code></pre>
+<h3 id="组件插槽"><a href="#组件插槽" class="headerlink" title="组件插槽"></a>组件插槽</h3><h4 id="匿名插槽"><a href="#匿名插槽" class="headerlink" title="匿名插槽"></a>匿名插槽</h4><ul>
+<li><p>组件最大的特性就是复用性，而插槽作为组件的扩展大大提高了组件的可复用能力</p>
+</li>
+<li><p>在vue组件的模板中，可用<code>&lt;slot&gt;&lt;/slot&gt;</code>添加一个插槽，插槽内的内容是默认值，当没有被覆盖时，将显示默认值</p>
+</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;!-- 此处组件标签内没有其他内容，因此显示默认内容 --&gt;
+            &lt;cpn&gt;&lt;/cpn&gt;
+            &lt;!-- 此处利用span标签覆盖了插槽的默认内容 --&gt;
+            &lt;cpn&gt;&lt;span&gt;这里是一些文字&lt;/span&gt;&lt;/cpn&gt;
+            &lt;!-- 组件标签里的所有内容都会作为插槽内容显示，因此此处的三个标签都会显示 --&gt;
+            &lt;cpn&gt;
+                &lt;b&gt;加粗文字&lt;/b&gt;
+                &lt;i&gt;斜体文字&lt;/i&gt;
+                &lt;span&gt;这里是一些文字&lt;/span&gt;
+            &lt;/cpn&gt;
+        &lt;/div&gt;
+        &lt;template id=&quot;cpn&quot;&gt;
+            &lt;div&gt;
+                &lt;h2&gt;我是组件标题&lt;/h2&gt;
+                &lt;p&gt;我是组件的文本内容&lt;/p&gt;
+                &lt;slot&gt;&lt;button type=&quot;button&quot;&gt;这是按钮&lt;/button&gt;&lt;/slot&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            const app = new Vue({
+                el: &#39;#app&#39;,
+                data: {
+
+                },
+                components:{
+                    cpn: {
+                        template:&#39;#cpn&#39;
+                    }
+                }
+            })
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="具名插槽"><a href="#具名插槽" class="headerlink" title="具名插槽"></a>具名插槽</h4><ul>
+<li>当有多个插槽时，我们要想覆盖特定的某个插槽就必须使用名字，这就是具名插槽</li>
+<li>使用 <code>&lt;slot&gt;</code> 中的 “name” 属性绑定元素</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;cpn&gt;
+                &lt;button type=&quot;button&quot; slot=&quot;left&quot;&gt;按钮&lt;/button&gt;
+                &lt;span slot=&quot;center&quot;&gt;&lt;b&gt;这是中间的标题&lt;/b&gt;&lt;/span&gt;
+                &lt;a href=&quot;&quot; slot=&quot;right&quot;&gt;一个链接&lt;/a&gt;
+            &lt;/cpn&gt;
+        &lt;/div&gt;
+        &lt;template id=&quot;cpn&quot;&gt;
+            &lt;div&gt;
+                &lt;slot name=&quot;left&quot;&gt;&lt;span&gt;左边&lt;/span&gt;&lt;/slot&gt;
+                &lt;slot name=&quot;center&quot;&gt;&lt;span&gt;中间&lt;/span&gt;&lt;/slot&gt;
+                &lt;slot name=&quot;right&quot;&gt;&lt;span&gt;右边&lt;/span&gt;&lt;/slot&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            const app = new Vue({
+                el: &#39;#app&#39;,
+                data: {
+
+                },
+                components:{
+                    cpn: {
+                        template:&#39;#cpn&#39;
+                    }
+                }
+            })
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="作用域插槽"><a href="#作用域插槽" class="headerlink" title="作用域插槽"></a>作用域插槽</h4><ul>
+<li>父组件对子组件加工处理</li>
+<li>既可以复用子组件的slot，又可以使slot内容不一致</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;!-- 默认是无序列表 --&gt;
+            &lt;cpn&gt;&lt;/cpn&gt;
+            &lt;!-- 此处将内容改为每个元素中间用“-”连接 --&gt;
+            &lt;cpn&gt;
+                &lt;template v-slot=&quot;slot&quot;&gt;
+                    &lt;span v-for=&quot;item in slot.data&quot;&gt;{{item}} - &lt;/span&gt;
+                &lt;/template&gt;
+            &lt;/cpn&gt;
+            &lt;!-- 此处将内容改为每个元素中间用“*”连接 --&gt;
+            &lt;cpn&gt;
+                &lt;template v-slot=&quot;slot&quot;&gt;
+                    &lt;span&gt;{{slot.data.join(' * ')}}&lt;/span&gt;
+                &lt;/template&gt;
+            &lt;/cpn&gt;
+        &lt;/div&gt;
+        &lt;template id=&quot;cpn&quot;&gt;
+            &lt;div&gt;
+                &lt;slot :data=&quot;items&quot;&gt;
+                    &lt;ul&gt;
+                        &lt;li v-for=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/slot&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            const app = new Vue({
+                el: &#39;#app&#39;,
+                data: {
+
+                },
+                components:{
+                    cpn: {
+                        template:&#39;#cpn&#39;,
+                        data() {
+                            return {
+                                items: [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;]
+                            }
+                        }
+                    }
+                }
+            })
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h3 id="父子组件通信的练习"><a href="#父子组件通信的练习" class="headerlink" title="父子组件通信的练习"></a>父子组件通信的练习</h3><p>在接下来的实例中，我将模拟在有网络请求的情况下，用户点击不同的分类tab时显示不通内容的案例。</p>
+<ul>
+<li>父组件首先模拟向后台请求数据，请求到数据后显示tab列表并显示默认的数据</li>
+<li>用户可以点击按钮，点击后子组件通知父组件模拟请求对应的数据</li>
+<li>父组件请求到数据后传给子组件并显示</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;style type=&quot;text/css&quot;&gt;
+        .active{
+          background-color: #00aaff;
+        }
+        .btn{
+            margin-right: 10px;
+            border: 0;
+            border-radius: 2px;
+            padding-left: 10px;
+            padding-right: 10px;
+            height: 30px;
+        }
+    &lt;/style&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;cpn :categories=&#39;categories&#39; :items=&#39;items&#39; @btnclick=&#39;changeitems&#39;&gt;&lt;/cpn&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;template id=&quot;cpn&quot;&gt;
+        &lt;div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;btn&quot; v-for=&quot;(category, index) in categories&quot; 
+            @click=&quot;btnclick(category, index)&quot; :class=&quot;{active: currentIndex == index}&quot;&gt;
+            {{category.name}}
+            &lt;/button&gt;
+            &lt;br&gt;
+            &lt;ul&gt;
+                &lt;li v-for=&quot;item in items&quot;&gt;{{item}}&lt;/li&gt;
+            &lt;/ui&gt;
+        &lt;/div&gt;
+    &lt;/template&gt;
+    &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        const cpn = {
+            template: &#39;#cpn&#39;,
+            props: {
+                items: {
+                    type: Array,
+                    default() {
+                        return [&#39;无数据&#39;]
+                    }
+                },
+                categories: {
+                    type: Array,
+                    required: true
+                }
+            },
+            methods: {
+                btnclick(category, index){
+                    //console.log(category);
+                    this.currentIndex = index;
+                    this.$emit(&#39;btnclick&#39;, category);
+                },
+            },
+            data() {
+                return {
+                    currentIndex: 0
+                }
+            }
+        };
+        const app = new Vue({
+            el: &#39;#app&#39;,
+            data: {
+                categories: [
+                    {
+                        id: &#39;movies&#39;,
+                        name: &#39;电影&#39;
+                    },
+                    {
+                        id: &#39;fruits&#39;,
+                        name: &#39;水果&#39;
+                    },
+                    {
+                        id: &#39;musics&#39;,
+                        name: &#39;音乐&#39;
+                    }
+                ],
+                //ff
+                lists: {
+                    movies: [&#39;星际穿越&#39;, &#39;火星救援&#39;, &#39;星际迷航&#39;, &#39;星球大战&#39;],
+                    fruits: [&#39;苹果&#39;, &#39;香蕉&#39;, &#39;草莓&#39;, &#39;鸭梨&#39;],
+                    musics: [&#39;生命因你而火热&#39;, &#39;没有理想的人不伤心&#39;, &#39;你要跳舞吗&#39;]
+                },
+                items: []
+            },
+            components: {
+                cpn
+            },
+            mounted() {
+                //模拟网络请求和数据绑定
+                this.items = this.lists.movies;
+            },
+            methods: {
+                changeitems(category) {
+                    //模拟网络请求和数据绑定
+                    this.items = this.lists[category.id];
+                }
+            }
+        })
+
+    &lt;/script&gt;
+&lt;/html&gt;
+</code></pre>
 ]]></content>
+      <categories>
+        <category>Vue</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+        <tag>Vue</tag>
+      </tags>
   </entry>
   <entry>
     <title>Vue入门——基础语法</title>
