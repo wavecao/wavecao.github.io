@@ -1,0 +1,811 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vue组件基础 - New World</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="New World,"> 
+    <meta name="description" content="代码改变世界,Vue组件基础Vue的组件化思想组件化是Vue中很重要的思想：
+
+它提供了一种抽象，让我们可以开发出一个个独立可复用的小组件来构造我们的应用
+任何的应用都会被抽象成一颗组件树
+
+
+组件化思想的应用：,"> 
+    <meta name="author" content="曹威"> 
+    <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 4.1.0"></head>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">New World</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://www.cheerway.fun">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Vue组件基础</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="javascript:;"><b>「 </b>Article<b> 」</b></a>
+                
+                March 09, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/ck7pivht30000a8tngd4bfysi/" title="Vue组件基础" class="">Vue组件基础</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    12k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    11 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h2 id="Vue组件基础"><a href="#Vue组件基础" class="headerlink" title="Vue组件基础"></a>Vue组件基础</h2><h3 id="Vue的组件化思想"><a href="#Vue的组件化思想" class="headerlink" title="Vue的组件化思想"></a>Vue的组件化思想</h3><p>组件化是Vue中很重要的思想：</p>
+<ul>
+<li>它提供了一种抽象，让我们可以开发出一个个独立可复用的小组件来构造我们的应用</li>
+<li>任何的应用都会被抽象成一颗组件树</li>
+</ul>
+<p><img src="http://image.wavecao.xyz/blog/20200309/2UYo8tWiUW68.png?imageslim" alt="mark"></p>
+<p>组件化思想的应用：</p>
+<ul>
+<li>有了组件化的思想，我们在之后的开发中就要充分的利用它。</li>
+<li>尽可能的将页面拆分成一个个小的、可复用的组件。</li>
+<li>这样让我们的代码更加方便组织和管理，并且扩展性也更强。</li>
+</ul>
+<h3 id="注册组件"><a href="#注册组件" class="headerlink" title="注册组件"></a>注册组件</h3><h4 id="全局注册"><a href="#全局注册" class="headerlink" title="全局注册"></a>全局注册</h4><ul>
+<li>Vue.component(‘组件名称’, { })     第1个参数是标签名称，第2个参数是一个选项对象</li>
+<li><strong>全局组件</strong>注册后，任何<strong>vue实例</strong>都可以用</li>
+</ul>
+<pre><code class="html">&lt;div id=&quot;example&quot;&gt;
+  &lt;!-- 2、 组件使用 组件名称 是以HTML标签的形式使用  --&gt;  
+  &lt;my-component&gt;&lt;/my-component&gt;
+&lt;/div&gt;
+&lt;script&gt;
+    //   注册组件 
+    // 1、 my-component 就是组件中自定义的标签名
+    Vue.component(&#39;my-component&#39;, {
+      template: &#39;&lt;div&gt;A custom component!&lt;/div&gt;&#39;
+    })
+
+    // 创建根实例
+    new Vue({
+      el: &#39;#example&#39;
+    })
+
+&lt;/script&gt;</code></pre>
+<h4 id="局部注册"><a href="#局部注册" class="headerlink" title="局部注册"></a>局部注册</h4><pre><code class="html">&lt;div id=&quot;app&quot;&gt;
+      &lt;my-component&gt;&lt;/my-component&gt;
+  &lt;/div&gt;
+
+
+&lt;script&gt;
+    // 定义组件的模板
+    var Child = {
+      template: &#39;&lt;div&gt;A custom component!&lt;/div&gt;&#39;
+    }
+    new Vue({
+      //局部注册组件  
+      components: {
+        // &lt;my-component&gt; 将只在父模板可用  一定要在实例上注册了才能在html文件中使用
+        &#39;my-component&#39;: Child
+      }
+    })
+ &lt;/script&gt;</code></pre>
+<p><strong>局部注册的组件只能在注册它的Vue实例中使用</strong></p>
+<h4 id="组件注意事项"><a href="#组件注意事项" class="headerlink" title="组件注意事项"></a>组件注意事项</h4><ul>
+<li>组件参数data必须是一个函数，同时要求改函数返回一个对象</li>
+<li>组件模板必须是单个根元素，当需要写多个HTML标签时，需在最外层套一个div</li>
+<li>组件模板的内容可以是模板字符串</li>
+<li>组件可以使用多次</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;cpn&gt;&lt;/cpn&gt;
+            &lt;cpn&gt;&lt;/cpn&gt;
+            &lt;cpn&gt;&lt;/cpn&gt;
+        &lt;/div&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            Vue.component(&#39;cpn&#39;, {
+                template: &#39;&lt;button @click=&quot;handle&quot;&gt;点击了{{counter}}次&lt;/button&gt;&#39;,
+                data() {
+                    return {
+                        counter: 0
+                    }
+                },
+                methods:{
+                    handle() {
+                        this.counter++;
+                    }
+                }
+            })
+          const app = new Vue({
+          el: &quot;#app&quot;,
+            data: {
+
+            }
+          });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+<p>如上的代码中，名为<code>cpn</code>的组件被使用了三次，从运行效果可以看出，每个组件的counter变量是独立的</p>
+<p><img src="http://image.wavecao.xyz/blog/20200309/611k8DchY8ba.png?imageslim" alt="mark"></p>
+<h4 id="模板的分离写法"><a href="#模板的分离写法" class="headerlink" title="模板的分离写法"></a>模板的分离写法</h4><p>上述注册组件的方法，我们将template模板放在了注册组件的内部，这样做会带来两个坏处</p>
+<ol>
+<li>没有代码补全，撰写模板的过程更麻烦</li>
+<li>代码看起来更加凌乱</li>
+</ol>
+<p>因此一般我们会采用模板的分离写法，nVue提供了两种方案来定义HTML模块内容：</p>
+<ul>
+<li><p>使用<code>&lt;script&gt;</code>标签</p>
+</li>
+<li><p>使用<code>&lt;template&gt;</code>标签</p>
+</li>
+</ul>
+<p><img src="http://image.wavecao.xyz/blog/20200309/nfLi6kjGQVmz.png?imageslim" alt="mark"></p>
+<p><img src="http://image.wavecao.xyz/blog/20200309/ha9Pr7SxHYuB.png?imageslim" alt="mark"></p>
+<h3 id="组件之间的通信"><a href="#组件之间的通信" class="headerlink" title="组件之间的通信"></a>组件之间的通信</h3><h4 id="父组件向子组件传值"><a href="#父组件向子组件传值" class="headerlink" title="父组件向子组件传值"></a>父组件向子组件传值</h4><ul>
+<li>父组件发送的形式是以属性的形式绑定值到子组件身上。</li>
+<li>然后子组件用属性props接收</li>
+<li>在props中使用驼峰形式，模板中需要使用短横线的形式字符串形式的模板中没有这个限制</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;title&gt;Title&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&quot;app&quot;&gt;
+            &lt;cpn :c-movies=&quot;movies&quot; :c-message=&quot;message&quot;&gt;&lt;/cpn&gt;
+        &lt;/div&gt;
+        &lt;template id=&quot;cpn&quot;&gt;
+            &lt;div&gt;
+                &lt;h2&gt;{{cMessage}}&lt;/h2&gt;
+                &lt;div&gt;
+                    &lt;ul&gt;
+                        &lt;li v-for=&quot;item in cMovies&quot;&gt;{{item}}&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/template&gt;
+        &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+        &lt;script&gt;
+            const app = new Vue({
+                el: &quot;#app&quot;,
+                data: {
+                    message: &#39;你好啊&#39;,
+                    movies: [&#39;星际穿越&#39;, &#39;火星救援&#39;, &#39;星际迷航&#39;, &#39;星球大战&#39;]
+                },
+                components: {
+                    cpn: {
+                        template: &#39;#cpn&#39;,
+                        data() {
+                            return {
+
+                            }
+                        },
+                        methods: {
+
+                        },
+                        props: {
+                            cMovies: {
+                                type: Array,
+                                default () {
+                                    return [&#39;随便什么电影&#39;]
+                                }
+                            },
+                            cMessage: {
+                                type: String,
+                                default: &#39;aaaaaa&#39;
+                            }
+                        }
+                    }
+                },
+            });
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>上面的代码中，props属性采用的是对象写法，好处就是可以进行类型校验，默认值设置等操作，而另外的数组写法则不能进行这些操作：</p>
+<pre><code class="html">props: [&#39;cMovies&#39;, &#39;cMessage&#39;]</code></pre>
+<h4 id="子组件向父组件传值"><a href="#子组件向父组件传值" class="headerlink" title="子组件向父组件传值"></a>子组件向父组件传值</h4><ul>
+<li>子组件用<code>$emit()</code>触发事件</li>
+<li><code>$emit()</code>  第一个参数为 自定义的事件名称     第二个参数为需要传递的数据</li>
+<li>父组件用v-on 监听子组件的事件</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+         &lt;div id=&quot;app&quot;&gt;
+            &lt;div :style=&#39;{fontSize: fontSize + &quot;px&quot;}&#39;&gt;{{pmsg}}&lt;/div&gt;
+             &lt;!-- 父组件用v-on 监听子组件的事件
+                这里 enlarge-text  是从 $emit 中的第一个参数对应   handle 为对应的事件处理函数    
+            --&gt;    
+            &lt;menu-item :parr=&#39;parr&#39; @enlarge-text=&#39;handle($event)&#39;&gt;&lt;/menu-item&gt;
+          &lt;/div&gt;
+            &lt;template id=&quot;cpn&quot;&gt;
+                &lt;div&gt;
+                    &lt;ul&gt;
+                      &lt;li :key=&#39;index&#39; v-for=&#39;(item,index) in parr&#39;&gt;{{item}}&lt;/li&gt;
+                    &lt;/ul&gt;
+                        &lt;!-- 子组件用$emit()触发事件
+                        第一个参数为 自定义的事件名称   第二个参数为需要传递的数据 --&gt;  
+                    &lt;button @click=&#39;$emit(&quot;enlarge-text&quot;, 5)&#39;&gt;扩大父组件中字体大小&lt;/button&gt;
+                    &lt;button @click=&#39;$emit(&quot;enlarge-text&quot;, 10)&#39;&gt;扩大父组件中字体大小&lt;/button&gt;
+                  &lt;/div&gt;
+            &lt;/template&gt;
+          &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+          &lt;script type=&quot;text/javascript&quot;&gt;
+            var vm = new Vue({
+              el: &#39;#app&#39;,
+              data: {
+                pmsg: &#39;父组件中内容&#39;,
+                parr: [&#39;apple&#39;,&#39;orange&#39;,&#39;banana&#39;],
+                fontSize: 10
+              },
+              methods: {
+                handle: function(val){
+                  // 扩大字体大小
+                  this.fontSize += val;
+                }
+              },
+                    components:{
+                        &#39;menu-item&#39;: {
+                            props: [&#39;parr&#39;],
+                            template: &#39;#cpn&#39;
+                        }
+                    }
+            });
+          &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<h4 id="兄弟间的传值"><a href="#兄弟间的传值" class="headerlink" title="兄弟间的传值"></a>兄弟间的传值</h4><ul>
+<li>兄弟之间传递数据需要借助于事件中心，通过事件中心传递数据   <ul>
+<li>提供事件中心    var hub = new Vue()</li>
+</ul>
+</li>
+<li>传递数据方，通过一个事件触发hub.$emit(方法名，传递的数据)</li>
+<li>接收数据方，通过mounted(){} 钩子中  触发hub.$on()方法名</li>
+<li>销毁事件 通过hub.$off()方法名销毁之后无法进行传递数据</li>
+</ul>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&quot;utf-8&quot;&gt;
+        &lt;title&gt;&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+         &lt;div id=&quot;app&quot;&gt;
+            &lt;div&gt;父组件&lt;/div&gt;
+            &lt;div&gt;
+              &lt;button @click=&#39;handle&#39;&gt;销毁事件&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;test-tom&gt;&lt;/test-tom&gt;
+            &lt;test-jerry&gt;&lt;/test-jerry&gt;
+          &lt;/div&gt;
+          &lt;script src=&quot;https://cdn.jsdelivr.net/npm/vue/dist/vue.js&quot;&gt;&lt;/script&gt;
+          &lt;script type=&quot;text/javascript&quot;&gt;
+            /*
+              兄弟组件之间数据传递
+            */
+            //1、 提供事件中心
+            var hub = new Vue();
+
+            Vue.component(&#39;test-tom&#39;, {
+              data: function(){
+                return {
+                  num: 0
+                }
+              },
+              template: `
+                &lt;div&gt;
+                  &lt;div&gt;TOM:{{num}}&lt;/div&gt;
+                  &lt;div&gt;
+                    &lt;button @click=&#39;handle&#39;&gt;点击&lt;/button&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              `,
+              methods: {
+                handle: function(){
+                  //2、传递数据方，通过一个事件触发hub.$emit(方法名，传递的数据)   触发兄弟组件的事件
+                  hub.$emit(&#39;jerry-event&#39;, 2);
+                }
+              },
+              mounted: function() {
+               // 3、接收数据方，通过mounted(){} 钩子中  触发hub.$on(方法名
+                hub.$on(&#39;tom-event&#39;, (val) =&gt; {
+                  this.num += val;
+                });
+              }
+            });
+            Vue.component(&#39;test-jerry&#39;, {
+              data: function(){
+                return {
+                  num: 0
+                }
+              },
+              template: `
+                &lt;div&gt;
+                  &lt;div&gt;JERRY:{{num}}&lt;/div&gt;
+                  &lt;div&gt;
+                    &lt;button @click=&#39;handle&#39;&gt;点击&lt;/button&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              `,
+              methods: {
+                handle: function(){
+                  //2、传递数据方，通过一个事件触发hub.$emit(方法名，传递的数据)   触发兄弟组件的事件
+                  hub.$emit(&#39;tom-event&#39;, 1);
+                }
+              },
+              mounted: function() {
+                // 3、接收数据方，通过mounted(){} 钩子中  触发hub.$on()方法名
+                hub.$on(&#39;jerry-event&#39;, (val) =&gt; {
+                  this.num += val;
+                });
+              }
+            });
+            var vm = new Vue({
+              el: &#39;#app&#39;,
+              data: {
+
+              },
+              methods: {
+                handle: function(){
+                  //4、销毁事件 通过hub.$off()方法名销毁之后无法进行传递数据  
+                  hub.$off(&#39;tom-event&#39;);
+                  hub.$off(&#39;jerry-event&#39;);
+                }
+              }
+            });
+          &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/bgmusic.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='2840a5aa21f491f132b7'
+        data-cs='3610f58fc22e82e8befddce4f0c5fae5fcb489a4'
+        data-r='blog-comments'
+        data-o='wavecao'
+        data-a='wavecao'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>曹威</p>
+                    <span>Code Change The World</span>
+                    <dl>
+                        <dd><a href="https://github.com/wavecao" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/wavecao1" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">9 <p>Articles</p></a></li>
+                    <li><a href="/categories">7 <p>Categories</p></a></li>
+                    <li><a href="/tags">7 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Vue组件基础"><span class="toc-number">1.</span> <span class="toc-text">Vue组件基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Vue的组件化思想"><span class="toc-number">1.1.</span> <span class="toc-text">Vue的组件化思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注册组件"><span class="toc-number">1.2.</span> <span class="toc-text">注册组件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#组件之间的通信"><span class="toc-number">1.3.</span> <span class="toc-text">组件之间的通信</span></a></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            曹威
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Code Change The World", "代码改变世界"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
