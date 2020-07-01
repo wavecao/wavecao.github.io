@@ -107,7 +107,7 @@ JCL,">
             animation-duration: 1.2s;
             background-image: 
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-                url(http://image.wavecao.xyz/blog/20200225/Wrc0uF8i5r3r.png?imageslim) ">
+                url(http://image.cheerway.fun/blog/20200225/Wrc0uF8i5r3r.png?imageslim) ">
         </div>
         <div class="else">
             <p class="animated fadeInDown">
@@ -192,12 +192,12 @@ public class HelloWorld {
     logger.info(&quot;Hello World&quot;);
   }
 }</code></pre>
-<p><img src="http://image.wavecao.xyz/blog/20200227/HrCXCAHqbOx7.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200227/HrCXCAHqbOx7.png?imageslim" alt="mark"></p>
 <p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；</strong></p>
 <h4 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h4><p>下面是几种框架的日志选择：</p>
 <p>SpringBoot（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
 <p>统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？</p>
-<p><img src="http://image.wavecao.xyz/blog/20200227/YqDpaS53HU61.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200227/YqDpaS53HU61.png?imageslim" alt="mark"></p>
 <p><strong>如何让系统中所有的日志都统一到slf4j；</strong></p>
 <p>1、将系统中其他日志框架先排除出去；</p>
 <p>2、用中间包来替换原有的日志框架；</p>
@@ -208,7 +208,7 @@ public class HelloWorld {
     &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
 &lt;/dependency&gt;</code></pre>
 <p>底层的依赖关系：</p>
-<p><img src="http://image.wavecao.xyz/blog/20200227/3P4RoG9Cgt3Q.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200227/3P4RoG9Cgt3Q.png?imageslim" alt="mark"></p>
 <p>总结：</p>
 <p>​    1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录</p>
 <p>​    2）、SpringBoot也把其他的日志都替换成了slf4j；</p>
@@ -219,7 +219,7 @@ public abstract class LogFactory {
     static String UNSUPPORTED_OPERATION_IN_JCL_OVER_SLF4J = &quot;http://www.slf4j.org/codes.html#unsupported_operation_in_jcl_over_slf4j&quot;;
 
     static LogFactory logFactory = new SLF4JLogFactory();</code></pre>
-<p><img src="http://image.wavecao.xyz/blog/20200227/dYYSl4SCYGyB.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200227/dYYSl4SCYGyB.png?imageslim" alt="mark"></p>
 <p>4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？</p>
 <p>Spring框架用的是commons-logging；</p>
 <pre><code class="xml">&lt;dependency&gt;

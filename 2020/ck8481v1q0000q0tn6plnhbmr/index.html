@@ -98,7 +98,7 @@
             animation-duration: 1.2s;
             background-image: 
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-                url(http://image.wavecao.xyz/blog/20200304/NJXBiQVEA48R.png?imageslim) ">
+                url(http://image.cheerway.fun/blog/20200304/NJXBiQVEA48R.png?imageslim) ">
         </div>
         <div class="else">
             <p class="animated fadeInDown">
@@ -157,10 +157,10 @@
         <div class="content markdown animated fadeIn">
             <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a>什么是队列</h3><p>对于数组来说，我们可以通过下标值拿到每一个具体的元素。但是有些时候我们需要一种限制存取顺序的数据结构，此时队列和栈便派上了用场。</p>
 <p>队列与栈的不同之处在于，队列是先进先出（FIFO）而栈是后入先出（LIFO），其实<code>队列</code>二字“名副其实”，我们可以将其理解为日常生活中的排队：当我们在超市收银台结账时，肯定是排在前面的顾客先结账，然后依次是后面的顾客结账（不考虑某些人的插队行为）。</p>
-<p><img src="http://image.wavecao.xyz/Snipaste_2020-03-23_15-49-30.png" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/Snipaste_2020-03-23_15-49-30.png" alt="mark"></p>
 <p>如上图所示，队列是典型的 FIFO 数据结构。插入（insert）操作也称作入队（enqueue），新元素始终被添加在<code>队列的末尾</code>。 删除（delete）操作也被称为出队（dequeue)。 你只能移除<code>第一个元素</code>。</p>
 <h3 id="顺序队列"><a href="#顺序队列" class="headerlink" title="顺序队列"></a>顺序队列</h3><p>顺序队列可以基于动态数组和指向头部的指针的方式实现的，是连续的一块内存空间。其结构如下图：</p>
-<img src="http://image.wavecao.xyz/blog/20200323/PfkWFmuOECIu.jpg?imageslim" alt="mark" style="zoom:50%;" />
+<img src="http://image.cheerway.fun/blog/20200323/PfkWFmuOECIu.jpg?imageslim" alt="mark" style="zoom:50%;" />
 
 <p>按照上述，其实现也十分简单，下面给出一种实现</p>
 <pre><code class="java">public class MyQueue {
@@ -215,8 +215,7 @@
 
 <h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><p>上述通过数组来实现的队列，我们虽然进行了优化，但是当有空间无法利用时时，还是会进行一次数据搬移，性能也会收到影响，能否避免数据呢？答案是肯定的，看一下循环队列的解决思路。</p>
 <p>循环队列就相当于一个圆环，数组可以想象成一条直线，我们把这条直线掰成一个圆环，就是循环队列，为了更形象的表示，可以看下图所示：</p>
-<img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=4226895243,1633034368&amp;fm=15&amp;gp=0.jpg" style="zoom:50%;" />
-
+<p><img src="http://image.cheerway.fun/blog/20200701/vavymwwzDzOe.jpg?imageslim" alt="mark"></p>
 <p>循环队列中，我们需要两个指针，即head和tail分别指向队列的头和尾，当队列初始化时，head和tail都指向索引为0的位置。如果有数据入队，tail则后移一次，如果有数据出队，head则后移一次。</p>
 <p>但是上述的过程会出现一系列问题：</p>
 <ul>

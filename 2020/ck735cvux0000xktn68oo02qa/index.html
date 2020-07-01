@@ -98,7 +98,7 @@
             animation-duration: 1.2s;
             background-image: 
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-                url(http://image.wavecao.xyz/blog/20200225/Wrc0uF8i5r3r.png?imageslim) ">
+                url(http://image.cheerway.fun/blog/20200225/Wrc0uF8i5r3r.png?imageslim) ">
         </div>
         <div class="else">
             <p class="animated fadeInDown">
@@ -271,7 +271,7 @@ person.cat.age=2</code></pre>
 <p>当工程中同时有两种配置文件时，将以properties优先</p>
 </blockquote>
 <h4 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h4><p>如果使用properties配置时中文数据出现乱码，在设置中找到<code>File Encoding</code>，将配置文件字符设置为<code>UTF-8</code>，并且勾选 <code>Transparent native-to-ascii conversion</code></p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/1R5zyYPhc0sj.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/1R5zyYPhc0sj.png?imageslim" alt="mark"></p>
 <h2 id="配置文件两种注入方式的对比"><a href="#配置文件两种注入方式的对比" class="headerlink" title="配置文件两种注入方式的对比"></a>配置文件两种注入方式的对比</h2><p>配置文件值注入有两种方式，一个是Spring Boot的<code>@ConfigurationProperties</code>注解，另一个是spring原先的<code>@value</code>注解</p>
 <table>
 <thead>
@@ -333,36 +333,36 @@ public class Person {
     private Integer age;</code></pre>
 </blockquote>
 <h3 id="JSR303数据校验"><a href="#JSR303数据校验" class="headerlink" title="JSR303数据校验"></a>JSR303数据校验</h3><p><code>@ConfigurationProperties</code>注解可以使用JSR303数据校验</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/pnGDtGwVtNhx.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/pnGDtGwVtNhx.png?imageslim" alt="mark"></p>
 <p><code>@Value</code>注解不支持数据校验</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/evrd48vQG7bk.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/evrd48vQG7bk.png?imageslim" alt="mark"></p>
 <h2 id="配置的其他知识"><a href="#配置的其他知识" class="headerlink" title="配置的其他知识"></a>配置的其他知识</h2><h3 id="PropertySource"><a href="#PropertySource" class="headerlink" title="@PropertySource"></a>@PropertySource</h3><p><code>@PropertySource</code>注解的作用是加载指定位置的配置文件，其指可以是数组，即可以加载多个配置文件</p>
 <p>SpringBoot默认加载的配置文件名称是<code>application</code>，如果配置文件名不是这个是不会被容器加载的。</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/4MturEUqwdXc.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/4MturEUqwdXc.png?imageslim" alt="mark"></p>
 <blockquote>
 <p>使用这个注解加载配置文件就需要配置类使用@component等注解而不是等待@EnableConfigurationProperties激活，而且不支持yaml，只能是properties</p>
 </blockquote>
 <h3 id="ImportResource"><a href="#ImportResource" class="headerlink" title="@ImportResource"></a>@ImportResource</h3><p><code>@ImportResource</code>注解用于导入Spring的配置文件，让配置文件里面的内容生效；(就是以前写的springmvc.xml、applicationContext.xml)</p>
 <p>Spring Boot里面没有Spring的配置文件，我们自己编写的配置文件，也不能自动识别；</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/LiTBIgzvujgf.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/LiTBIgzvujgf.png?imageslim" alt="mark"></p>
 <p>想让Spring的配置文件生效，加载进来；必须把@<strong>ImportResource</strong>标注在一个配置类上</p>
 <blockquote>
 <p>注意：此处应该把该注解加在入口类上而不是测试类</p>
 </blockquote>
-<p><img src="http://image.wavecao.xyz/blog/20200226/j1iXGQCTSsRl.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/j1iXGQCTSsRl.png?imageslim" alt="mark"></p>
 <h3 id="Configuration"><a href="#Configuration" class="headerlink" title="@Configuration"></a>@Configuration</h3><p>这是SpringBoot推荐的添加注解的方式，并且推荐使用全注解的方式。</p>
 <p>配置类加上<strong>@Configuration</strong>相当于 Spring配置文件。</p>
 <h4 id="Bean"><a href="#Bean" class="headerlink" title="@Bean"></a>@Bean</h4><p>使用@Bean给容器中添加组件，其中组件名就是方法名。</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/s4PmyAVxd4Fh.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/s4PmyAVxd4Fh.png?imageslim" alt="mark"></p>
 <h3 id="配置文件占位符"><a href="#配置文件占位符" class="headerlink" title="配置文件占位符"></a>配置文件占位符</h3><h4 id="随机值"><a href="#随机值" class="headerlink" title="随机值"></a>随机值</h4><pre><code class="java">${random.value}
 ${random.int}
 ${random.long}
 ${random.int(10)}
 ${random.int[1024,65536]}</code></pre>
-<h4 id="引用配置好的其他属性"><a href="#引用配置好的其他属性" class="headerlink" title="引用配置好的其他属性"></a>引用配置好的其他属性</h4><p><img src="http://image.wavecao.xyz/blog/20200226/UtEFBaPzUhtY.png?imageslim" alt="mark"></p>
+<h4 id="引用配置好的其他属性"><a href="#引用配置好的其他属性" class="headerlink" title="引用配置好的其他属性"></a>引用配置好的其他属性</h4><p><img src="http://image.cheerway.fun/blog/20200226/UtEFBaPzUhtY.png?imageslim" alt="mark"></p>
 <p>如果引用的属性没有值，可以使用<code>:</code>指定他的默认值</p>
 <h3 id="Profile"><a href="#Profile" class="headerlink" title="Profile"></a>Profile</h3><p>Profile是Spring对不同环境提供不同配置功能的支持，可以通过激活、指定参数等方式快速切换环境</p>
-<h4 id="多profile文件形式"><a href="#多profile文件形式" class="headerlink" title="多profile文件形式"></a>多profile文件形式</h4><p><img src="http://image.wavecao.xyz/blog/20200226/dawLnttRyTks.png?imageslim" alt="mark"></p>
+<h4 id="多profile文件形式"><a href="#多profile文件形式" class="headerlink" title="多profile文件形式"></a>多profile文件形式</h4><p><img src="http://image.cheerway.fun/blog/20200226/dawLnttRyTks.png?imageslim" alt="mark"></p>
 <p>此时运行程序，启动的是8080端口，但是我们可以自定义激活配置文件：</p>
 <blockquote>
 <p>举个栗子：如果在主配置文件中加入以下代码</p>
@@ -392,7 +392,7 @@ spring:
 <pre><code class="shell">java -jar xxx.jar --spring.profiles.active=dev;</code></pre>
 </li>
 <li><p>虚拟机参数</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/fyV8zRiwJYjb.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/fyV8zRiwJYjb.png?imageslim" alt="mark"></p>
 </li>
 </ol>
 <h3 id="配置文件加载位置"><a href="#配置文件加载位置" class="headerlink" title="配置文件加载位置"></a>配置文件加载位置</h3><p>springboot 启动会扫描以下位置的application.properties或者application.yml文件作为Spring boot的默认配置文件</p>
@@ -406,7 +406,7 @@ classpath: /config/
 classpath: /</code></pre></blockquote>
 <p>优先级由高到底，高优先级的配置会覆盖低优先级的配置（优先级低的先加载）；</p>
 <p>SpringBoot会从这四个位置全部加载主配置文件；<strong>互补配置</strong>；</p>
-<p><img src="http://image.wavecao.xyz/blog/20200226/WHmqeGpljphn.png?imageslim" alt="mark"></p>
+<p><img src="http://image.cheerway.fun/blog/20200226/WHmqeGpljphn.png?imageslim" alt="mark"></p>
 <blockquote>
 <p>项目根目录下的配置文件maven在打包时不会编译进去，需要更改一下配置</p>
 </blockquote>
