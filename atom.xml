@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.cheerway.fun/"/>
-  <updated>2020-07-01T01:48:12.681Z</updated>
+  <updated>2020-07-28T09:03:00.404Z</updated>
   <id>https://www.cheerway.fun/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单例模式详解</title>
+    <link href="https://www.cheerway.fun/2020/ckd5pqa5b0000lwvsdod13m2i/"/>
+    <id>https://www.cheerway.fun/2020/ckd5pqa5b0000lwvsdod13m2i/</id>
+    <published>2020-07-28T09:02:00.000Z</published>
+    <updated>2020-07-28T09:03:00.404Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="一、什么是单例模式"><a href="#一、什么是单例模式" class="headerlink" title="一、什么是单例模式"></a>一、什么是单例模式</h2><ul><li>单例类只能有一个实例</li><li>必须自行创建自己的唯一实例</li><li>向所有其他对象提供这一实例</li></ul><h2 id="二、单例模式的分类"><a href="#二、单例模式的分类" class="headerlink" title="二、单例模式的分类"></a>二、单例模式的分类</h2><p><strong>饿汉式：</strong>在类加载时候就创建单例（不管是否需要使用，都会先创建）</p><p><strong>懒汉式：</strong>在需要使用实例的时候才创建</p><h2 id="三、代码实现"><a href="#三、代码实现" class="headerlink" title="三、代码实现"></a>三、代码实现</h2><p>单例模式的核心思想：</p><ul><li>定义私有静态对象作为该类的唯一实例obj。</li><li>私有化构造函数，保证用户不可以直接通过构造函数创建该类实例，或直接访问该类实例。</li><li>定义一个公有的getInstance()方法去获得该类的唯一单例obj。</li></ul><h3 id="饿汉式："><a href="#饿汉式：" class="headerlink" title="饿汉式："></a>饿汉式：</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>静态常量：将唯一实例instance设置为静态常量</p><pre><code class="java">public class Singleton1 {    private static final Singleton1 INSTANCE = new Singleton1();    private Singleton1() {        System.out.println(&quot;单例模式懒汉式(静态常量)——我被new出来了&quot;);    }    public static Singleton1 getInstance() {        return INSTANCE;    }}</code></pre><p>特点：多线程下可以保证是唯一实例，但是造成了资源浪费，因为有时候我们可能不需要这个实例</p><h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>静态代码块：将类的实例化放在静态代码块中</p><pre><code class="java">public class Singleton2 {    private static Singleton2 instance;    static {        instance = new Singleton2();    }    private Singleton2() {        System.out.println(&quot;单例模式懒汉式(静态代码块)——我被new出来了&quot;);    }    public static Singleton2 getInstance() {        return instance;    }}</code></pre><p>特点：与方法一相同</p><h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4><p>静态内部类：</p><pre><code class="java">public class Singleton3 {    private Singleton3() {        System.out.println(&quot;单例模式懒汉式(静态内部类)——我被new出来了&quot;);    }    public static class SingletonInstance {        private static final Singleton3 instance = new Singleton3();    }    public static Singleton3 getInstance() {        return SingletonInstance.instance;    }}</code></pre><p>特点：Singleton3在加载的时候不会被实例化，而是在需要实例化时（调用getInstance()）,才会装载静态内部类，从而完成Singleton2的实例化。多线程下可以实现单例。</p><h3 id="懒汉式："><a href="#懒汉式：" class="headerlink" title="懒汉式："></a>懒汉式：</h3><h4 id="方法一-1"><a href="#方法一-1" class="headerlink" title="方法一"></a>方法一</h4><p>只判断一次+不加任何同步锁 多线程下不能实现单例，<strong>错误示范！</strong></p><pre><code class="java">public class Singleton4 {    private static Singleton4 instance = null;    private Singleton4() {        System.out.println(&quot;实例被new出来了&quot;);    }    public static Singleton4 getInstance() {        if (instance == null) {            instance = new Singleton4();        }        return instance;    }}</code></pre><p>该方式<strong>不能保证</strong>高并发下的单个实例：比如线程1运行到if (instance == null)这行代码，还没来得及运行下一行创建实例的代码，此时线程2获得CPU时间片，恰好也运行到这个判断条件，就同样得到一个true结果，因此出现了两个实例！！！</p><h4 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a>方法二</h4><p>用synchronized对getInstance()方法加锁，可以实现单例</p><pre><code class="java">public class Singleton5 {    private static Singleton5 instance = null;    private Singleton5() {        System.out.println(&quot;实例被new出来了&quot;);    }    public static synchronized Singleton5 getInstance() {        if (instance == null) {            instance = new Singleton5();        }        return instance;    }}</code></pre><p>缺点：这样给整个方法都加上了同步锁，即每次想得到一次单例都会给此方法加锁，这样使线程之间退化成串行化的执行。上面方法效率太低，我希望只在该方法执行第一次实例化的时候加锁，如果该单例已被new出，则不进入同步区域，直接返回即可。</p><h4 id="方法三-1"><a href="#方法三-1" class="headerlink" title="方法三"></a>方法三</h4><p>用synchronized对类加同步锁+双重检查  这个看测试结果似乎能实现单例，但其实没有volatile修饰的obj实例的这个类也是一个<strong>错误方法！</strong></p><pre><code class="java">public class Singleton6 {    private static Singleton6 instance = null;    private Singleton6() {        System.out.println(&quot;实例被new出来了&quot;);    }    public static Singleton6 getInstance() {        if (instance == null) {            synchronized (Singleton6.class) {                if (instance == null) {                    instance = new Singleton6(); //error                }            }        }        return instance;    }}</code></pre><p>双重检查锁：</p><p>第一次检查instance是否被初始化（不去获得锁，只是查看是否满足加锁的条件而言），若已被初始化则返回。</p><p>第二次检查instance查看在加锁阻塞期间，是否已经有其他线程先一步对instance做了初始化。</p><p>这样看来似乎单例没问题呀，但其实这里有一个隐患，对构造函数来说，编译器为了优化进行指令重排序：</p><blockquote><p>实例化对象的那行代码（注释为为error的那行），实际上可以分解成以下三个步骤：</p><ol><li>分配内存空间</li><li>初始化对象</li><li>将对象指向刚分配的内存空间</li></ol><p>但是有些编译器为了性能的原因，可能会将第二步和第三步进行<strong>重排序</strong>，顺序就成了：</p><ol><li>分配内存空间</li><li>将对象指向刚分配的内存空间</li><li>初始化对象</li></ol></blockquote><p>因此整个过程可能会变成如下场景：</p><table><thead><tr><th>Step</th><th>Thread A</th><th>Thread B</th></tr></thead><tbody><tr><td>S1</td><td>检查到对象instance为空</td><td></td></tr><tr><td>S2</td><td>获取类的同步锁</td><td></td></tr><tr><td>S3</td><td>再次检查到instance为空</td><td></td></tr><tr><td>S4</td><td>为instance分配内存空间</td><td></td></tr><tr><td>S5</td><td>将instance指向刚分配的内存空间</td><td></td></tr><tr><td>S6</td><td></td><td>检查到对象instance不为空</td></tr><tr><td>S7</td><td></td><td>访问并返回instance（此时对象还未初始化，得到一个初始化未完成的对象）</td></tr><tr><td>S8</td><td>初始化instance</td><td></td></tr></tbody></table><p>表格中，S7时刻线程B对instance的访问，访问的是一个初始化未完成的对象，发生错误。 </p><h4 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h4><p>双重校验+volatile</p><p>双重校验+volatile 与上一个类不同的是，该类中对这个单例obj加了volatile关键字。这个关键字的作用是：使用了volatile关键字后，重排序被禁止，所有的写（write）操作都将发生在读（read）操作之前。在volatile和synchronized两端线程安全的保护下，保证多线程下单例的创建。</p><pre><code class="java">public class Singleton7 {    private static volatile Singleton7 instance = null;    private Singleton7() {        System.out.println(&quot;实例被new出来了&quot;);    }    public static Singleton7 getInstance() {        if (instance == null) {            synchronized (Singleton7.class) {                if (instance == null) {                    instance = new Singleton7();                }            }        }        return instance;    }}</code></pre><p><strong>该方式是最完善的方式，面试的时候被问起直接上这种方式！</strong></p><h2 id="四、单例模式的使用场景"><a href="#四、单例模式的使用场景" class="headerlink" title="四、单例模式的使用场景"></a>四、单例模式的使用场景</h2><ul><li>需要频繁的进行创建和销毁的对象；</li><li>创建对象时耗时过多或耗费资源过多，但又经常用到的对象；</li><li>工具类对象；</li><li>频繁访问数据库或文件的对象。</li></ul><p>优点：该类只存在一个对象，节省了系统资源（省去了对象的频繁创建与销毁），提高了系统性能。</p><p>缺点：当想实例化一个单例类的时候，必须要记住使用相应的获取对象的方法，而不是使用new，可能会给其他开发人员造成困扰，特别是看不到源码的时候。例如本文中要创建一个单例类的实例时，你要知道getInstance（）这个函数名。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;单例模式&quot;&gt;&lt;a href=&quot;#单例模式&quot; class=&quot;headerlink&quot; title=&quot;单例模式&quot;&gt;&lt;/a&gt;单例模式&lt;/h1&gt;&lt;h2 id=&quot;一、什么是单例模式&quot;&gt;&lt;a href=&quot;#一、什么是单例模式&quot; class=&quot;headerlink&quot; title=
+      
+    
+    </summary>
+    
+    
+      <category term="设计模式" scheme="https://www.cheerway.fun/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+    
+      <category term="笔记" scheme="https://www.cheerway.fun/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="设计模式" scheme="https://www.cheerway.fun/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>顺序队列和循环队列</title>

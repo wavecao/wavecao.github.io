@@ -5,21 +5,12 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>【算法】Python判断数字是否是回文数 - New World</title>
+    <title>Tag: 设计模式 - New World</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="New World,"> 
-    <meta name="description" content="代码改变世界,回文数的定义：回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
-
-
-示例1：
-输入：121
-输出：True
-示例2：
-输入：-121
-输出：False
-解释: 从左向右读, 为 -12,"> 
+    <meta name="description" content="代码改变世界,"> 
     <meta name="author" content="曹威"> 
     <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -74,78 +65,145 @@
     </div>
     <span id="config-title" style="display:none">New World</span>
     <div id="loader"></div>
-    <div id="single">
-    <div class="scrollbar gradient-bg-rev"></div>
-<div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <div class="navigation animated fadeIn fast delay-1s">
-        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://www.cheerway.fun">
-        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">【算法】Python判断数字是否是回文数</h3>
-        <div class="social">
-            <!--        <div class="like-icon">-->
-            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-            <!--        </div>-->
-            <div>
-                <div class="share">
-                    
-                        <a href="javascript:;" class="iconfont icon-share1"></a>
-                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
-                    
-                </div>
-            </div>
+    <div class="nav">
+    <ul id="menu-menu" class="menu">
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/2019/about/" title="ABOUT" external="false">ABOUT</a>
+        </li>
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/categories/" title="CATEGORIES" external="false">CATEGORIES</a>
+        </li>
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/tags/" title="TAGS" external="false">TAGS</a>
+        </li>
+        
+        <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+            <a href="/archives/" title="ARCHIVES" external="false">ARCHIVES</a>
+        </li>
+        
+    </ul>
+    <p class="copyright" id="copyright">
+        &copy; 2020 曹威.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+    </p>
+	
+</div>
+
+<div id="container">
+    
+<div class="search-box">
+    <form class="site-search-form">
+        <span class="iconfont icon-search"></span>
+        <input type="text" id="local-search-input" class="st-search-input" />
+        <div class="iconfont icon-cross search-box-close"></div>
+    </form>
+    <div class="search-scrollable">
+        <div id="local-search-result" class="local-search-result-cls" data-initialise="Initialising search index..."
+            data-start="Please input search keywords." data-empty="No result found, please try other keywords.">
+            <span>Please input search keywords.</span>
         </div>
     </div>
 </div>
-
-    <div class="section">
-        <div class=article-header-wrapper>
-    <div class="article-header">
-        <div class="article-cover animated fadeIn" style="
-            animation-delay: 600ms;
-            animation-duration: 1.2s;
-            background-image: 
-                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-                url(/img/cover.jpg) ">
+<div id="header">
+    <div>
+        <div class="logo animated fadeInDown">
+            <img src="/img/favicon.png" alt="">
+            <a class="image-logo" href="/"></a>
         </div>
-        <div class="else">
-            <p class="animated fadeInDown">
-                
-                <a href="/categories/算法"><b>「
-                    </b>算法<b> 」</b></a>
-                
-                December 12, 2019
-            </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2019/huiwenshu/" title="【算法】Python判断数字是否是回文数" class="">【算法】Python判断数字是否是回文数</a>
-            </h3>
+        <ul id="menu-menu" class="menu text-menu">
             
-            <p class="post-count animated fadeInDown">
-                
-                <span>
-                    <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    2k
-                </span>
-                
-                
-                <span>
-                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    2 mins.
-                </span>
-                
-                
-                
-                <span id="busuanzi_container_page_pv">
-                    <b class="iconfont icon-read"></b> <i>Read count</i>
-                    <span id="busuanzi_value_page_pv">0</span>
-                </span>
-                
-            </p>
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/2019/about/" title="ABOUT" external="false" class="menu-link">ABOUT</a>
+            </li>
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/categories/" title="CATEGORIES" external="false" class="menu-link">CATEGORIES</a>
+            </li>
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/tags/" title="TAGS" external="false" class="menu-link">TAGS</a>
+            </li>
+            
+            <li class="animated fadeInDown menu-item menu-item-type-post_type menu-item-object-page">
+                <a href="/archives/" title="ARCHIVES" external="false" class="menu-link">ARCHIVES</a>
+            </li>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+            <li class="animated fadeInDown search-bar iconfont icon-search"></li>
             
+        </ul>
+        <div class="iconfont icon-menu switchmenu gradient-text animated fadeInDown"></div>
+    </div>
+</div>
+<div id="screen">
+    <div id="mark">
+        <div class="cover animated fadeIn" style="
+            animation-delay: 900ms;
+            animation-duration: 2.8s;
+            background-image:
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.56), #100e17),
+                url(/img/cover.jpg);">
         </div>
     </div>
+    
+    <div id="post0" class="else">
+        <p class="animated fadeInDown">
+            
+            <a href="/categories/设计模式"><b>「
+                </b>设计模式<b> 」</b></a>
+            
+            July 28, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown">
+            <a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="单例模式详解" class="posttitle">单例模式详解</a></h3>
+        
+        <p class="post-count animated fadeInDown">
+            
+            <span>
+                <b class="iconfont icon-text2"></b> <i>Words count</i>
+                6.5k
+            </span>
+            
+            
+            <span>
+                <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                6 mins.
+            </span>
+            
+            
+        </p>
+        
+        
+        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+        
+        <div class="md-content animated fadeIn">
+            
+            <ul>
+<li>单例类只能有一个实例</li>
+<li>必须自行创建自己的唯一实例</li>
+<li>向所有其他对象提供这一实例</li>
+</ul>
+<p><strong>饿汉式：</strong>在类加载时候就创建单例（不管是否需要使用，都会先创建）</p>
+<p><strong>懒汉式：</strong>在需要使用实例的时候才创建</p>
+<p>单例模式的核心思想：</p>
+<ul>
+<li>定义私有静态对象作为该类的唯一实例obj。</li>
+<li>私有化构造函数，保证用户不可以直接通过构造函数创建该类实例，或直接访问该类实例。</li>
+<li>定义一个公有的getInstance()方法去获得该类的唯一单例obj。</li>
+</ul>
+<h3 id="饿汉式："><a href="#饿汉式：" class="headerlink" title="饿汉式："></a>饿汉式：</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>静态常量：将唯一实例instance设置为静态常量</p>
+<pre><code class="java">public class Singleton1 {
+    private static final Singleton1 INSTANCE...</code></pre>
+            
+            <span class="read-more"><a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="Read article" class="posttitle">Read article</a>
+                <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+    
 </div>
 
 <div class="screen-gradient-after">
@@ -153,130 +211,21 @@
         <div class="screen-gradient-content-inside">
             <div class="bold-underline-links screen-gradient-sponsor">
                 <p>
-                    <span class="animated fadeIn delay-1s"></span>
+                    <span class="typed-text"></span>
                 </p>
             </div>
         </div>
     </div>
 </div>
 
-<div class="article">
-    <div class='main'>
-        <div class="content markdown animated fadeIn">
-            <p><strong>回文数的定义：</strong>回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
-<a id="more"></a>
-
-<p><strong>示例1：</strong></p>
-<p>输入：121</p>
-<p>输出：True</p>
-<p><strong>示例2：</strong></p>
-<p>输入：-121</p>
-<p>输出：False</p>
-<p>解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。</p>
-<p><strong>示例3：</strong></p>
-<p>输入: 10</p>
-<p>输出: false</p>
-<p>解释: 从右向左读, 为 01 。因此它不是一个回文数。</p>
-<p><strong>思路：</strong></p>
-<p>映入脑海的第一个想法是将数字转换为字符串，并检查字符串是否为回文。但是，这需要额外的非常量空间来创建问题描述中所不允许的字符串。</p>
-<p>第二个想法是将数字本身反转，但是这样做有一个风险，32位机器的int类型最大值为2147483647，反转后的数字可能超出范围造成溢出。</p>
-<p>按照第二个想法，为了避免数字反转可能导致的溢出问题，为什么不考虑只反转 int\text{int}int 数字的一半？毕竟，如果该数字是回文，其后半部分反转后应该与原始数字的前半部分相同。</p>
-<p>例如，输入 1221，我们可以将数字“1221”的后半部分从“21”反转为“12”，并将其与前半部分“12”进行比较，因为二者相同，我们得知数字 1221 是回文。</p>
-<p><strong>算法：</strong></p>
-<p>首先我们要处理一些特殊情况，负数不可能是回文数，首先要禁止负数进入。</p>
-<p>然后再考虑如何反转数字，例如1221，首先1221%10就可以得到最后一位数字1，然后将1221/10得到122，再次122%10得到倒数第二位数字2，最后用1*10+2=12就得到了我们反转后的数字12，用12和原数字的前两位对比即可判断该数字是不是回文数。</p>
-<p>还存在一个问题：我们怎么知道自己反转了一半呢？</p>
-<p>我们将原始数字除以 10，然后给反转后的数字乘上 10，所以，当原始数字小于反转后的数字时，就意味着我们已经处理了一半位数的数字。</p>
-<p><strong>代码实现：</strong></p>
-<pre><code class="python">Python 
-
-class Solution(object):    
-    def isPalindrome(self, x):        
-        &quot;&quot;&quot;        
-        :type x: int        
-        :rtype: bool        
-        &quot;&quot;&quot;        
-        if x&lt;0 or (x % 10 == 0 and x != 0):                        return False        
-        y=0        
-        while(x&gt;y):            
-            y=x%10+y*10            
-            x /= 10;        
-        return x==y or x==y/10 </code></pre>
-<pre><code class="java">Java 
-
-class Solution {    
-    public boolean isPalindrome(int x) {        
-        if(x &lt; 0 || (x % 10 == 0 &amp;&amp; x != 0))                    return false;        
-        int res = 0;        
-        while(x &gt; res){            
-            res = res * 10 + x % 10;            
-            x /= 10;        
-        }        
-        return x == res || x == res / 10;    
-    } 
-} </code></pre>
-
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls"
-                data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-            <ul id="audio-list" style="display:none">
-                
-                
-                <li title='0' data-url='/statics/bgmusic.mp3'></li>
-                
-                    
-            </ul>
-            
-            
-            
-    <div id='gitalk-container' class="comment link"
-        data-ae='true'
-        data-ci='2840a5aa21f491f132b7'
-        data-cs='3610f58fc22e82e8befddce4f0c5fae5fcb489a4'
-        data-r='blog-comments'
-        data-o='wavecao'
-        data-a='wavecao'
-        data-d=''
-    >Comments</div>
-
-
-            
-            
-        </div>
-        <div class="sidebar">
-            <div class="box animated fadeInRight">
-                <div class="subbox">
-                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
-                    <p>曹威</p>
-                    <span>Code Change The World</span>
-                    <dl>
-                        <dd><a href="https://github.com/wavecao" target="_blank"><span
-                                    class=" iconfont icon-github"></span></a></dd>
-                        <dd><a href="https://twitter.com/wavecao1" target="_blank"><span
-                                    class=" iconfont icon-twitter"></span></a></dd>
-                        <dd><a href="" target="_blank"><span
-                                    class=" iconfont icon-stack-overflow"></span></a></dd>
-                    </dl>
-                </div>
-                <ul>
-                    <li><a href="/">11 <p>Articles</p></a></li>
-                    <li><a href="/categories">8 <p>Categories</p></a></li>
-                    <li><a href="/tags">8 <p>Tags</p></a></li>
-                </ul>
-            </div>
-            
-            
-            
-            
-        </div>
+    <div id="primary">
+        
     </div>
+    
 </div>
+<div id="preview"></div>
 
-    </div>
-</div>
+
     <div id="back-to-top" class="animated fadeIn faster">
         <div class="flow"></div>
         <span class="percentage animated fadeIn faster">0%</span>

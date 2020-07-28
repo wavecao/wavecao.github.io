@@ -146,48 +146,60 @@
             animation-duration: 2.8s;
             background-image:
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.56), #100e17),
-                url(http://image.cheerway.fun/blog/20200304/NJXBiQVEA48R.png?imageslim);">
+                url(/img/cover.jpg);">
         </div>
     </div>
     
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="/categories/算法"><b>「
-                </b>算法<b> 」</b></a>
+            <a href="/categories/设计模式"><b>「
+                </b>设计模式<b> 」</b></a>
             
-            March 23, 2020
+            July 28, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/ck8481v1q0000q0tn6plnhbmr/" title="顺序队列和循环队列" class="posttitle">顺序队列和循环队列</a></h3>
+            <a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="单例模式详解" class="posttitle">单例模式详解</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                5.2k
+                6.5k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                5 mins.
+                6 mins.
             </span>
             
             
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a>什么是队列</h3><p>对于数组来说，我们可以通过下标值拿到每一个具体的元素。但是有些时候我们需要一种限制存取顺序的数据结构，此时队列和栈便派上了用场。</p>
-<p>队列与栈的不同之处在于，队列是先进先出（FIFO）而栈是后入先出（LIFO），其实<code>队列</code>二字“名副其实”，我们可以将其理解为日常生活中的排队：当我们在超市收银台结账时，肯定是排在前面的顾客先结账，然后依次是后面的顾客结账（不考虑某些人的插队行为）。</p>
-<p></p>
-<p>如上图所示，队列是典型的 FIFO 数据结构。插入（insert）操作也称作入队（enqueue），新元素始终被添加在<code>队列的末尾</code>。 删除（delete）操作也被称为出队（dequeue)。 你只能移除<code>第一个元素...</code></p>
+            <ul>
+<li>单例类只能有一个实例</li>
+<li>必须自行创建自己的唯一实例</li>
+<li>向所有其他对象提供这一实例</li>
+</ul>
+<p><strong>饿汉式：</strong>在类加载时候就创建单例（不管是否需要使用，都会先创建）</p>
+<p><strong>懒汉式：</strong>在需要使用实例的时候才创建</p>
+<p>单例模式的核心思想：</p>
+<ul>
+<li>定义私有静态对象作为该类的唯一实例obj。</li>
+<li>私有化构造函数，保证用户不可以直接通过构造函数创建该类实例，或直接访问该类实例。</li>
+<li>定义一个公有的getInstance()方法去获得该类的唯一单例obj。</li>
+</ul>
+<h3 id="饿汉式："><a href="#饿汉式：" class="headerlink" title="饿汉式："></a>饿汉式：</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>静态常量：将唯一实例instance设置为静态常量</p>
+<pre><code class="java">public class Singleton1 {
+    private static final Singleton1 INSTANCE...</code></pre>
             
-            <span class="read-more"><a href="/2020/ck8481v1q0000q0tn6plnhbmr/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -208,6 +220,53 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(http://image.cheerway.fun/blog/20200304/NJXBiQVEA48R.png?imageslim);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/算法">
+                  <b>「 </b>算法<b> 」</b>
+                </a>
+            
+            March 23, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/ck8481v1q0000q0tn6plnhbmr/" title="顺序队列和循环队列" class="posttitle">顺序队列和循环队列</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        5.2k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        5 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a>什么是队列</h3><p>对于数组来说，我们可以通过下标值拿到每一个具体的元素。但是有些时候我们需要一种限制存取顺序的数据结构，此时队列和栈便派上了用场。</p>
+<p>队列与栈的不同之处在于，队列是先进先出（FIFO）而栈是后入先出（LIFO），其实<code>队列</code>二字“名副其实”，我们可以将其理解为日常生活中的排队：当我们在超市收银台结...</p>
+            
+            <span class="read-more"><a href="/2020/ck8481v1q0000q0tn6plnhbmr/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
