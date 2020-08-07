@@ -153,53 +153,51 @@
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="/categories/设计模式"><b>「
-                </b>设计模式<b> 」</b></a>
+            <a href="/categories/JVM"><b>「
+                </b>JVM<b> 」</b></a>
             
-            July 28, 2020
+            August 07, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="单例模式详解" class="posttitle">单例模式详解</a></h3>
+            <a href="/2020/ckdk09gon00003kvs6isd5hhz/" title="JVM调优和Linux命令" class="posttitle">JVM调优和Linux命令</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                6.5k
+                3.8k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                6 mins.
+                3 mins.
             </span>
             
             
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <ul>
-<li>单例类只能有一个实例</li>
-<li>必须自行创建自己的唯一实例</li>
-<li>向所有其他对象提供这一实例</li>
-</ul>
-<p><strong>饿汉式：</strong>在类加载时候就创建单例（不管是否需要使用，都会先创建）</p>
-<p><strong>懒汉式：</strong>在需要使用实例的时候才创建</p>
-<p>单例模式的核心思想：</p>
+            <p>启动boot打好的包时：</p>
+<p>java  -server  jvm的各种参数  包名</p>
+<pre><code class="shell">java -server -Xms1024m -Xmx 1024 -XX:+UseG1GC 包名</code></pre>
+<p>解释：-Xms堆内存初始大小，-Xmx堆内存最大大小，-XX:+UseG1GC使用G1垃圾回收器</p>
+<p></p>
+<p>精简版：uptime</p>
+<p></p>
+<p></p>
+<p>查看CPU</p>
+<p>vmstat -n 2 3 第一个参数是采样的时间间隔数单位s，第二个参数是采样的次数</p>
 <ul>
-<li>定义私有静态对象作为该类的唯一实例obj。</li>
-<li>私有化构造函数，保证用户不可以直接通过构造函数创建该类实例，或直接访问该类实例。</li>
-<li>定义一个公有的getInstance()方法去获得该类的唯一单例obj。</li>
-</ul>
-<h3 id="饿汉式："><a href="#饿汉式：" class="headerlink" title="饿汉式："></a>饿汉式：</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>静态常量：将唯一实例instance设置为静态常量</p>
-<pre><code class="java">public class Singleton1 {
-    private static final Singleton1 INSTANCE...</code></pre>
+<li><p>procs</p>
+<p><strong>r</strong>：运行和等待CPU时间片的进程数，原则上1核CPu的运行队列不要超过2，真个系统的运行队列不能超过总核数的2倍，否则表示系统压力过大</p>
+<p><strong>b</strong>：等待资源的进程数，比如正在等待磁盘I/O，网络...</p></li></ul>
             
-            <span class="read-more"><a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2020/ckdk09gon00003kvs6isd5hhz/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -220,6 +218,109 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/并发编程">
+                  <b>「 </b>并发编程<b> 」</b>
+                </a>
+            
+            August 05, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/ckdk09gpd00063kvsapxlbuhb/" title="Java多线程知识（未完待续）" class="posttitle">Java多线程知识（未完待续）</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        9.9k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        9 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">并发编程</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <h3 id="第一章：进程与线程的基本概念"><a href="#第一章：进程与线程的基本概念" class="headerlink" title="第一章：进程与线程的基本概念"></a>第一章：进程与线程的基本概念</h3><h4 id="1-1-线程和进程的一些概念"><a href="#1-1-线程和进程的一些概念" class="headerlink" title="1.1 线程和进程的一些概念"></a>1.1 线程和进程的一些概念</h4><p><strong>进程的提出：</strong>由于<strong>批处理操作系统的指令运行方式仍然是串行的，内存中始终只有一个程序在运行</strong>，后面的程序需要等待前面的程序执行完成后才能开始执行，而前面的程序有时会由于I/O操作、网络等原因阻塞，所以<strong>批处理操作效率也不高</strong>。</p>
+<p><strong>进程的概念：</strong>进程就是<strong>应用程...</strong></p>
+            
+            <span class="read-more"><a href="/2020/ckdk09gpd00063kvsapxlbuhb/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(/img/welcome-cover.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/设计模式">
+                  <b>「 </b>设计模式<b> 」</b>
+                </a>
+            
+            July 28, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="单例模式详解" class="posttitle">单例模式详解</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        6.5k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        6 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <ul>
+<li>单例类只能有一个实例</li>
+<li>必须自行创建自己的唯一实例</li>
+<li>向所有其他对象提供这一实例</li>
+</ul>
+<p><strong>饿汉式：</strong>在类加载时候就创建单例（不管是否需要使用，都会先创建）</p>
+<p><strong>懒汉式：</strong>在需要使用实例的时候才创建</p>
+<p>单例模式的核心思想：</p>
+<ul>
+<li>定义私有静态对象作为该类的唯一实例obj。</li>
+<li>私有化构造函数，保证用户不可以直接通过构造函数创建...</li></ul>
+            
+            <span class="read-more"><a href="/2020/ckd5pqa5b0000lwvsdod13m2i/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:

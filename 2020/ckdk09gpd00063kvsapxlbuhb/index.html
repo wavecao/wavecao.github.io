@@ -1,0 +1,654 @@
+
+<!DOCTYPE html>
+<html lang="zh-Hans" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Java多线程知识（未完待续） - New World</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="New World,"> 
+    <meta name="description" content="代码改变世界,Java多线程知识第一篇：基础篇第一章：进程与线程的基本概念1.1 线程和进程的一些概念进程的提出：由于批处理操作系统的指令运行方式仍然是串行的，内存中始终只有一个程序在运行，后面的程序需要等待前面,"> 
+    <meta name="author" content="曹威"> 
+    <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link href="https://fonts.loli.net/css?family=Roboto+Mono|Rubik&display=swap" rel="stylesheet">
+    
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1429596_nzgqgvnmkjb.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.7.2/animate.min.css">
+
+    
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/codemirror.min.css">
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/codemirror/5.48.4/theme/dracula.css">
+
+    
+<link rel="stylesheet" href="/css/obsidian.css">
+
+    
+<link rel="stylesheet" href="/css/ball-atom.min.css">
+
+<meta name="generator" content="Hexo 4.1.0"></head>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+<body class="loading">
+    <div class="loader">
+        <div class="la-ball-atom la-2x">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <span id="config-title" style="display:none">New World</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div class="scrollbar gradient-bg-rev"></div>
+<div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <div class="navigation animated fadeIn fast delay-1s">
+        <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://www.cheerway.fun">
+        <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
+        <h3 class="subtitle">Java多线程知识（未完待续）</h3>
+        <div class="social">
+            <!--        <div class="like-icon">-->
+            <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+            <!--        </div>-->
+            <div>
+                <div class="share">
+                    
+                        <a href="javascript:;" class="iconfont icon-share1"></a>
+                        <div class="share-component-cc" data-disabled="facebook,douban,linkedin,diandian,tencent,google"></div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="section">
+        <div class=article-header-wrapper>
+    <div class="article-header">
+        <div class="article-cover animated fadeIn" style="
+            animation-delay: 600ms;
+            animation-duration: 1.2s;
+            background-image: 
+                radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+                url(/img/cover.jpg) ">
+        </div>
+        <div class="else">
+            <p class="animated fadeInDown">
+                
+                <a href="/categories/并发编程"><b>「
+                    </b>并发编程<b> 」</b></a>
+                
+                August 05, 2020
+            </p>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/ckdk09gpd00063kvsapxlbuhb/" title="Java多线程知识（未完待续）" class="">Java多线程知识（未完待续）</a>
+            </h3>
+            
+            <p class="post-count animated fadeInDown">
+                
+                <span>
+                    <b class="iconfont icon-text2"></b> <i>Words count</i>
+                    9.9k
+                </span>
+                
+                
+                <span>
+                    <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                    9 mins.
+                </span>
+                
+                
+                
+                <span id="busuanzi_container_page_pv">
+                    <b class="iconfont icon-read"></b> <i>Read count</i>
+                    <span id="busuanzi_value_page_pv">0</span>
+                </span>
+                
+            </p>
+            
+            
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" rel="tag">并发编程</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            
+        </div>
+    </div>
+</div>
+
+<div class="screen-gradient-after">
+    <div class="screen-gradient-content">
+        <div class="screen-gradient-content-inside">
+            <div class="bold-underline-links screen-gradient-sponsor">
+                <p>
+                    <span class="animated fadeIn delay-1s"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article">
+    <div class='main'>
+        <div class="content markdown animated fadeIn">
+            <h1 id="Java多线程知识"><a href="#Java多线程知识" class="headerlink" title="Java多线程知识"></a>Java多线程知识</h1><h2 id="第一篇：基础篇"><a href="#第一篇：基础篇" class="headerlink" title="第一篇：基础篇"></a>第一篇：基础篇</h2><h3 id="第一章：进程与线程的基本概念"><a href="#第一章：进程与线程的基本概念" class="headerlink" title="第一章：进程与线程的基本概念"></a>第一章：进程与线程的基本概念</h3><h4 id="1-1-线程和进程的一些概念"><a href="#1-1-线程和进程的一些概念" class="headerlink" title="1.1 线程和进程的一些概念"></a>1.1 线程和进程的一些概念</h4><p><strong>进程的提出：</strong>由于<strong>批处理操作系统的指令运行方式仍然是串行的，内存中始终只有一个程序在运行</strong>，后面的程序需要等待前面的程序执行完成后才能开始执行，而前面的程序有时会由于I/O操作、网络等原因阻塞，所以<strong>批处理操作效率也不高</strong>。</p>
+<p><strong>进程的概念：</strong>进程就是<strong>应用程序在内存中分配的空间，也就是正在运行的程序</strong>，各个进程之间互不干扰。同时进程保存着程序每一个时刻运行的状态。</p>
+<p><strong>上下文切换：</strong>CPU为每个进程分配一个时间段，称作它的时间片。如果在时间片结束时进程还在运行，则暂停这个进程的运行，并且CPU分配给另一个进程。</p>
+<blockquote>
+<p>当进程暂停时，它会保存当前进程的状态（进程标识，进程使用的资源等），在下一次切换回来时根据之前保存的状态进行恢复，接着继续执行。</p>
+</blockquote>
+<p><strong>进程让操作系统的并发成为了可能！</strong></p>
+<p><strong>线程的提出：</strong>虽然进程的出现，使得操作系统的性能大大提升，但是随着时间的推移，人们并不满足一个进程在一段时间只能做一件事情，如果一个进程有多个子任务时，只能逐个得执行这些子任务，很影响效率。</p>
+<p><strong>线程的概念：</strong>让一个线程执行一个子任务，这样一个进程就包含了多个线程，每个线程负责一个单独的子任务。</p>
+<p><strong>进程让操作系统的并发性成为了可能，而线程让进程的内部并发成为了可能。</strong></p>
+<p>使用多线程的<strong>好处：</strong></p>
+<ul>
+<li>进程间的通信比较复杂，而线程间的通信比较简单，通常情况下，我们需要使用共享资源，这些资源在线程间的通信比较容易。</li>
+<li>进程是重量级的，而线程是轻量级的，故多线程方式的系统开销更小。</li>
+</ul>
+<p><strong>进程和线程的区别：</strong></p>
+<p><code>二者最本质的区别就是是否单独占有内存地址空间以及其他系统资源（比如I/O）</code></p>
+<ul>
+<li>进程单独占有一定的内存地址空间，所以进程间存在内存隔离，数据是分开的，数据共享复杂但是同步简单，各个进程之间互不干扰；而线程共享所属进程占有的内存地址空间和资源，数据共享简单，但是同步复杂。</li>
+<li>进程单独占有一定的内存地址空间，一个进程出现问题不会影响其他进程，不影响主程序的稳定性，可靠性高；一个线程崩溃可能影响整个程序的稳定性，可靠性较低。</li>
+<li>进程单独占有一定的内存地址空间，进程的创建和销毁不仅需要保存寄存器和栈信息，还需要资源的分配回收以及页调度，开销较大；线程只需要保存寄存器和栈信息，开销较小。</li>
+</ul>
+<p>另外一个重要区别是，<strong>进程是操作系统进行资源分配的基本单位，而线程是操作系统进行调度的基本单位</strong>，即CPU分配时间的单位 。</p>
+<h4 id="1-2-上下文切换"><a href="#1-2-上下文切换" class="headerlink" title="1.2 上下文切换"></a>1.2 上下文切换</h4><p>上下文切换（有时也称做进程切换或任务切换）是指 CPU 从一个进程（或线程）切换到另一个进程（或线程）。上下文是指<strong>某一时间点 CPU 寄存器和程序计数器的内容。</strong></p>
+<blockquote>
+<p>寄存器是cpu内部的少量的速度很快的闪存，通常存储和访问计算过程的中间值提高计算机程序的运行速度。</p>
+<p>程序计数器是一个专用的寄存器，用于表明指令序列中 CPU 正在执行的位置，存的值为正在执行的指令的位置或者下一个将要被执行的指令的位置，具体实现依赖于特定的系统。</p>
+<p>举例说明 线程A - B</p>
+<p>1.先挂起线程A，将其在cpu中的状态保存在内存中。</p>
+<p>2.在内存中检索下一个线程B的上下文并将其在 CPU 的寄存器中恢复,执行B线程。</p>
+<p>3.当B执行完，根据程序计数器中指向的位置恢复线程A。</p>
+</blockquote>
+<p>CPU通过为每个线程分配CPU时间片来实现多线程机制。CPU通过时间片分配算法来循环执行任务，当前任务执行一个时间片后会切换到下一个任务。</p>
+<p>但是，在切换前会保存上一个任务的状态，以便下次切换回这个任务时，可以再加载这个任务的状态。所以任务从保存到再加载的过程就是一次上下文切换。</p>
+<p>上下文切换通常是计算密集型的，意味着此操作会<strong>消耗大量的 CPU 时间，故线程也不是越多越好</strong>。如何减少系统中上下文切换次数，是提升多线程性能的一个重点课题。</p>
+<h3 id="第二章：Java多线程入门类和接口"><a href="#第二章：Java多线程入门类和接口" class="headerlink" title="第二章：Java多线程入门类和接口"></a>第二章：Java多线程入门类和接口</h3><h4 id="2-1-Thread类和Runnable接口"><a href="#2-1-Thread类和Runnable接口" class="headerlink" title="2.1 Thread类和Runnable接口"></a>2.1 Thread类和Runnable接口</h4><p>JDk为我们提供了Thread类和Runnable接口实现自己的线程：</p>
+<ul>
+<li>继承<code>Thread</code>类，并重写<code>run()</code>方法</li>
+<li>实现<code>Runnable</code>接口的<code>run()</code>方法</li>
+</ul>
+<h5 id="2-1-1-继承Thread类"><a href="#2-1-1-继承Thread类" class="headerlink" title="2.1.1 继承Thread类"></a>2.1.1 继承Thread类</h5><p>代码示例：</p>
+<pre><code class="java">public class Demo {
+    public static class MyThread extends Thread {
+        @Override
+        public void run() {
+            System.out.println(&quot;MyThread&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        Thread myThread = new MyThread();
+        myThread.start();
+    }
+}</code></pre>
+<p>必须要调用<code>start()</code>方法以后，线程才算启动！</p>
+<blockquote>
+<p>我们调用<code>start()</code>方法之后，虚拟机会创建出一个线程，此时线程只是就绪状态，只有当前线程分配到CPU时间片以后，再调用<code>run()</code>方法，线程开始执行任务。</p>
+<p>不可以多次调用<code>start()</code> 方法，不然会报异常！</p>
+</blockquote>
+<h5 id="2-1-2-实现Runnable接口"><a href="#2-1-2-实现Runnable接口" class="headerlink" title="2.1.2 实现Runnable接口"></a>2.1.2 实现Runnable接口</h5><p>Runnable接口是一个函数式接口：</p>
+<pre><code class="java">@FunctionalInterface
+public interface Runnable {
+    public abstract void run();
+}</code></pre>
+<p>这意味着可以使用函数式编程来简化代码：</p>
+<pre><code class="java">public class Demo {
+    public static class MyThread implements Runnable {
+        @Override
+        public void run() {
+            System.out.println(&quot;MyThread&quot;);
+        }
+    }
+
+    public static void main(String[] args) {
+        new MyThread().run();
+
+        // Java 8 函数式编程，可以省略MyThread类
+        new Thread(() -&gt; {
+            System.out.println(&quot;Java 8 匿名内部类&quot;);
+        }).start();
+    }
+}</code></pre>
+<h5 id="2-1-3-Thread类的构造方法"><a href="#2-1-3-Thread类的构造方法" class="headerlink" title="2.1.3 Thread类的构造方法"></a>2.1.3 Thread类的构造方法</h5><p><code>Thread</code>类是一个<code>Runnable</code>接口的实现类，我们来看看<code>Thread</code>类的源码。</p>
+<p>查看<code>Thread</code>类的构造方法，发现其实是简单调用一个私有的<code>init</code>方法来实现初始化。<code>init</code>的方法签名：</p>
+<pre><code class="java">// Thread类源码 
+
+// 片段1 - init方法
+private void init(ThreadGroup g, Runnable target, String name,
+                      long stackSize, AccessControlContext acc,
+                      boolean inheritThreadLocals)
+
+// 片段2 - 构造函数调用init方法
+public Thread(Runnable target) {
+    init(null, target, &quot;Thread-&quot; + nextThreadNum(), 0);
+}
+
+// 片段3 - 使用在init方法里初始化AccessControlContext类型的私有属性
+this.inheritedAccessControlContext = 
+    acc != null ? acc : AccessController.getContext();
+
+// 片段4 - 两个对用于支持ThreadLocal的私有属性
+ThreadLocal.ThreadLocalMap threadLocals = null;
+ThreadLocal.ThreadLocalMap inheritableThreadLocals = null;</code></pre>
+<p>我们挨个来解释一下<code>init</code>方法的这些参数：</p>
+<ul>
+<li><p>g：线程组，指定这个线程是在哪个线程组下；</p>
+</li>
+<li><p>target：指定要执行的任务；</p>
+</li>
+<li><p>name：线程的名字，多个线程的名字是可以重复的。如果不指定名字，见片段2；</p>
+</li>
+<li><p>acc：见片段3，用于初始化私有变量<code>inheritedAccessControlContext</code>。</p>
+<blockquote>
+<p>这个变量有点神奇。它是一个私有变量，但是在<code>Thread</code>类里只有<code>init</code>方法对它进行初始化，在<code>exit</code>方法把它设为<code>null</code>。其它没有任何地方使用它。一般我们是不会使用它的，那什么时候会使用到这个变量呢？可以参考这个stackoverflow的问题：<a href="https://stackoverflow.com/questions/13516766/restrict-permissions-to-threads-which-execute-third-party-software" target="_blank" rel="noopener">Restrict permissions to threads which execute third party software</a>；</p>
+</blockquote>
+</li>
+<li><p>inheritThreadLocals：可继承的<code>ThreadLocal</code>，见片段4，<code>Thread</code>类里面有两个私有属性来支持<code>ThreadLocal</code>，我们会在后面的章节介绍<code>ThreadLocal</code>的概念。</p>
+</li>
+</ul>
+<p>实际情况下，我们大多是直接调用下面两个构造方法：</p>
+<pre><code class="java">Thread(Runnable target)
+Thread(Runnable target, String name)</code></pre>
+<h5 id="2-1-4-Thread类的几个常用方法"><a href="#2-1-4-Thread类的几个常用方法" class="headerlink" title="2.1.4 Thread类的几个常用方法"></a>2.1.4 Thread类的几个常用方法</h5><ul>
+<li>currentThread()：静态方法，返回对当前正在执行的线程对象的引用；</li>
+<li>start()：开始执行线程的方法，java虚拟机会调用线程内的run()方法；</li>
+<li>yield()：yield在英语里有放弃的意思，同样，这里的yield()指的是当前线程愿意让出对当前处理器的占用。这里需要注意的是，就算当前线程调用了yield()方法，程序在调度的时候，也还有可能继续运行这个线程的；</li>
+<li>sleep()：静态方法，使当前线程睡眠一段时间；</li>
+<li>join()：使当前线程等待另一个线程执行完毕之后再继续执行，内部调用的是Object类的wait方法实现的；</li>
+</ul>
+<h5 id="2-1-5-Thread类和Runnable接口的比较"><a href="#2-1-5-Thread类和Runnable接口的比较" class="headerlink" title="2.1.5 Thread类和Runnable接口的比较"></a>2.1.5 Thread类和Runnable接口的比较</h5><ul>
+<li>由于Java“单继承，多实现”的特性，Runnable接口使用起来比Thread更灵活。</li>
+<li>Runnable接口出现更符合面向对象，将线程单独进行对象的封装。</li>
+<li>Runnable接口出现，降低了线程对象和线程任务的耦合性。</li>
+<li>如果使用线程时不需要使用Thread类的诸多方法，显然使用Runnable接口更为轻量。</li>
+</ul>
+<p>所以，我们通常优先使用“实现<code>Runnable</code>接口”这种方式来自定义线程类。</p>
+<h4 id="2-2-Callable、Future与FutureTask"><a href="#2-2-Callable、Future与FutureTask" class="headerlink" title="2.2 Callable、Future与FutureTask"></a>2.2 Callable、Future与FutureTask</h4><p>使用上述的两种方式实现多线程又一个弊端，就是<code>run()</code>方法没有返回值。</p>
+<p>JDK给我们提供了<code>Callable</code>接口与<code>Future</code>类为我们解决这个问题，这也是所谓的“异步”模型。</p>
+<h5 id="2-2-1-Callable接口"><a href="#2-2-1-Callable接口" class="headerlink" title="2.2.1 Callable接口"></a>2.2.1 Callable接口</h5><p><code>Callable</code>接口和<code>Runnable</code>接口类似，也是一个函数式接口，不同之处在于前者的<code>run()</code>方法有返回值，并且支持泛型。</p>
+<pre><code class="java">@FunctionalInterface
+public interface Callable&lt;V&gt; {
+    V call() throws Exception;
+}</code></pre>
+<p><code>Callable</code>接口一般是配合线程池工具<code>ExcutorService</code>使用的，这里只介绍<code>ExecutorService</code>可以使用<code>submit</code>方法来让一个<code>Callable</code>接口执行。它会返回一个<code>Future</code>，我们后续的程序可以通过这个<code>Future</code>的<code>get</code>方法得到结果。</p>
+<pre><code class="java">// 自定义Callable
+class Task implements Callable&lt;Integer&gt;{
+    @Override
+    public Integer call() throws Exception {
+        // 模拟计算需要一秒
+        Thread.sleep(1000);
+        return 2;
+    }
+    public static void main(String args[]){
+        // 使用
+        ExecutorService executor = Executors.newCachedThreadPool();
+        Task task = new Task();
+        Future&lt;Integer&gt; result = executor.submit(task);
+        // 注意调用get方法会阻塞当前线程，直到得到结果。
+        // 所以实际编码中建议使用可以设置超时时间的重载get方法。
+        System.out.println(result.get()); 
+    }
+}</code></pre>
+<p>输出结果：</p>
+<pre><code class="java">2</code></pre>
+<h5 id="2-2-2-Future接口"><a href="#2-2-2-Future接口" class="headerlink" title="2.2.2 Future接口"></a>2.2.2 Future接口</h5><p><code>Future</code>接口只有几个比较简单的方法：</p>
+<pre><code class="java">public abstract interface Future&lt;V&gt; {
+    public abstract boolean cancel(boolean paramBoolean);
+    public abstract boolean isCancelled();
+    public abstract boolean isDone();
+    public abstract V get() throws InterruptedException, ExecutionException;
+    public abstract V get(long paramLong, TimeUnit paramTimeUnit)
+            throws InterruptedException, ExecutionException, TimeoutException;
+}</code></pre>
+<p><code>cancel</code>方法是试图取消一个线程的执行。</p>
+<p>注意是<strong>试图</strong>取消，<strong>并不一定能取消成功</strong>。因为任务可能已完成、已取消、或者一些其它因素不能取消，存在取消失败的可能。<code>boolean</code>类型的返回值是“是否取消成功”的意思。参数<code>paramBoolean</code>表示是否采用中断的方式取消线程执行。</p>
+<p>所以有时候，为了让任务有能够取消的功能，就使用<code>Callable</code>来代替<code>Runnable</code>。如果为了可取消性而使用 <code>Future</code>但又不提供可用的结果，则可以声明 <code>Future&lt;?&gt;</code>形式类型、并返回 <code>null</code>作为底层任务的结果。</p>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls"
+                data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+            <ul id="audio-list" style="display:none">
+                
+                
+                <li title='0' data-url='/statics/bgmusic.mp3'></li>
+                
+                    
+            </ul>
+            
+            
+            
+    <div id='gitalk-container' class="comment link"
+        data-ae='true'
+        data-ci='2840a5aa21f491f132b7'
+        data-cs='3610f58fc22e82e8befddce4f0c5fae5fcb489a4'
+        data-r='blog-comments'
+        data-o='wavecao'
+        data-a='wavecao'
+        data-d=''
+    >Comments</div>
+
+
+            
+            
+        </div>
+        <div class="sidebar">
+            <div class="box animated fadeInRight">
+                <div class="subbox">
+                    <img src="https://res.cloudinary.com/tridiamond/image/upload/v1573019751/TriDiamond_logo_ui_xeublz.jpg" height=300 width=300></img>
+                    <p>曹威</p>
+                    <span>Code Change The World</span>
+                    <dl>
+                        <dd><a href="https://github.com/wavecao" target="_blank"><span
+                                    class=" iconfont icon-github"></span></a></dd>
+                        <dd><a href="https://twitter.com/wavecao1" target="_blank"><span
+                                    class=" iconfont icon-twitter"></span></a></dd>
+                        <dd><a href="" target="_blank"><span
+                                    class=" iconfont icon-stack-overflow"></span></a></dd>
+                    </dl>
+                </div>
+                <ul>
+                    <li><a href="/">12 <p>Articles</p></a></li>
+                    <li><a href="/categories">9 <p>Categories</p></a></li>
+                    <li><a href="/tags">9 <p>Tags</p></a></li>
+                </ul>
+            </div>
+            
+            
+            
+            <div class="box sticky animated fadeInRight faster">
+                <div id="toc" class="subbox">
+                    <h4>Contents</h4>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java多线程知识"><span class="toc-number">1.</span> <span class="toc-text">Java多线程知识</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一篇：基础篇"><span class="toc-number">1.1.</span> <span class="toc-text">第一篇：基础篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一章：进程与线程的基本概念"><span class="toc-number">1.1.1.</span> <span class="toc-text">第一章：进程与线程的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二章：Java多线程入门类和接口"><span class="toc-number">1.1.2.</span> <span class="toc-text">第二章：Java多线程入门类和接口</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+    <div id="back-to-top" class="animated fadeIn faster">
+        <div class="flow"></div>
+        <span class="percentage animated fadeIn faster">0%</span>
+        <span class="iconfont icon-top02 animated fadeIn faster"></span>
+    </div>
+</body>
+<footer>
+    <p class="copyright" id="copyright">
+        &copy; 2020
+        <span class="gradient-text">
+            曹威
+        </span>.
+        Powered by <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a>
+        Theme
+        <span class="gradient-text">
+            <a href="https://github.com/TriDiamond/hexo-theme-obsidian" title="Obsidian" target="_blank" rel="noopener">Obsidian</a>
+        </span>
+        <small><a href="https://github.com/TriDiamond/hexo-theme-obsidian/blob/master/CHANGELOG.md" title="v1.4.3" target="_blank" rel="noopener">v1.4.3</a></small>
+		<br>
+		<span class="gradient-text">
+			<a href="http://www.beian.miit.gov.cn/" title="鲁ICP备18039816号-3" target="_blank" rel="noopener">鲁ICP备18039816号-3</a>
+		</span>
+    </p>
+</footer>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<script>
+  MathJax.Hub.Config({
+    "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX", "TeX"],
+      linebreaks: {
+        automatic: true
+      },
+      EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+      inlineMath: [
+        ["$", "$"],
+        ["\\(", "\\)"]
+      ],
+      processEscapes: true,
+      ignoreClass: "tex2jax_ignore|dno",
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      noUndefined: {
+        attributes: {
+          mathcolor: "red",
+          mathbackground: "#FFEEEE",
+          mathsize: "90%"
+        }
+      },
+      Macros: {
+        href: "{}"
+      }
+    },
+    messageStyle: "none"
+  });
+</script>
+<script>
+  function initialMathJax() {
+    MathJax.Hub.Queue(function () {
+      var all = MathJax.Hub.getAllJax(),
+        i;
+      // console.log(all);
+      for (i = 0; i < all.length; i += 1) {
+        console.log(all[i].SourceElement().parentNode)
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  }
+
+  function reprocessMathJax() {
+    if (typeof MathJax !== 'undefined') {
+      MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+  }
+</script>
+
+
+
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
+
+    
+<script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/obsidian.js"></script>
+<script src="/js/jquery.truncate.js"></script>
+<script src="/js/search.js"></script>
+
+
+<script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
+
+
+<script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+
+<script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
+
+
+    
+<script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
+
+
+
+
+    
+<script src="/js/busuanzi.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if ($('span[id^="busuanzi_"]').length) {
+                initialBusuanzi();
+            }
+        });
+    </script>
+
+
+
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
+
+
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-149874671-1');
+    </script>
+
+
+
+
+
+<script>
+    function initialTyped () {
+        var typedTextEl = $('.typed-text');
+        if (typedTextEl && typedTextEl.length > 0) {
+            var typed = new Typed('.typed-text', {
+                strings: ["Code Change The World", "代码改变世界"],
+                typeSpeed: 90,
+                loop: true,
+                loopCount: Infinity,
+                backSpeed: 20,
+            });
+        }
+    }
+
+    if ($('.article-header') && $('.article-header').length) {
+        $(document).ready(function () {
+            initialTyped();
+        });
+    }
+</script>
+
+
+
+
+</html>
