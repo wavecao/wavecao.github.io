@@ -72,19 +72,19 @@ function utiliseBgColor() {
  * Building the caption html in an article
  */
 function buildImgCaption() {
-  var images = $('.content').find('img');
-  var usedCaption = [];
+  //var images = $('.content').find('img');
+  //var usedCaption = [];
 
-  images.each(function () {
-    var caption = $(this).attr('alt');
-    if (caption !== '' && usedCaption.indexOf(caption) < 0) {
-      $('.content')
-        .find("[alt='" + caption + "']")
-        .parent()
-        .append('<p class="image-caption">"' + caption + '"</p>');
-      usedCaption.push(caption);
-    }
-  });
+  //images.each(function () {
+    //var caption = $(this).attr('alt');
+    //if (caption !== '' && usedCaption.indexOf(caption) < 0) {
+      //$('.content')
+        //.find("[alt='" + caption + "']")
+        //.parent()
+        //.append('<p class="image-caption">"' + caption + '"</p>');
+     // usedCaption.push(caption);
+    //}
+  //});
 }
 
 var Home = location.href,

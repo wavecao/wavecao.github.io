@@ -5,18 +5,22 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>单例模式详解 - New World</title>
+    <title>SpringBoot 日志全解 - New World</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="New World,"> 
-    <meta name="description" content="代码改变世界,单例模式一、什么是单例模式
-单例类只能有一个实例
-必须自行创建自己的唯一实例
-向所有其他对象提供这一实例
+    <meta name="description" content="代码改变世界,日志1、日志框架介绍主流的日志框架：
+JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….
 
-二、单例模式的分类饿汉式：在类加载时候就创建单例（不管是否需要使用，都会先创建）
-懒汉式：,"> 
+
+
+日志门面  （日志的抽象层）
+日志实现
+
+
+
+JCL,"> 
     <meta name="author" content="曹威"> 
     <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -78,7 +82,7 @@
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://www.cheerway.fun">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">单例模式详解</h3>
+        <h3 class="subtitle">SpringBoot 日志全解</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -103,30 +107,30 @@
             animation-duration: 1.2s;
             background-image: 
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-                url(/img/cover.jpg) ">
+                url(http://image.cheerway.fun/blog/20200225/Wrc0uF8i5r3r.png?imageslim) ">
         </div>
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/设计模式"><b>「
-                    </b>设计模式<b> 」</b></a>
+                <a href="/categories/SpringBoot"><b>「
+                    </b>SPRINGBOOT<b> 」</b></a>
                 
-                July 28, 2020
+                February 27, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/cke23yiem00124gvsh43z8gyn/" title="单例模式详解" class="">单例模式详解</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/cke245gfn000x78vsbv445jcq/" title="SpringBoot 日志全解" class="">SpringBoot 日志全解</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    6.5k
+                    9k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    6 mins.
+                    8 mins.
                 </span>
                 
                 
@@ -139,7 +143,7 @@
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
             
         </div>
     </div>
@@ -160,199 +164,236 @@
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h1><h2 id="一、什么是单例模式"><a href="#一、什么是单例模式" class="headerlink" title="一、什么是单例模式"></a>一、什么是单例模式</h2><ul>
-<li>单例类只能有一个实例</li>
-<li>必须自行创建自己的唯一实例</li>
-<li>向所有其他对象提供这一实例</li>
-</ul>
-<h2 id="二、单例模式的分类"><a href="#二、单例模式的分类" class="headerlink" title="二、单例模式的分类"></a>二、单例模式的分类</h2><p><strong>饿汉式：</strong>在类加载时候就创建单例（不管是否需要使用，都会先创建）</p>
-<p><strong>懒汉式：</strong>在需要使用实例的时候才创建</p>
-<h2 id="三、代码实现"><a href="#三、代码实现" class="headerlink" title="三、代码实现"></a>三、代码实现</h2><p>单例模式的核心思想：</p>
-<ul>
-<li>定义私有静态对象作为该类的唯一实例obj。</li>
-<li>私有化构造函数，保证用户不可以直接通过构造函数创建该类实例，或直接访问该类实例。</li>
-<li>定义一个公有的getInstance()方法去获得该类的唯一单例obj。</li>
-</ul>
-<h3 id="饿汉式："><a href="#饿汉式：" class="headerlink" title="饿汉式："></a>饿汉式：</h3><h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><p>静态常量：将唯一实例instance设置为静态常量</p>
-<pre><code class="java">public class Singleton1 {
-    private static final Singleton1 INSTANCE = new Singleton1();
-    private Singleton1() {
-        System.out.println(&quot;单例模式懒汉式(静态常量)——我被new出来了&quot;);
-    }
-    public static Singleton1 getInstance() {
-        return INSTANCE;
-    }
-}</code></pre>
-<p>特点：多线程下可以保证是唯一实例，但是造成了资源浪费，因为有时候我们可能不需要这个实例</p>
-<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>静态代码块：将类的实例化放在静态代码块中</p>
-<pre><code class="java">public class Singleton2 {
-    private static Singleton2 instance;
-    static {
-        instance = new Singleton2();
-    }
-    private Singleton2() {
-        System.out.println(&quot;单例模式懒汉式(静态代码块)——我被new出来了&quot;);
-    }
-
-    public static Singleton2 getInstance() {
-        return instance;
-    }
-}</code></pre>
-<p>特点：与方法一相同</p>
-<h4 id="方法三"><a href="#方法三" class="headerlink" title="方法三"></a>方法三</h4><p>静态内部类：</p>
-<pre><code class="java">public class Singleton3 {
-    private Singleton3() {
-        System.out.println(&quot;单例模式懒汉式(静态内部类)——我被new出来了&quot;);
-    }
-    public static class SingletonInstance {
-        private static final Singleton3 instance = new Singleton3();
-    }
-    public static Singleton3 getInstance() {
-        return SingletonInstance.instance;
-    }
-}</code></pre>
-<p>特点：Singleton3在加载的时候不会被实例化，而是在需要实例化时（调用getInstance()）,才会装载静态内部类，从而完成Singleton2的实例化。多线程下可以实现单例。</p>
-<h3 id="懒汉式："><a href="#懒汉式：" class="headerlink" title="懒汉式："></a>懒汉式：</h3><h4 id="方法一-1"><a href="#方法一-1" class="headerlink" title="方法一"></a>方法一</h4><p>只判断一次+不加任何同步锁 多线程下不能实现单例，<strong>错误示范！</strong></p>
-<pre><code class="java">public class Singleton4 {
-    private static Singleton4 instance = null;
-    private Singleton4() {
-        System.out.println(&quot;实例被new出来了&quot;);
-    }
-    public static Singleton4 getInstance() {
-        if (instance == null) {
-            instance = new Singleton4();
-        }
-        return instance;
-    }
-}</code></pre>
-<p>该方式<strong>不能保证</strong>高并发下的单个实例：比如线程1运行到if (instance == null)这行代码，还没来得及运行下一行创建实例的代码，此时线程2获得CPU时间片，恰好也运行到这个判断条件，就同样得到一个true结果，因此出现了两个实例！！！</p>
-<h4 id="方法二-1"><a href="#方法二-1" class="headerlink" title="方法二"></a>方法二</h4><p>用synchronized对getInstance()方法加锁，可以实现单例</p>
-<pre><code class="java">public class Singleton5 {
-    private static Singleton5 instance = null;
-    private Singleton5() {
-        System.out.println(&quot;实例被new出来了&quot;);
-    }
-    public static synchronized Singleton5 getInstance() {
-        if (instance == null) {
-            instance = new Singleton5();
-        }
-        return instance;
-    }
-}</code></pre>
-<p>缺点：这样给整个方法都加上了同步锁，即每次想得到一次单例都会给此方法加锁，这样使线程之间退化成串行化的执行。上面方法效率太低，我希望只在该方法执行第一次实例化的时候加锁，如果该单例已被new出，则不进入同步区域，直接返回即可。</p>
-<h4 id="方法三-1"><a href="#方法三-1" class="headerlink" title="方法三"></a>方法三</h4><p>用synchronized对类加同步锁+双重检查  这个看测试结果似乎能实现单例，但其实没有volatile修饰的obj实例的这个类也是一个<strong>错误方法！</strong></p>
-<pre><code class="java">public class Singleton6 {
-    private static Singleton6 instance = null;
-    private Singleton6() {
-        System.out.println(&quot;实例被new出来了&quot;);
-    }
-    public static Singleton6 getInstance() {
-        if (instance == null) {
-            synchronized (Singleton6.class) {
-                if (instance == null) {
-                    instance = new Singleton6(); //error
-                }
-            }
-        }
-        return instance;
-    }
-}</code></pre>
-<p>双重检查锁：</p>
-<p>第一次检查instance是否被初始化（不去获得锁，只是查看是否满足加锁的条件而言），若已被初始化则返回。</p>
-<p>第二次检查instance查看在加锁阻塞期间，是否已经有其他线程先一步对instance做了初始化。</p>
-<p>这样看来似乎单例没问题呀，但其实这里有一个隐患，对构造函数来说，编译器为了优化进行指令重排序：</p>
-<blockquote>
-<p>实例化对象的那行代码（注释为为error的那行），实际上可以分解成以下三个步骤：</p>
-<ol>
-<li>分配内存空间</li>
-<li>初始化对象</li>
-<li>将对象指向刚分配的内存空间</li>
-</ol>
-<p>但是有些编译器为了性能的原因，可能会将第二步和第三步进行<strong>重排序</strong>，顺序就成了：</p>
-<ol>
-<li>分配内存空间</li>
-<li>将对象指向刚分配的内存空间</li>
-<li>初始化对象</li>
-</ol>
-</blockquote>
-<p>因此整个过程可能会变成如下场景：</p>
+            <h2 id="日志"><a href="#日志" class="headerlink" title="日志"></a>日志</h2><h3 id="1、日志框架介绍"><a href="#1、日志框架介绍" class="headerlink" title="1、日志框架介绍"></a>1、日志框架介绍</h3><p><strong>主流的日志框架：</strong></p>
+<p>JUL、JCL、Jboss-logging、logback、log4j、log4j2、slf4j….</p>
 <table>
 <thead>
 <tr>
-<th>Step</th>
-<th>Thread A</th>
-<th>Thread B</th>
+<th align="center">日志门面  （日志的抽象层）</th>
+<th align="center">日志实现</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>S1</td>
-<td>检查到对象instance为空</td>
-<td></td>
-</tr>
-<tr>
-<td>S2</td>
-<td>获取类的同步锁</td>
-<td></td>
-</tr>
-<tr>
-<td>S3</td>
-<td>再次检查到instance为空</td>
-<td></td>
-</tr>
-<tr>
-<td>S4</td>
-<td>为instance分配内存空间</td>
-<td></td>
-</tr>
-<tr>
-<td>S5</td>
-<td>将instance指向刚分配的内存空间</td>
-<td></td>
-</tr>
-<tr>
-<td>S6</td>
-<td></td>
-<td>检查到对象instance不为空</td>
-</tr>
-<tr>
-<td>S7</td>
-<td></td>
-<td>访问并返回instance（此时对象还未初始化，得到一个初始化未完成的对象）</td>
-</tr>
-<tr>
-<td>S8</td>
-<td>初始化instance</td>
-<td></td>
+<td align="center"><del>JCL（Jakarta  Commons Logging）</del>    SLF4j（Simple  Logging Facade for Java）    <strong><del>jboss-logging</del></strong></td>
+<td align="center">Log4j  JUL（java.util.logging）  Log4j2  <strong>Logback</strong></td>
 </tr>
 </tbody></table>
-<p>表格中，S7时刻线程B对instance的访问，访问的是一个初始化未完成的对象，发生错误。 </p>
-<h4 id="方法四"><a href="#方法四" class="headerlink" title="方法四"></a>方法四</h4><p>双重校验+volatile</p>
-<p>双重校验+volatile 与上一个类不同的是，该类中对这个单例obj加了volatile关键字。这个关键字的作用是：使用了volatile关键字后，重排序被禁止，所有的写（write）操作都将发生在读（read）操作之前。在volatile和synchronized两端线程安全的保护下，保证多线程下单例的创建。</p>
-<pre><code class="java">public class Singleton7 {
-    private static volatile Singleton7 instance = null;
-    private Singleton7() {
-        System.out.println(&quot;实例被new出来了&quot;);
-    }
-    public static Singleton7 getInstance() {
-        if (instance == null) {
-            synchronized (Singleton7.class) {
-                if (instance == null) {
-                    instance = new Singleton7();
-                }
-            }
-        }
-        return instance;
-    }
+<p>一般来说在开发中在左边选择一个抽象层，右边选择一个实现。</p>
+<p>SpringBoot默认选用<code>SLF4j</code>和<code>logback</code>，SpringBoot的底层是Spring，而Spring默认是JCL。</p>
+<h3 id="2、SLF4J的使用"><a href="#2、SLF4J的使用" class="headerlink" title="2、SLF4J的使用"></a>2、SLF4J的使用</h3><h4 id="如何在系统中使用SLF4J？"><a href="#如何在系统中使用SLF4J？" class="headerlink" title="如何在系统中使用SLF4J？"></a>如何在系统中使用SLF4J？</h4><p>可以参考：<a href="https://www.slf4j.org" target="_blank" rel="noopener">https://www.slf4j.org</a></p>
+<p>开发时候日志记录方法的调用，不应该来直接调用日志的实现类，而是调用日志抽象层里面的方法。</p>
+<p>给系统里导入slf4j的jar和  logback的实现jar，就可以进行如下示例：</p>
+<pre><code class="java">import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class HelloWorld {
+  public static void main(String[] args) {
+    Logger logger = LoggerFactory.getLogger(HelloWorld.class);
+    logger.info(&quot;Hello World&quot;);
+  }
 }</code></pre>
-<p><strong>该方式是最完善的方式，面试的时候被问起直接上这种方式！</strong></p>
-<h2 id="四、单例模式的使用场景"><a href="#四、单例模式的使用场景" class="headerlink" title="四、单例模式的使用场景"></a>四、单例模式的使用场景</h2><ul>
-<li>需要频繁的进行创建和销毁的对象；</li>
-<li>创建对象时耗时过多或耗费资源过多，但又经常用到的对象；</li>
-<li>工具类对象；</li>
-<li>频繁访问数据库或文件的对象。</li>
-</ul>
-<p>优点：该类只存在一个对象，节省了系统资源（省去了对象的频繁创建与销毁），提高了系统性能。</p>
-<p>缺点：当想实例化一个单例类的时候，必须要记住使用相应的获取对象的方法，而不是使用new，可能会给其他开发人员造成困扰，特别是看不到源码的时候。例如本文中要创建一个单例类的实例时，你要知道getInstance（）这个函数名。</p>
+<p><img src="http://image.cheerway.fun/blog/20200227/HrCXCAHqbOx7.png?imageslim" alt="mark"></p>
+<p>每一个日志的实现框架都有自己的配置文件。使用slf4j以后，<strong>配置文件还是做成日志实现框架自己本身的配置文件；</strong></p>
+<h4 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h4><p>下面是几种框架的日志选择：</p>
+<p>SpringBoot（slf4j+logback）: Spring（commons-logging）、Hibernate（jboss-logging）、MyBatis、xxxx</p>
+<p>统一日志记录，即使是别的框架和我一起统一使用slf4j进行输出？</p>
+<p><img src="http://image.cheerway.fun/blog/20200227/YqDpaS53HU61.png?imageslim" alt="mark"></p>
+<p><strong>如何让系统中所有的日志都统一到slf4j；</strong></p>
+<p>1、将系统中其他日志框架先排除出去；</p>
+<p>2、用中间包来替换原有的日志框架；</p>
+<p>3、我们导入slf4j其他的实现</p>
+<h3 id="3、SpringBoot的日志关系"><a href="#3、SpringBoot的日志关系" class="headerlink" title="3、SpringBoot的日志关系"></a>3、SpringBoot的日志关系</h3><p>SpringBoot的日志starter是：</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
+<p>底层的依赖关系：</p>
+<p><img src="http://image.cheerway.fun/blog/20200227/3P4RoG9Cgt3Q.png?imageslim" alt="mark"></p>
+<p>总结：</p>
+<p>​    1）、SpringBoot底层也是使用slf4j+logback的方式进行日志记录</p>
+<p>​    2）、SpringBoot也把其他的日志都替换成了slf4j；</p>
+<p>​    3）、中间替换包？</p>
+<pre><code class="java">@SuppressWarnings(&quot;rawtypes&quot;)
+public abstract class LogFactory {
+
+    static String UNSUPPORTED_OPERATION_IN_JCL_OVER_SLF4J = &quot;http://www.slf4j.org/codes.html#unsupported_operation_in_jcl_over_slf4j&quot;;
+
+    static LogFactory logFactory = new SLF4JLogFactory();</code></pre>
+<p><img src="http://image.cheerway.fun/blog/20200227/dYYSl4SCYGyB.png?imageslim" alt="mark"></p>
+<p>4）、如果我们要引入其他框架？一定要把这个框架的默认日志依赖移除掉？</p>
+<p>Spring框架用的是commons-logging；</p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;groupId&gt;commons-logging&lt;/groupId&gt;
+            &lt;artifactId&gt;commons-logging&lt;/artifactId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;</code></pre>
+<p><strong>SpringBoot能自动适配所有的日志，而且底层使用slf4j+logback的方式记录日志，引入其他框架的时候，只需要把这个框架依赖的日志框架排除掉即可；</strong></p>
+<h3 id="4、日志使用"><a href="#4、日志使用" class="headerlink" title="4、日志使用"></a>4、日志使用</h3><h4 id="默认配置"><a href="#默认配置" class="headerlink" title="默认配置"></a>默认配置</h4><p>SpringBoot默认帮我们配置好了日志；</p>
+<pre><code class="java">//记录器
+Logger logger = LoggerFactory.getLogger(getClass());
+@Test
+public void contextLoads() {
+    //System.out.println();
+
+    //日志的级别；
+    //由低到高   trace&lt;debug&lt;info&lt;warn&lt;error
+    //可以调整输出的日志级别；日志就只会在这个级别以以后的高级别生效
+    logger.trace(&quot;这是trace日志...&quot;);
+    logger.debug(&quot;这是debug日志...&quot;);
+    //SpringBoot默认给我们使用的是info级别的，没有指定级别的就用SpringBoot默认规定的级别；root级别
+    logger.info(&quot;这是info日志...&quot;);
+    logger.warn(&quot;这是warn日志...&quot;);
+    logger.error(&quot;这是error日志...&quot;);
+
+
+}</code></pre>
+<p>日志输出格式：</p>
+<blockquote>
+<pre><code>    %d表示日期时间，
+    %thread表示线程名，
+    %-5level：级别从左显示5个字符宽度
+    %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+    %msg：日志消息，
+    %n是换行符
+--&gt;
+%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</code></pre></blockquote>
+<p>SpringBoot修改日志的默认配置</p>
+<pre><code class="properties">logging.level.com.atguigu=trace
+
+
+#logging.path=
+# 不指定路径在当前项目下生成springboot.log日志
+# 可以指定完整的路径；
+#logging.file=G:/springboot.log
+
+# 在当前磁盘的根路径下创建spring文件夹和里面的log文件夹；使用 spring.log 作为默认文件
+logging.path=/spring/log
+
+#  在控制台输出的日志的格式
+logging.pattern.console=%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n
+# 指定文件中日志输出的格式
+logging.pattern.file=%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n</code></pre>
+<table>
+<thead>
+<tr>
+<th>logging.file</th>
+<th>logging.path</th>
+<th>Example</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(none)</td>
+<td>(none)</td>
+<td></td>
+<td>只在控制台输出</td>
+</tr>
+<tr>
+<td>指定文件名</td>
+<td>(none)</td>
+<td>my.log</td>
+<td>输出日志到my.log文件</td>
+</tr>
+<tr>
+<td>(none)</td>
+<td>指定目录</td>
+<td>/var/log</td>
+<td>输出到指定目录的 spring.log 文件中</td>
+</tr>
+</tbody></table>
+<h4 id="指定配置"><a href="#指定配置" class="headerlink" title="指定配置"></a>指定配置</h4><p>给类路径下放上每个日志框架自己的配置文件即可；SpringBoot就不使用他默认配置的了</p>
+<table>
+<thead>
+<tr>
+<th>Logging System</th>
+<th>Customization</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Logback</td>
+<td><code>logback-spring.xml</code>, <code>logback-spring.groovy</code>, <code>logback.xml</code> or <code>logback.groovy</code></td>
+</tr>
+<tr>
+<td>Log4j2</td>
+<td><code>log4j2-spring.xml</code> or <code>log4j2.xml</code></td>
+</tr>
+<tr>
+<td>JDK (Java Util Logging)</td>
+<td><code>logging.properties</code></td>
+</tr>
+</tbody></table>
+<p>logback.xml：直接就被日志框架识别了；</p>
+<p><strong>logback-spring.xml</strong>：日志框架就不直接加载日志的配置项，由SpringBoot解析日志配置，可以使用SpringBoot的高级Profile功能</p>
+<pre><code class="xml">&lt;springProfile name=&quot;staging&quot;&gt;
+    &lt;!-- configuration to be enabled when the &quot;staging&quot; profile is active --&gt;
+      可以指定某段配置只在某个环境下生效
+&lt;/springProfile&gt;
+</code></pre>
+<p>如：</p>
+<pre><code class="xml">&lt;appender name=&quot;stdout&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;
+    &lt;!--
+        日志输出格式：
+   %d表示日期时间，
+   %thread表示线程名，
+   %-5level：级别从左显示5个字符宽度
+   %logger{50} 表示logger名字最长50个字符，否则按照句点分割。 
+   %msg：日志消息，
+   %n是换行符
+        --&gt;
+    &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;
+        &lt;springProfile name=&quot;dev&quot;&gt;
+            &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss.SSS} ----&gt; [%thread] ---&gt; %-5level %logger{50} - %msg%n&lt;/pattern&gt;
+        &lt;/springProfile&gt;
+        &lt;springProfile name=&quot;!dev&quot;&gt;
+            &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss.SSS} ==== [%thread] ==== %-5level %logger{50} - %msg%n&lt;/pattern&gt;
+        &lt;/springProfile&gt;
+    &lt;/layout&gt;
+&lt;/appender&gt;</code></pre>
+<p>如果使用logback.xml作为日志配置文件，还要使用profile功能，会有以下错误</p>
+<p> <code>no applicable action for [springProfile]</code></p>
+<h3 id="5、切换日志框架"><a href="#5、切换日志框架" class="headerlink" title="5、切换日志框架"></a>5、切换日志框架</h3><p>可以按照slf4j的日志适配图，进行相关的切换；</p>
+<p><strong>slf4j+log4j的方式：</strong></p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+            &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;/exclusion&gt;
+        &lt;exclusion&gt;
+            &lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;
+            &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+    &lt;artifactId&gt;slf4j-log4j12&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre>
+<p><strong>切换为log4j2：</strong></p>
+<pre><code class="xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+    &lt;exclusions&gt;
+        &lt;exclusion&gt;
+            &lt;artifactId&gt;spring-boot-starter-logging&lt;/artifactId&gt;
+            &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+        &lt;/exclusion&gt;
+    &lt;/exclusions&gt;
+&lt;/dependency&gt;
+
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-log4j2&lt;/artifactId&gt;
+&lt;/dependency&gt;</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -411,7 +452,7 @@
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#单例模式"><span class="toc-number">1.</span> <span class="toc-text">单例模式</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、什么是单例模式"><span class="toc-number">1.1.</span> <span class="toc-text">一、什么是单例模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、单例模式的分类"><span class="toc-number">1.2.</span> <span class="toc-text">二、单例模式的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、代码实现"><span class="toc-number">1.3.</span> <span class="toc-text">三、代码实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#饿汉式："><span class="toc-number">1.3.1.</span> <span class="toc-text">饿汉式：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#懒汉式："><span class="toc-number">1.3.2.</span> <span class="toc-text">懒汉式：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、单例模式的使用场景"><span class="toc-number">1.4.</span> <span class="toc-text">四、单例模式的使用场景</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#日志"><span class="toc-number">1.</span> <span class="toc-text">日志</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、日志框架介绍"><span class="toc-number">1.1.</span> <span class="toc-text">1、日志框架介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、SLF4J的使用"><span class="toc-number">1.2.</span> <span class="toc-text">2、SLF4J的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、SpringBoot的日志关系"><span class="toc-number">1.3.</span> <span class="toc-text">3、SpringBoot的日志关系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4、日志使用"><span class="toc-number">1.4.</span> <span class="toc-text">4、日志使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5、切换日志框架"><span class="toc-number">1.5.</span> <span class="toc-text">5、切换日志框架</span></a></li></ol></li></ol>
                 </div>
             </div>
             
