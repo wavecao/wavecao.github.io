@@ -5,14 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JVM调优和Linux命令 - New World</title>
+    <title>顺序队列和循环队列 - New World</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="New World,"> 
-    <meta name="description" content="代码改变世界,JVM调优和Linux命令JVM调优启动boot打好的包时：
-java  -server  jvm的各种参数  包名
-java -server -Xms1024m -Xmx 1024 -XX:+Us,"> 
+    <meta name="description" content="代码改变世界,什么是队列对于数组来说，我们可以通过下标值拿到每一个具体的元素。但是有些时候我们需要一种限制存取顺序的数据结构，此时队列和栈便派上了用场。
+队列与栈的不同之处在于，队列是先进先出（FIFO）而栈是后,"> 
     <meta name="author" content="曹威"> 
     <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -74,7 +73,7 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://www.cheerway.fun">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">JVM调优和Linux命令</h3>
+        <h3 class="subtitle">顺序队列和循环队列</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -99,30 +98,30 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
             animation-duration: 1.2s;
             background-image: 
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-                url(/img/cover.jpg) ">
+                url(http://image.cheerway.fun/blog/20200304/NJXBiQVEA48R.png?imageslim) ">
         </div>
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/JVM"><b>「
-                    </b>JVM<b> 」</b></a>
+                <a href="/categories/算法"><b>「
+                    </b>算法<b> 」</b></a>
                 
-                August 07, 2020
+                March 23, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/ckdk09gon00003kvs6isd5hhz/" title="JVM调优和Linux命令" class="">JVM调优和Linux命令</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/cke23yidu00074gvshlcjhqbw/" title="顺序队列和循环队列" class="">顺序队列和循环队列</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    3.8k
+                    5.2k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    3 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -135,7 +134,7 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AE%97%E6%B3%95/" rel="tag">算法</a></li></ul>
             
         </div>
     </div>
@@ -156,82 +155,163 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="JVM调优和Linux命令"><a href="#JVM调优和Linux命令" class="headerlink" title="JVM调优和Linux命令"></a>JVM调优和Linux命令</h1><h2 id="JVM调优"><a href="#JVM调优" class="headerlink" title="JVM调优"></a>JVM调优</h2><p>启动boot打好的包时：</p>
-<p>java  -server  jvm的各种参数  包名</p>
-<pre><code class="shell">java -server -Xms1024m -Xmx 1024 -XX:+UseG1GC 包名</code></pre>
-<p>解释：-Xms堆内存初始大小，-Xmx堆内存最大大小，-XX:+UseG1GC使用G1垃圾回收器</p>
-<h2 id="Linux命令之top"><a href="#Linux命令之top" class="headerlink" title="Linux命令之top"></a>Linux命令之top</h2><p><img src="http://image.cheerway.fun/blog/20200807/VFQBhat6WILl.png?imageslim" alt="mark"></p>
-<p>精简版：uptime</p>
-<p><img src="http://image.cheerway.fun/blog/20200807/EulGh7BhFd9P.png?imageslim" alt="mark"></p>
-<h2 id="Linux-CPU-vmstat"><a href="#Linux-CPU-vmstat" class="headerlink" title="Linux-CPU-vmstat"></a>Linux-CPU-vmstat</h2><p><img src="http://image.cheerway.fun/blog/20200807/VI3vGY4E1V85.png?imageslim" alt="mark"></p>
-<p>查看CPU</p>
-<p>vmstat -n 2 3 第一个参数是采样的时间间隔数单位s，第二个参数是采样的次数</p>
+            <h3 id="什么是队列"><a href="#什么是队列" class="headerlink" title="什么是队列"></a>什么是队列</h3><p>对于数组来说，我们可以通过下标值拿到每一个具体的元素。但是有些时候我们需要一种限制存取顺序的数据结构，此时队列和栈便派上了用场。</p>
+<p>队列与栈的不同之处在于，队列是先进先出（FIFO）而栈是后入先出（LIFO），其实<code>队列</code>二字“名副其实”，我们可以将其理解为日常生活中的排队：当我们在超市收银台结账时，肯定是排在前面的顾客先结账，然后依次是后面的顾客结账（不考虑某些人的插队行为）。</p>
+<p><img src="http://image.cheerway.fun/Snipaste_2020-03-23_15-49-30.png" alt="mark"></p>
+<p>如上图所示，队列是典型的 FIFO 数据结构。插入（insert）操作也称作入队（enqueue），新元素始终被添加在<code>队列的末尾</code>。 删除（delete）操作也被称为出队（dequeue)。 你只能移除<code>第一个元素</code>。</p>
+<h3 id="顺序队列"><a href="#顺序队列" class="headerlink" title="顺序队列"></a>顺序队列</h3><p>顺序队列可以基于动态数组和指向头部的指针的方式实现的，是连续的一块内存空间。其结构如下图：</p>
+<img src="http://image.cheerway.fun/blog/20200323/PfkWFmuOECIu.jpg?imageslim" alt="mark" style="zoom:50%;" />
+
+<p>按照上述，其实现也十分简单，下面给出一种实现</p>
+<pre><code class="java">public class MyQueue {
+    //存储数据
+    private List&lt;Integer&gt; data;
+    //指向队列头部数据的指针
+    private int p_start;
+
+    public MyQueue() {
+        this.data = data = new ArrayList&lt;Integer&gt;();
+        this.p_start = 0;
+    }
+
+    //数据入列
+    public Boolean enQueue(int x){
+        data.add(x);
+        return true;
+    }
+
+    //数据出列
+    public Boolean deQueue(){
+        if (isEmpty()){
+            return false;
+        }
+        p_start++;
+        return true;
+    }
+
+    //获取队列头的元素
+    public int getFront(){
+        return data.get(p_start);
+    }
+
+    //判断是否为空
+    public Boolean isEmpty(){
+        return p_start &gt;= data.size();
+    }
+
+    public static void main(String[] args) {
+        MyQueue myQueue = new MyQueue();
+        myQueue.enQueue(1);
+        myQueue.enQueue(2);
+        myQueue.enQueue(3);
+        myQueue.enQueue(4);
+        System.out.println(myQueue.getFront());
+        myQueue.deQueue();
+        System.out.println(myQueue.getFront());
+    }
+}</code></pre>
+<h3 id="顺序队列的缺点"><a href="#顺序队列的缺点" class="headerlink" title="顺序队列的缺点"></a>顺序队列的缺点</h3><p>顺序队列的实现确实很简单，但是随着我们对一部分数据进行出队操作后，头部指针会渐渐后移，而头部指针前面的空间虽然已经被释放，但是它既不能被回收也不能被再次利用，造成了很大的空间浪费，我们当然可以每次队列满了以后将数据总体前移（如下图所示），这样虽然保证了空间不会被浪费，但是时间复杂度从O(1)变成了O(n)，也是非常大的性能开销。</p>
+<img src="https://upload-images.jianshu.io/upload_images/2005932-580777cb33fcaf68.jpg?imageMogr2/auto-orient/strip|imageView2/2/w/1142/format/webp" style="zoom:50%;" />
+
+<h3 id="循环队列"><a href="#循环队列" class="headerlink" title="循环队列"></a>循环队列</h3><p>上述通过数组来实现的队列，我们虽然进行了优化，但是当有空间无法利用时时，还是会进行一次数据搬移，性能也会收到影响，能否避免数据呢？答案是肯定的，看一下循环队列的解决思路。</p>
+<p>循环队列就相当于一个圆环，数组可以想象成一条直线，我们把这条直线掰成一个圆环，就是循环队列，为了更形象的表示，可以看下图所示：</p>
+<p><img src="http://image.cheerway.fun/blog/20200701/vavymwwzDzOe.jpg?imageslim" alt="mark"></p>
+<p>循环队列中，我们需要两个指针，即head和tail分别指向队列的头和尾，当队列初始化时，head和tail都指向索引为0的位置。如果有数据入队，tail则后移一次，如果有数据出队，head则后移一次。</p>
+<p>但是上述的过程会出现一系列问题：</p>
 <ul>
-<li><p>procs</p>
-<p><strong>r</strong>：运行和等待CPU时间片的进程数，原则上1核CPu的运行队列不要超过2，真个系统的运行队列不能超过总核数的2倍，否则表示系统压力过大</p>
-<p><strong>b</strong>：等待资源的进程数，比如正在等待磁盘I/O，网络I/O等</p>
-</li>
-<li><p>cpu</p>
-<p><strong>us</strong>：用户进程消耗cpu时间百分比，us高，用户进程消耗cpu时间多，如果长期大于50%，优化程序</p>
-<p><strong>sy</strong>：内核进程消耗的cpu时间百分比</p>
-<p><strong>us+sy</strong>：参考值为80%，如果大于80，说明可能存在cpu不足</p>
-<p><strong>id</strong>：处于空闲的cpu百分比</p>
-<p><strong>wa</strong>：系统等待IO的cpu时间百分比</p>
-<p><strong>st</strong>：来自于一个虚拟机偷取的cpu时间的百分比</p>
-</li>
-<li><p>查看额外</p>
-<ul>
-<li>查看所有cpu核信息   mpstat -P ALL 2</li>
-<li>每个进程使用cpu的用量分解信息   pidstat -u 1 -p 进程编号</li>
+<li>如果数组的大小为4，当tail指向3时，怎样让下一次入队时tail指向0（假设0位置可以插入）而不是指向4（指向4就造成数组下标越界了）？</li>
+<li>当队列空或者满时，都存在head=tail，如何判断队列到底是空还是满？</li>
 </ul>
-</li>
-</ul>
-<h2 id="Linux-内存-free"><a href="#Linux-内存-free" class="headerlink" title="Linux-内存-free"></a>Linux-内存-free</h2><p><img src="http://image.cheerway.fun/blog/20200807/ycXosXfGrhal.png?imageslim" alt="mark"></p>
-<p>pidstat -p 进程编号 -r 采样间隔秒数</p>
-<p><img src="http://image.cheerway.fun/blog/20200807/Ei1CFJNtCFTb.png?imageslim" alt="mark"></p>
-<h2 id="Linux-硬盘-df"><a href="#Linux-硬盘-df" class="headerlink" title="Linux-硬盘-df"></a>Linux-硬盘-df</h2><p><img src="C:%5CUsers%5C23537%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200807161706356.png" alt="image-20200807161706356"></p>
-<h2 id="Linux-磁盘IO-iostat"><a href="#Linux-磁盘IO-iostat" class="headerlink" title="Linux-磁盘IO-iostat"></a>Linux-磁盘IO-iostat</h2><p><img src="http://image.cheerway.fun/blog/20200807/bFdeYlISUTqR.png?imageslim" alt="mark"></p>
-<p>磁盘I/O性能评估</p>
-<p><strong>iostat -hdk 2 3</strong></p>
-<ul>
-<li>rkB/s每秒读取数据kb；</li>
-<li>wkB/s每秒读写数据量kb</li>
-<li>svctm I/O请求的平均服务时间，单位毫秒；</li>
-<li>await I/O请求的平均等待时间，单位毫秒；值越小，性能越好；</li>
-<li>==util== 一秒中又百分几的时间用于I/O操作，接近100%时，表示磁盘带宽跑满，需要优化程序或加磁盘</li>
-<li>rkB/s，wkB/s根据系统该应用不同回有不同的值，担忧规律遵循：长期、超大数据读写，肯定不正常，需要优化程序读取。</li>
-<li>svctm的值与await的值很接近，表示几乎没有I/O等待，磁盘性能好，如果await的值远高于svctm的值，则表示I/O队列等待太长，需要优化程序或更换更快磁盘</li>
-</ul>
-<p><strong>pidstat -d 采样间隔秒数 -p 进程号</strong></p>
-<h2 id="Linux-网络IO-ifstat"><a href="#Linux-网络IO-ifstat" class="headerlink" title="Linux-网络IO-ifstat"></a>Linux-网络IO-ifstat</h2><p><img src="http://image.cheerway.fun/blog/20200807/eWITsK3NLu9t.png?imageslim" alt="mark"></p>
-<h2 id="加入生产环境CPU占用过高，谈谈分析思路和定位？"><a href="#加入生产环境CPU占用过高，谈谈分析思路和定位？" class="headerlink" title="加入生产环境CPU占用过高，谈谈分析思路和定位？"></a>加入生产环境CPU占用过高，谈谈分析思路和定位？</h2><h4 id="案例步骤"><a href="#案例步骤" class="headerlink" title="案例步骤"></a>案例步骤</h4><ol>
-<li><p>先用top命令找出cpu占比最高的</p>
-</li>
-<li><p>ps -ef或者jps进一步定位，得知是一个怎样的后台程序惹事</p>
-<ul>
-<li>jps -l</li>
-<li>ps -ef|grep java|grep -v grep</li>
-</ul>
-</li>
-<li><p>定位到具体线程或者代码</p>
-<ul>
-<li><p>ps -mp 进程编号 -o Thread,tid,time</p>
-<p>定位到具体线程</p>
-<p>-m ：显示所有的线程</p>
-<p>-p pid 进程使用cpu的时间</p>
-<p>-o：该参数后是用户自定义格式</p>
-</li>
-</ul>
-</li>
-<li><p>将需要的线程ID转换为16禁止格式（英文小写格式）</p>
-<ul>
-<li>printf “%x\n” 线程ID</li>
-</ul>
-</li>
-<li><p>jstack 进程Id|grep tid(16进制线程id小写英文) -A60</p>
-<p>查看运行轨迹，堆栈异常信息</p>
+<p>下面我们逐个解决</p>
+<ol>
+<li><p>关于指针越界的问题其实很简单，我们只需要每次在对tail或者head加1时进行一次取余操作，即</p>
+<pre><code>(head + 1) % size;</code></pre></li>
+<li><p>关于判断队列空和满状态的问题，我的思路是：舍弃一个存储空间。也就是说如果tail的下一个是head，那么现在tail指向的空间就不再存储数据。如果是队列不断进行出队操作，head渐渐“追上”tail时，会出现head=tail的情况，此时队列为空。</p>
 </li>
 </ol>
+<p>总结一下：舍弃队列的最后一个存储空间，那么队列为空的标志是<code>(tail + 1) % size = head</code>，队列为满的标志是<code>head = tail</code>。</p>
+<p>为了满足用户的需求，在实现时我们必须保证用户请求的空间数，因此具体到代码实现上，我们初始化队列时就初始化一个比用户申请空间大1的数组。下面给出一种代码实现：</p>
+<pre><code class="java">public class MyCircularQueue {
+
+    private int[] data;
+    private int head;
+    private int tail;
+    private int size;
+
+    /**
+     * Initialize your data structure here. Set the size of the queue to be k.
+     */
+    public MyCircularQueue(int k) {
+        //初始化一个比用户要求大1的数组
+        size = k+1;
+        data = new int[size];
+        head = 0;
+        tail = 0;
+    }
+
+    /**
+     * Insert an element into the circular queue. Return true if the operation is successful.
+     */
+    public boolean enQueue(int value) {
+        if (isFull()) {
+            return false;
+        }
+        data[tail] = value;
+        tail = (tail + 1) % size;
+        return true;
+    }
+
+    /**
+     * Delete an element from the circular queue. Return true if the operation is successful.
+     */
+    public boolean deQueue() {
+        if (isEmpty()){
+            return false;
+        }
+        head = (head + 1) % size;
+        return true;
+    }
+
+    /**
+     * Get the front item from the queue.
+     */
+    public int Front() {
+        if (isEmpty()){
+            return -1;
+        }
+        return data[head];
+    }
+
+    /**
+     * Get the last item from the queue.
+     */
+    public int Rear() {
+        if (isEmpty()){
+            return -1;
+        }
+        //之所以要加上size是因为此处tail可能是0
+        return data[(tail - 1 + size) % size];
+    }
+
+    /**
+     * Checks whether the circular queue is empty or not.
+     */
+    public boolean isEmpty() {
+        return head == tail;
+    }
+
+    /**
+     * Checks whether the circular queue is full or not.
+     * 如果仅仅使用tail == head来判断队列是否满，则无法判断到底是空还是满
+     * 因此要牺牲最后一个存储单元。即如果tail的下一个是head，就认为满了
+     */
+    public boolean isFull() {
+        return (tail + 1) % size == head;
+    }
+
+}
+</code></pre>
+<h3 id="队列的其他形式"><a href="#队列的其他形式" class="headerlink" title="队列的其他形式"></a>队列的其他形式</h3><p>队列其实还有链式队列，无界队列，阻塞队列、并发队列等等，我们以后再聊！</p>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -290,7 +370,7 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM调优和Linux命令"><span class="toc-number">1.</span> <span class="toc-text">JVM调优和Linux命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM调优"><span class="toc-number">1.1.</span> <span class="toc-text">JVM调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux命令之top"><span class="toc-number">1.2.</span> <span class="toc-text">Linux命令之top</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-CPU-vmstat"><span class="toc-number">1.3.</span> <span class="toc-text">Linux-CPU-vmstat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-内存-free"><span class="toc-number">1.4.</span> <span class="toc-text">Linux-内存-free</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-硬盘-df"><span class="toc-number">1.5.</span> <span class="toc-text">Linux-硬盘-df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-磁盘IO-iostat"><span class="toc-number">1.6.</span> <span class="toc-text">Linux-磁盘IO-iostat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-网络IO-ifstat"><span class="toc-number">1.7.</span> <span class="toc-text">Linux-网络IO-ifstat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入生产环境CPU占用过高，谈谈分析思路和定位？"><span class="toc-number">1.8.</span> <span class="toc-text">加入生产环境CPU占用过高，谈谈分析思路和定位？</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是队列"><span class="toc-number">1.</span> <span class="toc-text">什么是队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序队列"><span class="toc-number">2.</span> <span class="toc-text">顺序队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#顺序队列的缺点"><span class="toc-number">3.</span> <span class="toc-text">顺序队列的缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#循环队列"><span class="toc-number">4.</span> <span class="toc-text">循环队列</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#队列的其他形式"><span class="toc-number">5.</span> <span class="toc-text">队列的其他形式</span></a></li></ol>
                 </div>
             </div>
             
@@ -383,80 +463,52 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
 </script>
 
 
-
-    
+ 
 <link rel="stylesheet" href="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.css">
-
-    
+ 
 <script src="//cdn.bootcss.com/gitalk/1.5.0/gitalk.min.js"></script>
-
-
-
+  
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="/js/plugin.js"></script>
 <script src="/js/obsidian.js"></script>
 <script src="/js/jquery.truncate.js"></script>
 <script src="/js/search.js"></script>
-
-
+ 
 <script src="//cdn.bootcss.com/typed.js/2.0.10/typed.min.js"></script>
-
-
+ 
 <script src="//cdn.bootcss.com/blueimp-md5/2.12.0/js/md5.min.js"></script>
-
-
+ 
 <script src="//cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
 
 
 <script src="https://cdn.bootcss.com/codemirror/5.48.4/codemirror.min.js"></script>
-
-    
+ 
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/javascript/javascript.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/css/css.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/xml/xml.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/htmlmixed/htmlmixed.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/clike/clike.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/php/php.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/shell/shell.min.js"></script>
-
-
-    
+  
 <script src="//cdn.bootcss.com/codemirror/5.48.4/mode/python/python.min.js"></script>
-
-
-
-
-    
+   
 <script src="/js/busuanzi.min.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            if ($('span[id^="busuanzi_"]').length) {
-                initialBusuanzi();
-            }
-        });
-    </script>
-
-
-
+<script>
+  $(document).ready(function () {
+    if ($('span[id^="busuanzi_"]').length) {
+      initialBusuanzi();
+    }
+  });
+</script>
+ 
 <link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/photoswipe.min.css">
 <link rel="stylesheet" href="//cdn.bootcss.com/photoswipe/4.1.3/default-skin/default-skin.min.css">
 
@@ -512,42 +564,39 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
         </div>
     </div>
 </div>
+ 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag('js', new Date());
 
-
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="//www.googletagmanager.com/gtag/js?id=UA-149874671-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-149874671-1');
-    </script>
-
-
-
-
+  gtag('config', 'UA-149874671-1');
+</script>
+ 
 
 <script>
-    function initialTyped () {
-        var typedTextEl = $('.typed-text');
-        if (typedTextEl && typedTextEl.length > 0) {
-            var typed = new Typed('.typed-text', {
-                strings: ["Code Change The World", "代码改变世界"],
-                typeSpeed: 90,
-                loop: true,
-                loopCount: Infinity,
-                backSpeed: 20,
-            });
-        }
+  function initialTyped() {
+    var typedTextEl = $('.typed-text');
+    if (typedTextEl && typedTextEl.length > 0) {
+      var typed = new Typed('.typed-text', {
+        strings: ['Code Change The World', '代码改变世界'],
+        typeSpeed: 90,
+        loop: true,
+        loopCount: Infinity,
+        backSpeed: 20,
+      });
     }
+  }
 
-    if ($('.article-header') && $('.article-header').length) {
-        $(document).ready(function () {
-            initialTyped();
-        });
-    }
+  if ($('.article-header') && $('.article-header').length) {
+    $(document).ready(function () {
+      initialTyped();
+    });
+  }
 </script>
 
 
