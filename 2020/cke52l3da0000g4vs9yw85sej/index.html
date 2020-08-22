@@ -5,14 +5,13 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>JVM调优和Linux命令 - New World</title>
+    <title>MySQL是怎样运行的(一)——初始MySQL - New World</title>
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="google" content="notranslate" />
     <meta name="keywords" content="New World,"> 
-    <meta name="description" content="代码改变世界,JVM调优和Linux命令JVM调优启动boot打好的包时：
-java  -server  jvm的各种参数  包名
-java -server -Xms1024m -Xmx 1024 -XX:+Us,"> 
+    <meta name="description" content="代码改变世界,
+本文所有知识点整理自掘金小册《MySQL 是怎样运行的：从根儿上理解 MySQL》，内容充实，难度适中，通俗易懂，有助于理解Mysql的运行原理，建议购买支持一下！（说真的，白嫖我整理的知识点根本,"> 
     <meta name="author" content="曹威"> 
     <link rel="alternative" href="atom.xml" title="New World" type="application/atom+xml"> 
     <link rel="icon" href="/img/favicon.png"> 
@@ -74,7 +73,7 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
     <div class="navigation animated fadeIn fast delay-1s">
         <img id="home-icon" class="icon-home" src="/img/favicon.png" alt="" data-url="https://www.cheerway.fun">
         <div id="play-icon" title="Play/Pause" class="iconfont icon-play"></div>
-        <h3 class="subtitle">JVM调优和Linux命令</h3>
+        <h3 class="subtitle">MySQL是怎样运行的(一)——初始MySQL</h3>
         <div class="social">
             <!--        <div class="like-icon">-->
             <!--            <a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -104,25 +103,25 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
         <div class="else">
             <p class="animated fadeInDown">
                 
-                <a href="/categories/JVM"><b>「
-                    </b>JVM<b> 」</b></a>
+                <a href="/categories/MySQL"><b>「
+                    </b>MYSQL<b> 」</b></a>
                 
-                August 07, 2020
+                August 22, 2020
             </p>
-            <h3 class="post-title animated fadeInDown"><a href="/2020/cke247h520000o0vs5lpzhfqy/" title="JVM调优和Linux命令" class="">JVM调优和Linux命令</a>
+            <h3 class="post-title animated fadeInDown"><a href="/2020/cke52l3da0000g4vs9yw85sej/" title="MySQL是怎样运行的(一)——初始MySQL" class="">MySQL是怎样运行的(一)——初始MySQL</a>
             </h3>
             
             <p class="post-count animated fadeInDown">
                 
                 <span>
                     <b class="iconfont icon-text2"></b> <i>Words count</i>
-                    3.8k
+                    5.4k
                 </span>
                 
                 
                 <span>
                     <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                    3 mins.
+                    5 mins.
                 </span>
                 
                 
@@ -135,7 +134,7 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
             </p>
             
             
-            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/JVM/" rel="tag">JVM</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
             
         </div>
     </div>
@@ -156,82 +155,124 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
 <div class="article">
     <div class='main'>
         <div class="content markdown animated fadeIn">
-            <h1 id="JVM调优和Linux命令"><a href="#JVM调优和Linux命令" class="headerlink" title="JVM调优和Linux命令"></a>JVM调优和Linux命令</h1><h2 id="JVM调优"><a href="#JVM调优" class="headerlink" title="JVM调优"></a>JVM调优</h2><p>启动boot打好的包时：</p>
-<p>java  -server  jvm的各种参数  包名</p>
-<pre><code class="shell">java -server -Xms1024m -Xmx 1024 -XX:+UseG1GC 包名</code></pre>
-<p>解释：-Xms堆内存初始大小，-Xmx堆内存最大大小，-XX:+UseG1GC使用G1垃圾回收器</p>
-<h2 id="Linux命令之top"><a href="#Linux命令之top" class="headerlink" title="Linux命令之top"></a>Linux命令之top</h2><p><img src="http://image.cheerway.fun/blog/20200807/VFQBhat6WILl.png?imageslim" alt="mark"></p>
-<p>精简版：uptime</p>
-<p><img src="http://image.cheerway.fun/blog/20200807/EulGh7BhFd9P.png?imageslim" alt="mark"></p>
-<h2 id="Linux-CPU-vmstat"><a href="#Linux-CPU-vmstat" class="headerlink" title="Linux-CPU-vmstat"></a>Linux-CPU-vmstat</h2><p><img src="http://image.cheerway.fun/blog/20200807/VI3vGY4E1V85.png?imageslim" alt="mark"></p>
-<p>查看CPU</p>
-<p>vmstat -n 2 3 第一个参数是采样的时间间隔数单位s，第二个参数是采样的次数</p>
-<ul>
-<li><p>procs</p>
-<p><strong>r</strong>：运行和等待CPU时间片的进程数，原则上1核CPu的运行队列不要超过2，真个系统的运行队列不能超过总核数的2倍，否则表示系统压力过大</p>
-<p><strong>b</strong>：等待资源的进程数，比如正在等待磁盘I/O，网络I/O等</p>
+            <blockquote>
+<p>本文所有知识点整理自掘金小册<a href="https://juejin.im/book/6844733769996304392" target="_blank" rel="noopener">《<strong>MySQL 是怎样运行的：从根儿上理解 MySQL</strong>》</a>，内容充实，难度适中，通俗易懂，有助于理解Mysql的运行原理，建议购买支持一下！（说真的，白嫖我整理的知识点根本没法领略到小册的魅力，也学不到东西）</p>
+</blockquote>
+<h2 id="初识Mysql"><a href="#初识Mysql" class="headerlink" title="初识Mysql"></a>初识Mysql</h2><h3 id="基础细碎知识"><a href="#基础细碎知识" class="headerlink" title="基础细碎知识"></a>基础细碎知识</h3><ul>
+<li><p>启动MySQL客户端命令</p>
+<pre><code class="shell">mysql -h主机名  -u用户名 -p密码</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">参数名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>-h</code></td>
+<td>表示服务器进程所在计算机的域名或者IP地址，如果服务器进程就运行在本机的话，可以省略这个参数，或者填<code>localhost</code>或者<code>127.0.0.1</code>。也可以写作 <code>--host=主机名</code>的形式。本地的话, 可以省略:smile:</td>
+</tr>
+<tr>
+<td align="center"><code>-u</code></td>
+<td>表示用户名。也可以写作 <code>--user=用户名</code>的形式。</td>
+</tr>
+<tr>
+<td align="center"><code>-p</code></td>
+<td>表示密码。也可以写作 <code>--password=密码</code>的形式。</td>
+</tr>
+</tbody></table>
+<p>举个栗子</p>
+<pre><code class="shell">mysql -uroot -p19981008</code></pre>
+<p><strong>另外, 各个参数的顺序没有硬性要求</strong></p>
 </li>
-<li><p>cpu</p>
-<p><strong>us</strong>：用户进程消耗cpu时间百分比，us高，用户进程消耗cpu时间多，如果长期大于50%，优化程序</p>
-<p><strong>sy</strong>：内核进程消耗的cpu时间百分比</p>
-<p><strong>us+sy</strong>：参考值为80%，如果大于80，说明可能存在cpu不足</p>
-<p><strong>id</strong>：处于空闲的cpu百分比</p>
-<p><strong>wa</strong>：系统等待IO的cpu时间百分比</p>
-<p><strong>st</strong>：来自于一个虚拟机偷取的cpu时间的百分比</p>
+<li><p>MySQL采用TCP作为服务器和客户端之间通信的网络通信协议; <code>MySQL</code>服务器会默认监听<code>3306</code>端口。</p>
 </li>
-<li><p>查看额外</p>
-<ul>
-<li>查看所有cpu核信息   mpstat -P ALL 2</li>
-<li>每个进程使用cpu的用量分解信息   pidstat -u 1 -p 进程编号</li>
+<li><p>如果<code>3306</code>端口被占用或者想自定义数据库实例监听的端口号, 可以在启动服务器程序的命令行中指定, 比如: </p>
+<pre><code class="shell">mysqld -P3307</code></pre>
+</li>
+</ul>
+<h3 id="服务器处理客户端请求"><a href="#服务器处理客户端请求" class="headerlink" title="服务器处理客户端请求"></a>服务器处理客户端请求</h3><p>客户端向服务端发送增删改查请求后, 服务端的大致流程如下图: </p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/12/28/167f4c7b99f87e1c?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt="image_1c8d26fmg1af0ms81cpc7gm8lv39.png-97.9kB"></p>
+<p>从图中我们可以看出，服务器程序处理来自客户端的查询请求大致需要经过三个部分，分别是<code>连接管理</code>、<code>解析与优化</code>、<code>存储引擎</code>。</p>
+<h4 id="连接管理"><a href="#连接管理" class="headerlink" title="连接管理"></a>连接管理</h4><p>MySQL使用连接池管理客户端的链接, 每次客户端断开连接后将线程缓存起来以便下次分配(我们可以自己限制线程的数量); 如果客户端与服务端不运行在同一台机器上, 还会使用<code>SSL</code>(安全套接字)的网络连接进行通信, 来保证数据的安全传输; </p>
+<h4 id="解析与优化"><a href="#解析与优化" class="headerlink" title="解析与优化"></a>解析与优化</h4><ul>
+<li><strong>查询缓存</strong><ul>
+<li>MySQL会把刚刚处理过的请求和结果缓存起来，如果有相同的请求过来，就直接从缓存中找出结果；缓存可以在客户端之间共享</li>
+<li>如果两个查询请求在任何字符上的不同（例如：空格、注释、大小写），都会导致缓存不会命中。另外，如果查询请求中包含某些系统函数、用户自定义变量和函数、一些系统表，如 mysql 、information_schema、 performance_schema 数据库中的表，那这个请求就不会被缓存。</li>
+<li>MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，如对该表使用了<code>INSERT</code>、 <code>UPDATE</code>、<code>DELETE</code>、<code>TRUNCATE TABLE</code>、<code>ALTER TABLE</code>、<code>DROP TABLE</code>或 <code>DROP DATABASE</code>语句，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除！</li>
+<li>虽然缓存可以提高性能, 但缓存本身也会造成开销, 从MySQL 5.7.20开始，不推荐使用查询缓存，并在MySQL 8.0中删除。</li>
+</ul>
+</li>
+<li><strong>语法解析</strong><ul>
+<li>服务器对接收到的文本做分析, 首先判断是否有语法错误, 之后就从文本中获取到要查询的表以及各种查询条件进行查询;</li>
+</ul>
+</li>
+<li><strong>查询优化</strong><ul>
+<li>我们自己写的SQL语句往往比较菜, MySQL会对我们的语句做一些优化, 比如说外连接转化为内连接, 表达式简化, 子查询转为连接等等;</li>
+<li>可以使用<code>EXPLAIN</code>语句来查看某个语句的执行计划;</li>
 </ul>
 </li>
 </ul>
-<h2 id="Linux-内存-free"><a href="#Linux-内存-free" class="headerlink" title="Linux-内存-free"></a>Linux-内存-free</h2><p><img src="http://image.cheerway.fun/blog/20200807/ycXosXfGrhal.png?imageslim" alt="mark"></p>
-<p>pidstat -p 进程编号 -r 采样间隔秒数</p>
-<p><img src="http://image.cheerway.fun/blog/20200807/Ei1CFJNtCFTb.png?imageslim" alt="mark"></p>
-<h2 id="Linux-硬盘-df"><a href="#Linux-硬盘-df" class="headerlink" title="Linux-硬盘-df"></a>Linux-硬盘-df</h2><p><img src="C:%5CUsers%5C23537%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200807161706356.png" alt="image-20200807161706356"></p>
-<h2 id="Linux-磁盘IO-iostat"><a href="#Linux-磁盘IO-iostat" class="headerlink" title="Linux-磁盘IO-iostat"></a>Linux-磁盘IO-iostat</h2><p><img src="http://image.cheerway.fun/blog/20200807/bFdeYlISUTqR.png?imageslim" alt="mark"></p>
-<p>磁盘I/O性能评估</p>
-<p><strong>iostat -hdk 2 3</strong></p>
-<ul>
-<li>rkB/s每秒读取数据kb；</li>
-<li>wkB/s每秒读写数据量kb</li>
-<li>svctm I/O请求的平均服务时间，单位毫秒；</li>
-<li>await I/O请求的平均等待时间，单位毫秒；值越小，性能越好；</li>
-<li>==util== 一秒中又百分几的时间用于I/O操作，接近100%时，表示磁盘带宽跑满，需要优化程序或加磁盘</li>
-<li>rkB/s，wkB/s根据系统该应用不同回有不同的值，担忧规律遵循：长期、超大数据读写，肯定不正常，需要优化程序读取。</li>
-<li>svctm的值与await的值很接近，表示几乎没有I/O等待，磁盘性能好，如果await的值远高于svctm的值，则表示I/O队列等待太长，需要优化程序或更换更快磁盘</li>
-</ul>
-<p><strong>pidstat -d 采样间隔秒数 -p 进程号</strong></p>
-<h2 id="Linux-网络IO-ifstat"><a href="#Linux-网络IO-ifstat" class="headerlink" title="Linux-网络IO-ifstat"></a>Linux-网络IO-ifstat</h2><p><img src="http://image.cheerway.fun/blog/20200807/eWITsK3NLu9t.png?imageslim" alt="mark"></p>
-<h2 id="加入生产环境CPU占用过高，谈谈分析思路和定位？"><a href="#加入生产环境CPU占用过高，谈谈分析思路和定位？" class="headerlink" title="加入生产环境CPU占用过高，谈谈分析思路和定位？"></a>加入生产环境CPU占用过高，谈谈分析思路和定位？</h2><h4 id="案例步骤"><a href="#案例步骤" class="headerlink" title="案例步骤"></a>案例步骤</h4><ol>
-<li><p>先用top命令找出cpu占比最高的</p>
-</li>
-<li><p>ps -ef或者jps进一步定位，得知是一个怎样的后台程序惹事</p>
-<ul>
-<li>jps -l</li>
-<li>ps -ef|grep java|grep -v grep</li>
-</ul>
-</li>
-<li><p>定位到具体线程或者代码</p>
-<ul>
-<li><p>ps -mp 进程编号 -o Thread,tid,time</p>
-<p>定位到具体线程</p>
-<p>-m ：显示所有的线程</p>
-<p>-p pid 进程使用cpu的时间</p>
-<p>-o：该参数后是用户自定义格式</p>
-</li>
-</ul>
-</li>
-<li><p>将需要的线程ID转换为16禁止格式（英文小写格式）</p>
-<ul>
-<li>printf “%x\n” 线程ID</li>
-</ul>
-</li>
-<li><p>jstack 进程Id|grep tid(16进制线程id小写英文) -A60</p>
-<p>查看运行轨迹，堆栈异常信息</p>
-</li>
-</ol>
+<h4 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h4><p>MySQL把数据的存储和提取操作都封装到了一个叫<code>存储引擎</code>的模块里; </p>
+<p>常见存储引擎:</p>
+<table>
+<thead>
+<tr>
+<th align="center">存储引擎</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>ARCHIVE</code></td>
+<td align="center">用于数据存档(行被插入后不能再修改)</td>
+</tr>
+<tr>
+<td align="center"><code>BLACKHOLE</code></td>
+<td align="center">丢弃写操作,读操作会返回空内容</td>
+</tr>
+<tr>
+<td align="center"><code>CSV</code></td>
+<td align="center">在存储数据时，以逗号分隔各个数据项</td>
+</tr>
+<tr>
+<td align="center"><code>FEDERATED</code></td>
+<td align="center">用来访问远程表</td>
+</tr>
+<tr>
+<td align="center"><code>InnoDB</code></td>
+<td align="center">具备外键支持功能的事务存储引擎，而且同时支持表级锁和行级锁</td>
+</tr>
+<tr>
+<td align="center"><code>MEMORY</code></td>
+<td align="center">置于内存的表</td>
+</tr>
+<tr>
+<td align="center"><code>MERGE</code></td>
+<td align="center">用来管理多个MyISAM表构成的表集合</td>
+</tr>
+<tr>
+<td align="center"><code>MyISAM</code></td>
+<td align="center">主要的非事务处理存储引擎</td>
+</tr>
+<tr>
+<td align="center"><code>NDB</code></td>
+<td align="center">MySQL集群专用存储引擎</td>
+</tr>
+</tbody></table>
+<h3 id="关于存储引擎的一些操作"><a href="#关于存储引擎的一些操作" class="headerlink" title="关于存储引擎的一些操作"></a>关于存储引擎的一些操作</h3><h4 id="查看当前使用的存储引擎"><a href="#查看当前使用的存储引擎" class="headerlink" title="查看当前使用的存储引擎"></a>查看当前使用的存储引擎</h4><pre><code class="sql">show engines;</code></pre>
+<p><img src="http://image.cheerway.fun/blog/20200822/pRPuRUvfLufu.png?imageslim" alt="mark"></p>
+<p>其中的<code>Support</code>列表示该存储引擎是否可用，<code>DEFAULT</code>值代表是当前服务器程序的默认存储引擎。<code>Transactions</code>列代表该存储引擎是否支持事务处理。<code>XA</code>列代表着该存储引擎是否支持分布式事务。<code>Savepoints</code>代表着该存储引擎是否支持部分事务回滚。</p>
+<h4 id="设置表的存储引擎"><a href="#设置表的存储引擎" class="headerlink" title="设置表的存储引擎"></a>设置表的存储引擎</h4><p>可以为不同的表设置不同的存储引擎，也就是说不同的表可以有不同的物理存储结构，不同的提取和写入方式。</p>
+<h5 id="创建时就指定存储引擎"><a href="#创建时就指定存储引擎" class="headerlink" title="创建时就指定存储引擎"></a>创建时就指定存储引擎</h5><p>创建数据表时如果没有指定存储引擎，那就会使用默认的存储引擎<code>InnoDB</code>，如果想显式地指定存储引擎可以使用下面地语句：</p>
+<pre><code class="mysql">CREATE TABLE 表名(
+    建表语句;
+) ENGINE = 存储引擎名称;</code></pre>
+<p>比如我们想创建一个使用MyISAM引擎地表，可以这么写：</p>
+<pre><code class="mysql">mysql&gt; CREATE TABLE engine_demo_table(
+    -&gt;     i int
+    -&gt; ) ENGINE = MyISAM;
+Query OK, 0 rows affected (0.02 sec)</code></pre>
+<h5 id="修改表的存储引擎"><a href="#修改表的存储引擎" class="headerlink" title="修改表的存储引擎"></a>修改表的存储引擎</h5><pre><code class="mysql">ALTER TABLE 表名 ENGINE = 存储引擎名称;</code></pre>
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls"
@@ -290,7 +331,7 @@ java -server -Xms1024m -Xmx 1024 -XX:+Us,">
             <div class="box sticky animated fadeInRight faster">
                 <div id="toc" class="subbox">
                     <h4>Contents</h4>
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM调优和Linux命令"><span class="toc-number">1.</span> <span class="toc-text">JVM调优和Linux命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM调优"><span class="toc-number">1.1.</span> <span class="toc-text">JVM调优</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux命令之top"><span class="toc-number">1.2.</span> <span class="toc-text">Linux命令之top</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-CPU-vmstat"><span class="toc-number">1.3.</span> <span class="toc-text">Linux-CPU-vmstat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-内存-free"><span class="toc-number">1.4.</span> <span class="toc-text">Linux-内存-free</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-硬盘-df"><span class="toc-number">1.5.</span> <span class="toc-text">Linux-硬盘-df</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-磁盘IO-iostat"><span class="toc-number">1.6.</span> <span class="toc-text">Linux-磁盘IO-iostat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Linux-网络IO-ifstat"><span class="toc-number">1.7.</span> <span class="toc-text">Linux-网络IO-ifstat</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#加入生产环境CPU占用过高，谈谈分析思路和定位？"><span class="toc-number">1.8.</span> <span class="toc-text">加入生产环境CPU占用过高，谈谈分析思路和定位？</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#初识Mysql"><span class="toc-number">1.</span> <span class="toc-text">初识Mysql</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基础细碎知识"><span class="toc-number">1.1.</span> <span class="toc-text">基础细碎知识</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#服务器处理客户端请求"><span class="toc-number">1.2.</span> <span class="toc-text">服务器处理客户端请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#关于存储引擎的一些操作"><span class="toc-number">1.3.</span> <span class="toc-text">关于存储引擎的一些操作</span></a></li></ol></li></ol>
                 </div>
             </div>
             

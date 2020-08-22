@@ -146,50 +146,64 @@
             animation-duration: 2.8s;
             background-image:
                 radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.56), #100e17),
-                url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597895038826&di=423dbc0befbefd0d55195ee12e7ff13e&imgtype=0&src=http%3A%2F%2Fimg.cnitedu.cn%2Fuploads%2Fallimg%2F1910%2Fwsh1012002.jpg);">
+                url(/img/cover.jpg);">
         </div>
     </div>
     
     <div id="post0" class="else">
         <p class="animated fadeInDown">
             
-            <a href="/categories/Linux"><b>「
-                </b>LINUX<b> 」</b></a>
+            <a href="/categories/MySQL"><b>「
+                </b>MYSQL<b> 」</b></a>
             
-            August 20, 2020
+            August 22, 2020
         </p>
         <h3 class="post-title animated fadeInDown">
-            <a href="/2020/cke247h7x0024o0vsgaiff6ov/" title="Linux学习笔记——一篇入门Linux" class="posttitle">Linux学习笔记——一篇入门Linux</a></h3>
+            <a href="/2020/cke52l3da0000g4vs9yw85sej/" title="MySQL是怎样运行的(一)——初始MySQL" class="posttitle">MySQL是怎样运行的(一)——初始MySQL</a></h3>
         
         <p class="post-count animated fadeInDown">
             
             <span>
                 <b class="iconfont icon-text2"></b> <i>Words count</i>
-                29k
+                5.4k
             </span>
             
             
             <span>
                 <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                26 mins.
+                5 mins.
             </span>
             
             
         </p>
         
         
-        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+        <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
         
         <div class="md-content animated fadeIn">
             
-            <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Linux 内核最初只是由芬兰人林纳斯·托瓦兹（Linus Torvalds）在赫尔辛基大学上学时出于个人爱好而编写的。</p>
-<p>Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。</p>
-<p>Linux 能运行主要的 UNIX 工具软件、应用程序和网络协议。它支持 32 位和 64 位硬件。Linux 继承了 Unix 以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。</p>
-<h3 id="发行版"><a href="#发行版" class="headerlink" title="发行版"></a>发行版</h3><p>Linux 的发行版说简单点就是将 Linux 内核与应用软件做一个打包。</p>
-<p></p>
-<p>目前市面上较知名的发行版有：Ubuntu、...</p>
+            <blockquote>
+<p>本文所有知识点整理自掘金小册<a href="https://juejin.im/book/6844733769996304392" target="_blank" rel="noopener">《<strong>MySQL 是怎样运行的：从根儿上理解 MySQL</strong>》</a>，内容充实，难度适中，通俗易懂，有助于理解Mysql的运行原理，建议购买支持一下！（说真的，白嫖我整理的知识点根本没法领略到小册的魅力，也学不到东西）</p>
+</blockquote>
+<h3 id="基础细碎知识"><a href="#基础细碎知识" class="headerlink" title="基础细碎知识"></a>基础细碎知识</h3><ul>
+<li><p>启动MySQL客户端命令</p>
+<pre><code class="shell">mysql -h主机名  -u用户名 -p密码</code></pre>
+<table>
+<thead>
+<tr>
+<th align="center">参数名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>-h</code></td>
+<td>表示服务器进程所在计算机的域名或者IP地址，如果服务器进程就运行在本机的话，可以省略这个参数，或者填<code>localhost</code>或者<code>127.0.0.1</code>。也可以写作 <code>--host=主机名</code>的形式。本地的话, 可以省略:smile:</td>
+</tr>
+<tr>
+<td align="center"><code>-u</code></td>
+<td>表示用户名。也可...</td></tr></tbody></table></li></ul>
             
-            <span class="read-more"><a href="/2020/cke247h7x0024o0vsgaiff6ov/" title="Read article" class="posttitle">Read article</a>
+            <span class="read-more"><a href="/2020/cke52l3da0000g4vs9yw85sej/" title="Read article" class="posttitle">Read article</a>
                 <b class="iconfont icon-arrow-right- gradient-text"></b></span>
         </div>
     </div>
@@ -210,6 +224,54 @@
 
     <div id="primary">
         
+<div class="post" id="post">
+    <div class="post-cover animated fadeIn" style="
+            background-image:
+            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
+            url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1597895038826&di=423dbc0befbefd0d55195ee12e7ff13e&imgtype=0&src=http%3A%2F%2Fimg.cnitedu.cn%2Fuploads%2Fallimg%2F1910%2Fwsh1012002.jpg);">
+    </div>
+    <div class="else">
+        <p class="animated fadeInDown">
+            
+                <a href="/categories/Linux">
+                  <b>「 </b>LINUX<b> 」</b>
+                </a>
+            
+            August 20, 2020
+        </p>
+        <h3 class="post-title animated fadeInDown"><a href="/2020/cke247h7x0024o0vsgaiff6ov/" title="Linux学习笔记——一篇入门Linux" class="posttitle">Linux学习笔记——一篇入门Linux</a></h3>
+        
+            <p class="post-count animated fadeInDown">
+                
+                    <span>
+                        <b class="iconfont icon-text2"></b> <i>Words count</i>
+                        29k
+                    </span>
+                
+                
+                    <span>
+                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
+                        26 mins.
+                    </span>
+                
+                
+            </p>
+            
+                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/Linux/" rel="tag">Linux</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+            
+        
+        <div class="md-content animated fadeIn">
+            
+                <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Linux 内核最初只是由芬兰人林纳斯·托瓦兹（Linus Torvalds）在赫尔辛基大学上学时出于个人爱好而编写的。</p>
+<p>Linux 是一套免费使用和自由传播的类 Unix 操作系统，是一个基于 POSIX 和 UNIX 的多用户、多任务、支持多线程和多 CPU 的操作系统。</p>
+<p>Linux 能运行...</p>
+            
+            <span class="read-more"><a href="/2020/cke247h7x0024o0vsgaiff6ov/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
+        </div>
+    </div>
+</div>
+
+
 <div class="post" id="post">
     <div class="post-cover animated fadeIn" style="
             background-image:
@@ -620,56 +682,9 @@
 </div>
 
 
-<div class="post" id="post">
-    <div class="post-cover animated fadeIn" style="
-            background-image:
-            radial-gradient(ellipse closest-side, rgba(0, 0, 0, 0.65), #100e17),
-            url(http://image.cheerway.fun/blog/20200225/Wrc0uF8i5r3r.png?imageslim);">
-    </div>
-    <div class="else">
-        <p class="animated fadeInDown">
-            
-                <a href="/categories/SpringBoot">
-                  <b>「 </b>SPRINGBOOT<b> 」</b>
-                </a>
-            
-            February 26, 2020
-        </p>
-        <h3 class="post-title animated fadeInDown"><a href="/2020/cke247h6k000qo0vs0jv8c3m7/" title="SpringBoot 配置文件详解（告别XML）" class="posttitle">SpringBoot 配置文件详解（告别XML）</a></h3>
-        
-            <p class="post-count animated fadeInDown">
-                
-                    <span>
-                        <b class="iconfont icon-text2"></b> <i>Words count</i>
-                        13k
-                    </span>
-                
-                
-                    <span>
-                        <b class="iconfont icon-timer__s"></b> <i>Reading time</i>
-                        12 mins.
-                    </span>
-                
-                
-            </p>
-            
-                <ul class="animated fadeInDown post-tags-list" itemprop="keywords"><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/SpringBoot/" rel="tag">SpringBoot</a></li><li class="animated fadeInDown post-tags-list-item"><a class="animated fadeInDown post-tags-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
-            
-        
-        <div class="md-content animated fadeIn">
-            
-                <p><a href="https://www.cheerway.fun/2020/ck71sexg50000cstn3hy6dnen/">上篇笔记</a>中提到SpringBoot简化Spring的开发是通过大量的默认配置，然而在开发中我们有时需要改变这些默认约定，所以要使用配置文件。</p>
-<p>SpringBoot中的配置文件明必须是application，如：<code>application.yml</code>，<code>application.properties</code>，<code>application...</code></p>
-            
-            <span class="read-more"><a href="/2020/cke247h6k000qo0vs0jv8c3m7/" title="Read article" class="posttitle">Read article</a> <b class="iconfont icon-arrow-right- gradient-text"></b></span>
-        </div>
-    </div>
-</div>
-
-
     </div>
     
-    <div id="pager"><a href="/tags/%E7%AC%94%E8%AE%B0/page/2/" class="more" data-loading="加载中..." data-load-more="Load more">Load more</a></div>
+    <div id="pager"><a href="/tags/%E7%AC%94%E8%AE%B0/page/2/" class="more" data-loading="Loading..." data-load-more="Load more">Load more</a></div>
     
 </div>
 <div id="preview"></div>
